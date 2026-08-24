@@ -10,7 +10,7 @@ The work is intended for hiring managers, business leaders, and clients evaluati
 
 ### 01 · H2 City Hotel — Booking Reliability & Inventory Exposure
 
-[![H2 City Hotel executive dashboard](01-hotel-booking-reliability/dashboard/preview.png)](01-hotel-booking-reliability/README.md)
+[![H2 City Hotel dashboard preview](01-hotel-booking-reliability/dashboard/preview.svg)](01-hotel-booking-reliability/README.md)
 
 **Business question:** Which booked demand should the hotel rely on, where is inventory exposure concentrated among No Deposit bookings, and which operating or policy changes are supported by the available evidence?
 
@@ -24,7 +24,7 @@ The case analyzes **79,330 real PMS booking records** from a Lisbon city hotel. 
 - Cancellations accounting for **54.2%** of failed No Deposit room-night exposure occur more than 30 days before arrival, creating a meaningful window for inventory-recovery action and measurement.
 - The analysis deliberately does **not** translate failed room nights into lost revenue because resale, settlement, commission, contribution margin, and daily room inventory are not observed.
 
-**Deliverables:** [Case overview](01-hotel-booking-reliability/README.md) · [Interactive dashboard](01-hotel-booking-reliability/dashboard/index.html) · [Business analytics report](01-hotel-booking-reliability/report/H2_City_Hotel_Business_Analytics_Report_EN.pdf) · [Methodology](01-hotel-booking-reliability/docs/METHOD.md)
+**Deliverables:** [Case overview](01-hotel-booking-reliability/README.md) · [Live dashboard](https://raw.githack.com/TangsBigPiggy/business-analytics-portfolio/main/01-hotel-booking-reliability/dashboard/index.html) · [Management report](01-hotel-booking-reliability/report/REPORT.md) · [Methodology](01-hotel-booking-reliability/docs/METHOD.md) · [Reproducible analysis](01-hotel-booking-reliability/analysis.py)
 
 **Tools:** Python · pandas · NumPy · Plotly · HTML/CSS/JavaScript
 
