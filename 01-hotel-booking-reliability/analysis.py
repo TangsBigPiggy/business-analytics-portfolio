@@ -1,50 +1,54 @@
-from pathlib import Path
-import pandas as pd
 import numpy as np
+import pandas as pd
 
-ROOT = Path(__file__).resolve().parent
-DATA = ROOT / "data" / "H2.csv.gz"
-
+DATA_URL = (
+    "https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/"
+    "data/2020/2020-02-11/hotels.csv"
+)
 MONTHS = {m: i for i, m in enumerate([
     "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
+    "July", "August", "September", "October", "November", "December",
 ], 1)}
 LEAD_BINS = [-1, 7, 30, 60, 90, 180, 10_000]
 LEAD_LABELS = ["0–7", "8–30", "31–60", "61–90", "91–180", "181+"]
 
 
 def load_h2() -> pd.DataFrame:
-    df = pd.read_csv(DATA, keep_default_na=False, low_memory=False)
-    for c in df.select_dtypes(include="object").columns:
-        df[c] = df[c].astype(str).str.strip()
+    """Load the public source mirror and retain the H2 / City Hotel property only."""
+    df = pd.read_csv(DATA_URL, low_memory=False)
+    df = df[df["hotel"].eq("City Hotel")].copy()
 
     if len(df) != 79_330:
         raise ValueError(f"Unexpected H2 row count: {len(df):,}")
 
-    df["ArrivalMonthNum"] = df["ArrivalDateMonth"].map(MONTHS)
-    df["ArrivalDate"] = pd.to_datetime(dict(
-        year=df["ArrivalDateYear"],
-        month=df["ArrivalMonthNum"],
-        day=df["ArrivalDateDayOfMonth"],
+    df["arrival_month_num"] = df["arrival_date_month"].map(MONTHS)
+    df["arrival_date"] = pd.to_datetime(dict(
+        year=df["arrival_date_year"],
+        month=df["arrival_month_num"],
+        day=df["arrival_date_day_of_month"],
     ))
-    df["ReservationStatusDate"] = pd.to_datetime(df["ReservationStatusDate"], errors="coerce")
-    df["TotalNights"] = df["StaysInWeekendNights"] + df["StaysInWeekNights"]
-    df["NonMaterialized"] = df["IsCanceled"].astype(int)
-    df["Realized"] = df["ReservationStatus"].eq("Check-Out").astype(int)
-    df["NoShow"] = df["ReservationStatus"].eq("No-Show").astype(int)
-    df["ExplicitCancellation"] = df["ReservationStatus"].eq("Canceled").astype(int)
-
-    expected = (df["ExplicitCancellation"].astype(bool) | df["NoShow"].astype(bool)).astype(int)
-    if not df["NonMaterialized"].eq(expected).all():
-        raise ValueError("IsCanceled does not reconcile to final reservation status.")
-
-    df["FailedRoomNights"] = df["TotalNights"] * df["NonMaterialized"]
-    df["LeadTimeBand"] = pd.cut(
-        df["LeadTime"], bins=LEAD_BINS, labels=LEAD_LABELS
+    df["reservation_status_date"] = pd.to_datetime(
+        df["reservation_status_date"], errors="coerce"
     )
-    df["CancelLeadDays"] = np.where(
-        df["ExplicitCancellation"].eq(1),
-        (df["ArrivalDate"] - df["ReservationStatusDate"]).dt.days,
+    df["total_nights"] = df["stays_in_weekend_nights"] + df["stays_in_week_nights"]
+    df["non_materialized"] = df["is_canceled"].astype(int)
+    df["realized"] = df["reservation_status"].eq("Check-Out").astype(int)
+    df["no_show"] = df["reservation_status"].eq("No-Show").astype(int)
+    df["explicit_cancellation"] = df["reservation_status"].eq("Canceled").astype(int)
+
+    expected = (
+        df["explicit_cancellation"].astype(bool) | df["no_show"].astype(bool)
+    ).astype(int)
+    if not df["non_materialized"].eq(expected).all():
+        raise ValueError("is_canceled does not reconcile to final reservation status.")
+
+    df["failed_room_nights"] = df["total_nights"] * df["non_materialized"]
+    df["lead_time_band"] = pd.cut(
+        df["lead_time"], bins=LEAD_BINS, labels=LEAD_LABELS
+    )
+    df["cancel_lead_days"] = np.where(
+        df["explicit_cancellation"].eq(1),
+        (df["arrival_date"] - df["reservation_status_date"]).dt.days,
         np.nan,
     )
     return df
@@ -52,8 +56,8 @@ def load_h2() -> pd.DataFrame:
 
 def standardized_rate(df: pd.DataFrame, segment: str, weights: pd.Series) -> float:
     rates = (
-        df[df["MarketSegment"].eq(segment)]
-        .groupby("LeadTimeBand", observed=True)["NonMaterialized"]
+        df[df["market_segment"].eq(segment)]
+        .groupby("lead_time_band", observed=True)["non_materialized"]
         .mean()
         .reindex(LEAD_LABELS)
     )
@@ -63,83 +67,86 @@ def standardized_rate(df: pd.DataFrame, segment: str, weights: pd.Series) -> flo
 
 
 def summarize(df: pd.DataFrame) -> dict:
-    nd = df[df["DepositType"].eq("No Deposit")].copy()
-    online = nd[nd["MarketSegment"].eq("Online TA")]
+    nd = df[df["deposit_type"].eq("No Deposit")].copy()
+    online = nd[nd["market_segment"].eq("Online TA")]
 
-    combined = nd[nd["MarketSegment"].isin(["Online TA", "Direct"])]
+    combined = nd[nd["market_segment"].isin(["Online TA", "Direct"])]
     weights = (
-        combined["LeadTimeBand"]
+        combined["lead_time_band"]
         .value_counts(normalize=True)
         .reindex(LEAD_LABELS, fill_value=0)
     )
 
     core = nd[
-        nd["MarketSegment"].eq("Online TA")
-        & nd["ArrivalDateYear"].isin([2016, 2017])
-        & nd["ArrivalDate"].dt.month.le(8)
+        nd["market_segment"].eq("Online TA")
+        & nd["arrival_date_year"].isin([2016, 2017])
+        & nd["arrival_date"].dt.month.le(8)
     ]
 
-    long_ota = online[online["LeadTime"].ge(91)]
-    failed_long_ota = long_ota[long_ota["NonMaterialized"].eq(1)]
+    long_ota = online[online["lead_time"].ge(91)]
+    failed_long_ota = long_ota[long_ota["non_materialized"].eq(1)]
     early_long_ota = failed_long_ota[
-        failed_long_ota["ExplicitCancellation"].eq(1)
-        & failed_long_ota["CancelLeadDays"].gt(30)
+        failed_long_ota["explicit_cancellation"].eq(1)
+        & failed_long_ota["cancel_lead_days"].gt(30)
     ]
 
-    nd_failed = nd[nd["NonMaterialized"].eq(1)]
+    nd_failed = nd[nd["non_materialized"].eq(1)]
     nd_early = nd_failed[
-        nd_failed["ExplicitCancellation"].eq(1)
-        & nd_failed["CancelLeadDays"].gt(30)
+        nd_failed["explicit_cancellation"].eq(1)
+        & nd_failed["cancel_lead_days"].gt(30)
     ]
     nd_late = nd_failed[
-        nd_failed["NoShow"].eq(1)
-        | (nd_failed["ExplicitCancellation"].eq(1) & nd_failed["CancelLeadDays"].le(7))
+        nd_failed["no_show"].eq(1)
+        | (
+            nd_failed["explicit_cancellation"].eq(1)
+            & nd_failed["cancel_lead_days"].le(7)
+        )
     ]
 
-    y = {}
+    year_stats = {}
     for year in [2016, 2017]:
-        x = core[core["ArrivalDateYear"].eq(year)]
-        y[year] = {
-            "bookings": len(x),
-            "non_materialization_rate": x["NonMaterialized"].mean(),
-            "failed_room_nights": x["FailedRoomNights"].sum(),
+        x = core[core["arrival_date_year"].eq(year)]
+        year_stats[year] = {
+            "bookings": int(len(x)),
+            "non_materialization_rate": float(x["non_materialized"].mean()),
+            "failed_room_nights": int(x["failed_room_nights"].sum()),
         }
 
     return {
         "bookings": len(df),
-        "overall_non_materialization_rate": df["NonMaterialized"].mean(),
+        "overall_non_materialization_rate": df["non_materialized"].mean(),
         "no_deposit_bookings": len(nd),
         "no_deposit_share": len(nd) / len(df),
-        "no_deposit_non_materialization_rate": nd["NonMaterialized"].mean(),
-        "no_deposit_failed_room_nights": nd["FailedRoomNights"].sum(),
+        "no_deposit_non_materialization_rate": nd["non_materialized"].mean(),
+        "no_deposit_failed_room_nights": int(nd["failed_room_nights"].sum()),
         "online_ta_share_of_no_deposit_bookings": len(online) / len(nd),
         "online_ta_share_of_no_deposit_failed_room_nights": (
-            online["FailedRoomNights"].sum() / nd["FailedRoomNights"].sum()
+            online["failed_room_nights"].sum() / nd["failed_room_nights"].sum()
         ),
         "standardized_online_ta_rate": standardized_rate(nd, "Online TA", weights),
         "standardized_direct_rate": standardized_rate(nd, "Direct", weights),
         "long_lead_online_ta_bookings": len(long_ota),
-        "long_lead_online_ta_rate": long_ota["NonMaterialized"].mean(),
-        "long_lead_online_ta_failed_room_nights": long_ota["FailedRoomNights"].sum(),
+        "long_lead_online_ta_rate": long_ota["non_materialized"].mean(),
+        "long_lead_online_ta_failed_room_nights": int(long_ota["failed_room_nights"].sum()),
         "long_lead_online_ta_failed_room_night_share": (
-            long_ota["FailedRoomNights"].sum() / nd["FailedRoomNights"].sum()
+            long_ota["failed_room_nights"].sum() / nd["failed_room_nights"].sum()
         ),
         "long_lead_online_ta_early_cancellation_share": (
-            early_long_ota["FailedRoomNights"].sum() / failed_long_ota["FailedRoomNights"].sum()
+            early_long_ota["failed_room_nights"].sum()
+            / failed_long_ota["failed_room_nights"].sum()
         ),
         "no_deposit_early_cancellation_share": (
-            nd_early["FailedRoomNights"].sum() / nd_failed["FailedRoomNights"].sum()
+            nd_early["failed_room_nights"].sum() / nd_failed["failed_room_nights"].sum()
         ),
         "no_deposit_late_leakage_share": (
-            nd_late["FailedRoomNights"].sum() / nd_failed["FailedRoomNights"].sum()
+            nd_late["failed_room_nights"].sum() / nd_failed["failed_room_nights"].sum()
         ),
-        "core_2016": y[2016],
-        "core_2017": y[2017],
+        "core_2016": year_stats[2016],
+        "core_2017": year_stats[2017],
     }
 
 
 if __name__ == "__main__":
-    data = load_h2()
-    result = summarize(data)
+    result = summarize(load_h2())
     for key, value in result.items():
         print(f"{key}: {value}")
