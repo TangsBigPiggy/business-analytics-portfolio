@@ -8,9 +8,9 @@ This project treats **H2 City Hotel as a single operating property**. The analys
 
 ## Primary deliverables
 
-### 1. Business analytics report
+### 1. Management report
 
-**[H2 City Hotel - Business Analytics Report (PDF)](report/H2_City_Hotel_Business_Analytics_Report_EN.pdf)**
+**[Read the business analytics report](report/REPORT.md)**
 
 A concise management report linking the observed booking patterns to practical operating decisions while keeping causal and financial conclusions within the limits of the data. It covers:
 
@@ -24,11 +24,11 @@ A concise management report linking the observed booking patterns to practical o
 
 ### 2. Interactive dashboard
 
-![H2 City Hotel dashboard](dashboard/preview.png)
+[![H2 City Hotel dashboard](dashboard/preview.svg)](https://raw.githack.com/TangsBigPiggy/business-analytics-portfolio/main/01-hotel-booking-reliability/dashboard/index.html)
 
-**[Interactive dashboard](dashboard/index.html)** - filterable and bilingual (English / 中文). Download/open the HTML locally, or serve the repository as a static site.
+**[Open the live dashboard](https://raw.githack.com/TangsBigPiggy/business-analytics-portfolio/main/01-hotel-booking-reliability/dashboard/index.html)** · [View source](dashboard/index.html)
 
-The dashboard supports exploration and cohort monitoring; the PDF report records the management interpretation.
+The browser dashboard loads the public source mirror, retains City Hotel only, validates the 79,330-row scope, and recomputes the figures when filters change. The written report records the management interpretation.
 
 ## Executive findings
 
@@ -62,35 +62,33 @@ Accordingly, the project does not report occupancy, RevPAR, GOPPAR, or policy RO
 ## Repository structure
 
 ```text
-.
+01-hotel-booking-reliability/
 ├── README.md
 ├── ATTRIBUTION.md
+├── analysis.py
 ├── requirements.txt
 ├── dashboard/
 │   ├── index.html
-│   ├── preview.png
-│   └── build_dashboard.py
-├── data/
-│   └── H2.csv.gz
+│   └── preview.svg
 ├── report/
-│   └── H2_City_Hotel_Business_Analytics_Report_EN.pdf
+│   └── REPORT.md
 └── docs/
     └── METHOD.md
 ```
 
-The repository contains the attributed H2 source extract in compressed CSV form, one reproducible interactive dashboard, one management-facing report, and one methodology note.
+The source data are not duplicated in this portfolio repository. The analysis script and browser dashboard read the public **TidyTuesday mirror of the Antonio, de Almeida & Nunes dataset**, then retain `City Hotel` only. This keeps the case reproducible while preserving clear attribution to the original publication.
 
-## Rebuild the dashboard
+## Reproduce the analytical checks
 
 ```bash
 pip install -r requirements.txt
-python dashboard/build_dashboard.py
+python analysis.py
 ```
 
-The builder validates the **79,330-row H2 scope** and reconciles `IsCanceled` with final booking status before generating the dashboard.
+The script validates the **79,330-row H2 scope**, reconciles `is_canceled` with final booking status, and reproduces the principal management metrics from the public source mirror.
 
 ## Data source
 
-The source extract is stored as `data/H2.csv.gz`; pandas reads it directly during the rebuild.
+Original publication: Nuno Antonio, Ana de Almeida, Luis Nunes. *Hotel booking demand datasets*. **Data in Brief 22 (2019), 41-49.** DOI: 10.1016/j.dib.2018.11.126. H2 is the City Hotel property in Lisbon. The article and data are published under **CC BY 4.0**.
 
-Nuno Antonio, Ana de Almeida, Luis Nunes. *Hotel booking demand datasets*. **Data in Brief 22 (2019), 41-49.** DOI: 10.1016/j.dib.2018.11.126. H2 is the City Hotel property in Lisbon. The article and data are published under **CC BY 4.0**.
+For reproducible code delivery, this repository reads the cleaned public mirror maintained by the **TidyTuesday / Data Science Learning Community** project; the mirror is derived from the same published H1/H2 files.
