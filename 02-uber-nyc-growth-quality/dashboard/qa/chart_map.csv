@@ -1,0 +1,9 @@
+﻿page,chart_id,question,family,takeaway,palette_policy
+1,monthly_trips_chart,Monthly completed-trip movement,Trend,Volume fluctuated seasonally and finished May 2026 2.1% above May 2025.,single-root preferred
+1,monthly_wait_chart,Wait center and tail movement,Trend,The P90 wait tail deteriorated faster than the average.,relaxed multi-category
+1,monthly_economics_chart,Passenger fare and driver pay movement,Trend,The separate per-trip measures moved in parallel over the comparison year.,hard two-root cap
+2,zone_operating_matrix,Demand × wait × growth by taxi zone,Relationship,Priority-proxy zones combine material completed-trip demand and above-city wait; airports carry the largest burden.,relaxed multi-category
+2,priority_zone_burden,Ranked excess wait burden,Comparison & Ranking,LaGuardia and JFK rank first and second by estimated excess minutes.,single-root preferred
+3,borough_growth_contribution,Borough growth contribution,Comparison,Manhattan and Brooklyn generated more than the net city increase because declines elsewhere offset growth.,hard two-root cap
+3,borough_wait_change,Borough wait deterioration,Comparison,"Wait increased in every borough, led by the Bronx, Queens, and Brooklyn.",single-root preferred
+3,hourly_wait_change,Hourly wait deterioration,Comparison,The largest increases cluster in the overnight and early-morning hours.,single-root preferred

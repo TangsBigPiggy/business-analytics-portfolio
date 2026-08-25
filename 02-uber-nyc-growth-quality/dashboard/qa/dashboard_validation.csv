@@ -1,0 +1,15 @@
+﻿check_name,actual,expected,passed
+upstream deep-analysis validation,17,17,True
+monthly row count,13,13,True
+monthly wait row count,39,39,True
+latest trips reconcile,15354816,15354816.0,True
+latest average wait reconcile,5.487,5.487,True
+latest P90 wait reconcile,10.437,10.437,True
+five-borough current-trip coverage,0.9999469221904059,>= 99.99%,True
+non-five-borough current-trip residual,815.0,815,True
+priority zone count,23,23,True
+priority zone trip total,2990216.0,2990216,True
+hourly row count,24,24,True
+hour current trips reconcile,15354816.0,15354816.0,True
+wait decomposition reconcile,0.44149,0.442,True
+page count,3,3,True

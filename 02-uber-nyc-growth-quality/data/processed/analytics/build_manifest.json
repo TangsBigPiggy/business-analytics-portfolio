@@ -1,0 +1,200 @@
+{
+  "build_name": "Uber NYC analytics layer",
+  "started_at_utc": "2026-08-25T00:43:34.646493+00:00",
+  "completed_at_utc": "2026-08-25T00:44:54.132147+00:00",
+  "elapsed_seconds": 79.486,
+  "repository_paths": {
+    "raw_input": "data/raw (source files are not committed)",
+    "output": "data/processed/analytics"
+  },
+  "source_window": {
+    "start_month": "2025-05",
+    "end_month": "2026-05",
+    "month_count": 13
+  },
+  "platform_filter": "HV0003",
+  "source_files": [
+    {
+      "name": "fhvhv_tripdata_2025-05.parquet",
+      "bytes": 517386544,
+      "modified_at_utc": "2026-08-24T02:11:57.426278+00:00"
+    },
+    {
+      "name": "fhvhv_tripdata_2025-06.parquet",
+      "bytes": 490819474,
+      "modified_at_utc": "2026-08-24T02:11:48.716701+00:00"
+    },
+    {
+      "name": "fhvhv_tripdata_2025-07.parquet",
+      "bytes": 487222980,
+      "modified_at_utc": "2026-08-24T02:01:42.828020+00:00"
+    },
+    {
+      "name": "fhvhv_tripdata_2025-08.parquet",
+      "bytes": 479574607,
+      "modified_at_utc": "2026-08-24T02:01:39.243819+00:00"
+    },
+    {
+      "name": "fhvhv_tripdata_2025-09.parquet",
+      "bytes": 480851341,
+      "modified_at_utc": "2026-08-24T02:01:34.011696+00:00"
+    },
+    {
+      "name": "fhvhv_tripdata_2025-10.parquet",
+      "bytes": 518486063,
+      "modified_at_utc": "2026-08-24T01:55:32.112449+00:00"
+    },
+    {
+      "name": "fhvhv_tripdata_2025-11.parquet",
+      "bytes": 507485661,
+      "modified_at_utc": "2026-08-24T01:55:21.957410+00:00"
+    },
+    {
+      "name": "fhvhv_tripdata_2025-12.parquet",
+      "bytes": 535754793,
+      "modified_at_utc": "2026-08-24T01:55:18.939467+00:00"
+    },
+    {
+      "name": "fhvhv_tripdata_2026-01.parquet",
+      "bytes": 505868728,
+      "modified_at_utc": "2026-08-24T01:28:27.427850+00:00"
+    },
+    {
+      "name": "fhvhv_tripdata_2026-02.parquet",
+      "bytes": 476780037,
+      "modified_at_utc": "2026-08-24T01:42:31.731725+00:00"
+    },
+    {
+      "name": "fhvhv_tripdata_2026-03.parquet",
+      "bytes": 532615621,
+      "modified_at_utc": "2026-08-24T01:43:04.846308+00:00"
+    },
+    {
+      "name": "fhvhv_tripdata_2026-04.parquet",
+      "bytes": 509865567,
+      "modified_at_utc": "2026-08-24T01:43:11.848330+00:00"
+    },
+    {
+      "name": "fhvhv_tripdata_2026-05.parquet",
+      "bytes": 537576484,
+      "modified_at_utc": "2026-08-24T01:43:20.637627+00:00"
+    }
+  ],
+  "engine": {
+    "python": "3.14.6",
+    "python_implementation": "CPython",
+    "duckdb": "1.5.5",
+    "memory_limit": "4GB",
+    "threads": 8
+  },
+  "tables": {
+    "data_quality_by_month": {
+      "rows": 13,
+      "elapsed_seconds": 9.224,
+      "file": "data_quality_by_month.parquet",
+      "bytes": 11509
+    },
+    "monthly_metrics": {
+      "rows": 13,
+      "elapsed_seconds": 21.767,
+      "file": "monthly_metrics.parquet",
+      "bytes": 13818
+    },
+    "daily_metrics": {
+      "rows": 396,
+      "elapsed_seconds": 12.771,
+      "file": "daily_metrics.parquet",
+      "bytes": 53337
+    },
+    "zone_daily_metrics": {
+      "rows": 102345,
+      "elapsed_seconds": 9.298,
+      "file": "zone_daily_metrics.parquet",
+      "bytes": 5282685
+    },
+    "zone_hour_metrics": {
+      "rows": 558869,
+      "elapsed_seconds": 26.213,
+      "file": "zone_hour_metrics.parquet",
+      "bytes": 26761234
+    }
+  },
+  "validation_checks": [
+    {
+      "check_name": "monthly row count",
+      "actual": 13,
+      "expected": 13,
+      "passed": true
+    },
+    {
+      "check_name": "quality row count",
+      "actual": 13,
+      "expected": 13,
+      "passed": true
+    },
+    {
+      "check_name": "monthly trips equal daily trips",
+      "actual": 193408206,
+      "expected": 193408206,
+      "passed": true
+    },
+    {
+      "check_name": "monthly trips equal quality trips",
+      "actual": 193408206,
+      "expected": 193408206,
+      "passed": true
+    },
+    {
+      "check_name": "valid-zone trips equal zone_daily trips",
+      "actual": 193408206,
+      "expected": 193408206,
+      "passed": true
+    },
+    {
+      "check_name": "valid-zone trips equal zone_hour trips",
+      "actual": 193408206,
+      "expected": 193408206,
+      "passed": true
+    },
+    {
+      "check_name": "monthly key uniqueness",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check_name": "daily key uniqueness",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check_name": "zone_daily key uniqueness",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check_name": "zone_hour key uniqueness",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check_name": "complete pickup-day coverage",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    }
+  ],
+  "metric_policy": {
+    "row_deletion": "none; metric-specific eligibility only",
+    "wait": "0 to 60 minutes inclusive",
+    "duration": "trip_time > 0 and dropoff_datetime > pickup_datetime",
+    "distance": "trip_miles > 0",
+    "fare_distribution": "base_passenger_fare >= 0",
+    "driver_pay_distribution": "driver_pay >= 0",
+    "on_scene_datetime": "quality monitoring only, not a core KPI",
+    "fare_minus_driver_pay": "not calculated or interpreted as platform economics"
+  }
+}

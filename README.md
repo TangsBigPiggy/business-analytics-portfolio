@@ -6,7 +6,29 @@ This repository contains business analytics case studies built around real opera
 
 The work is intended for hiring managers, business leaders, and clients evaluating practical capability across **business problem framing, data analysis, KPI design, visualization, commercial interpretation, and decision support**.
 
-## Featured case
+## Featured cases
+
+### 02 · Uber NYC — Marketplace Growth Quality & Service Efficiency
+
+[![Uber NYC marketplace dashboard preview](02-uber-nyc-growth-quality/assets/dashboard/dashboard-cover-en.jpg)](https://raw.githack.com/TangsBigPiggy/business-analytics-portfolio/main/02-uber-nyc-growth-quality/dashboard/uber_nyc_final_dashboard.html?lang=en#page-1)
+
+**Business question:** Did May 2026 trip growth come with worsening marketplace service quality—and where should operators investigate first?
+
+The case analyzes **193.4 million completed Uber HVFHV trips** across **13 months in New York City**. It combines a scalable DuckDB/Python pipeline with a bilingual three-page management dashboard, bilingual executive reports, taxi-zone prioritization, and explicit evidence boundaries.
+
+**Selected findings**
+
+- May 2026 completed trips increased **2.1% YoY to 15.35M**, while average request-to-pickup rose **8.8% to 5.49 minutes** and P90 rose **16.9% to 10.44 minutes**.
+- The citywide time increase was driven by **+0.449 minutes of within-borough movement**; geographic mix offset roughly **0.008 minutes**.
+- Manhattan and Brooklyn contributed **318.3K trips**, equivalent to **100.7% of net city growth** because declines elsewhere offset part of the gain.
+- A supply-constrained priority proxy identified **23 taxi zones covering 2.99M trips**. It is an operating-priority proxy from completed trips and observed service performance—not causal proof of insufficient driver supply.
+- Passenger base fare and driver pay remain separate measures; their difference is not interpreted as profit, margin, or take rate.
+
+**Deliverables:** [Case overview](02-uber-nyc-growth-quality/README.md) · [中文说明](02-uber-nyc-growth-quality/README_zh.md) · [Live bilingual dashboard](https://raw.githack.com/TangsBigPiggy/business-analytics-portfolio/main/02-uber-nyc-growth-quality/dashboard/uber_nyc_final_dashboard.html?lang=en#page-1) · [English report](https://raw.githack.com/TangsBigPiggy/business-analytics-portfolio/main/02-uber-nyc-growth-quality/reports/uber_nyc_growth_quality_report_en.html) · [中文报告](https://raw.githack.com/TangsBigPiggy/business-analytics-portfolio/main/02-uber-nyc-growth-quality/reports/uber_nyc_growth_quality_report_zh.html)
+
+**Tools:** Python · DuckDB · Parquet · HTML/CSS/JavaScript
+
+---
 
 ### 01 · H2 City Hotel — Booking Reliability & Inventory Exposure
 
@@ -42,4 +64,4 @@ Across cases, the emphasis is on four disciplines:
 
 **4. Make the output usable.** Findings are delivered through concise written analysis and decision-oriented visualizations, with definitions and analytical boundaries documented for review.
 
-Additional business analytics cases will be added to this repository as separate, self-contained projects.
+Each case is maintained as a separate, self-contained project with its own evidence, methodology, deliverables, and reproduction path.

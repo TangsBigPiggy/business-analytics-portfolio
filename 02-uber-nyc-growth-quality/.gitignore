@@ -1,0 +1,22 @@
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Raw TLC files are intentionally excluded from the public repository
+data/raw/
+Uber数据/
+fhvhv_tripdata_*.parquet
+
+# Local scratch and one-file audit outputs
+work/
+data/quality_audit/
+*.zip
+

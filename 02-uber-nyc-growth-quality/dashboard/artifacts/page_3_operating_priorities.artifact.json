@@ -1,0 +1,1172 @@
+{
+  "surface": "dashboard",
+  "manifest": {
+    "version": 1,
+    "surface": "dashboard",
+    "title": "Uber NYC Final Dashboard — Growth Quality & Operating Priorities",
+    "description": "Borough, hour, airport, and neighborhood priorities with evidence-bounded recommended actions.",
+    "generatedAt": "2026-08-25T03:50:10.099453+00:00",
+    "cards": [
+      {
+        "id": "core_growth_card",
+        "description": "Combined completed-trip increase from Manhattan and Brooklyn; the share exceeds 100% because other boroughs offset part of the gain.",
+        "dataset": "priority_headline",
+        "sourceId": "borough_analysis",
+        "metrics": [
+          {
+            "label": "Manhattan + Brooklyn",
+            "field": "manhattan_brooklyn_increment",
+            "format": "number"
+          },
+          {
+            "label": "Share of net city growth",
+            "field": "manhattan_brooklyn_share",
+            "format": "percent"
+          }
+        ]
+      },
+      {
+        "id": "within_borough_card",
+        "description": "Citywide Request-to-Pickup increase attributable to within-borough movement in the validated decomposition.",
+        "dataset": "priority_headline",
+        "sourceId": "borough_analysis",
+        "metrics": [
+          {
+            "label": "Within-borough wait effect",
+            "field": "within_borough_wait_minutes",
+            "format": "number",
+            "unit": "min"
+          },
+          {
+            "label": "Geographic mix effect",
+            "field": "geographic_mix_wait_minutes",
+            "format": "number",
+            "unit": "min",
+            "signed": true
+          }
+        ]
+      },
+      {
+        "id": "peak_hour_card",
+        "description": "Pickup hour with the largest May year-over-year average Request-to-Pickup increase.",
+        "dataset": "priority_headline",
+        "sourceId": "hourly_analysis",
+        "metrics": [
+          {
+            "label": "Peak hourly wait change",
+            "field": "peak_hour_wait_change_rate",
+            "format": "percent",
+            "signed": true
+          },
+          {
+            "label": "Pickup hour",
+            "field": "peak_hour",
+            "format": "text"
+          }
+        ]
+      },
+      {
+        "id": "top_window_card",
+        "description": "Top recurring weekday-hour-zone window by estimated excess Request-to-Pickup minutes per contributing day.",
+        "dataset": "priority_headline",
+        "sourceId": "priority_window_analysis",
+        "metrics": [
+          {
+            "label": "Top-window excess min/day",
+            "field": "top_window_excess_minutes_per_day",
+            "format": "number"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "borough_growth_contribution",
+        "title": "Contribution to city completed-trip growth by borough",
+        "subtitle": "May 2026 versus May 2025 · signed share of net city trip change",
+        "type": "bar",
+        "intent": "comparison",
+        "question": "Which boroughs contributed to or offset city completed-trip growth?",
+        "rationale": "A signed bar chart makes positive and negative growth contributions directly comparable.",
+        "dataset": "borough_yoy",
+        "sourceId": "borough_analysis",
+        "layout": "half",
+        "valueFormat": "percent",
+        "referenceLines": [
+          {
+            "axis": "y",
+            "value": 0,
+            "label": "No contribution",
+            "color": "neutral",
+            "lineStyle": "solid"
+          }
+        ],
+        "encodings": {
+          "x": {
+            "field": "borough",
+            "type": "nominal",
+            "label": "Pickup borough"
+          },
+          "y": {
+            "field": "contribution_to_growth_rate",
+            "type": "quantitative",
+            "label": "Contribution to city growth"
+          },
+          "tooltip": [
+            {
+              "field": "trip_delta",
+              "type": "quantitative",
+              "label": "Trip delta"
+            },
+            {
+              "field": "trip_growth_rate",
+              "type": "quantitative",
+              "label": "Borough trip growth",
+              "format": "percent"
+            }
+          ]
+        }
+      },
+      {
+        "id": "borough_wait_change",
+        "title": "Average Request-to-Pickup change by borough",
+        "subtitle": "May 2026 versus May 2025 · eligible completed trips",
+        "type": "bar",
+        "intent": "comparison",
+        "question": "Where did average Request-to-Pickup deteriorate most?",
+        "rationale": "A common-scale bar chart compares the five borough year-over-year changes.",
+        "dataset": "borough_yoy",
+        "sourceId": "borough_analysis",
+        "layout": "half",
+        "valueFormat": "percent",
+        "encodings": {
+          "x": {
+            "field": "borough",
+            "type": "nominal",
+            "label": "Pickup borough"
+          },
+          "y": {
+            "field": "avg_wait_change_rate",
+            "type": "quantitative",
+            "label": "YoY wait change"
+          },
+          "tooltip": [
+            {
+              "field": "avg_wait_2025_05",
+              "type": "quantitative",
+              "label": "May 2025 avg wait"
+            },
+            {
+              "field": "avg_wait_2026_05",
+              "type": "quantitative",
+              "label": "May 2026 avg wait"
+            },
+            {
+              "field": "trip_growth_rate",
+              "type": "quantitative",
+              "label": "Trip growth",
+              "format": "percent"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hourly_wait_change",
+        "title": "Average Request-to-Pickup change by pickup hour",
+        "subtitle": "May 2026 versus May 2025 · 24 citywide pickup hours",
+        "type": "bar",
+        "intent": "comparison",
+        "question": "Which hours carry the greatest year-over-year service deterioration?",
+        "rationale": "An ordered hourly bar chart exposes peak-pressure windows while preserving the daily sequence.",
+        "dataset": "hourly_yoy",
+        "sourceId": "hourly_analysis",
+        "layout": "full",
+        "valueFormat": "percent",
+        "encodings": {
+          "x": {
+            "field": "pickup_hour_label",
+            "type": "ordinal",
+            "label": "Pickup hour"
+          },
+          "y": {
+            "field": "avg_wait_change_rate",
+            "type": "quantitative",
+            "label": "YoY wait change"
+          },
+          "tooltip": [
+            {
+              "field": "trip_growth_rate",
+              "type": "quantitative",
+              "label": "Trip growth",
+              "format": "percent"
+            },
+            {
+              "field": "contribution_to_growth_rate",
+              "type": "quantitative",
+              "label": "Contribution to city growth",
+              "format": "percent"
+            },
+            {
+              "field": "avg_wait_2026_05",
+              "type": "quantitative",
+              "label": "May 2026 avg wait"
+            }
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "airport_windows_table",
+        "title": "Highest-priority airport operating windows",
+        "subtitle": "Top 12 recurring May 2026 airport weekday-hour windows by estimated excess minutes per contributing day",
+        "dataset": "airport_windows",
+        "sourceId": "priority_window_analysis",
+        "layout": "full",
+        "defaultSort": {
+          "field": "estimated_excess_request_to_pickup_minutes_per_day",
+          "direction": "desc"
+        },
+        "columns": [
+          {
+            "field": "weekday_name",
+            "label": "Weekday",
+            "type": "text"
+          },
+          {
+            "field": "pickup_hour_label",
+            "label": "Hour",
+            "type": "text"
+          },
+          {
+            "field": "zone_label",
+            "label": "Pickup zone",
+            "type": "text"
+          },
+          {
+            "field": "avg_trips_per_contributing_day",
+            "label": "Trips/day",
+            "format": "number"
+          },
+          {
+            "field": "avg_request_to_pickup_minutes",
+            "label": "Avg wait",
+            "format": "number"
+          },
+          {
+            "field": "wait_gap_to_city_minutes",
+            "label": "Gap vs city",
+            "format": "number",
+            "movement": true
+          },
+          {
+            "field": "estimated_excess_request_to_pickup_minutes_per_day",
+            "label": "Excess min/day",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "neighborhood_priority_table",
+        "title": "Highest-priority non-airport neighborhoods",
+        "subtitle": "Top 10 priority-proxy pickup zones excluding JFK and LaGuardia; May 2026",
+        "dataset": "neighborhood_priority",
+        "sourceId": "zone_priority_analysis",
+        "layout": "full",
+        "defaultSort": {
+          "field": "estimated_excess_request_to_pickup_minutes",
+          "direction": "desc"
+        },
+        "columns": [
+          {
+            "field": "zone_label",
+            "label": "Pickup zone",
+            "type": "text"
+          },
+          {
+            "field": "trips_2026_05",
+            "label": "May trips",
+            "format": "number"
+          },
+          {
+            "field": "trip_growth_rate",
+            "label": "Trip growth",
+            "format": "percent",
+            "movement": true
+          },
+          {
+            "field": "avg_wait_2026_05",
+            "label": "Avg wait",
+            "format": "number"
+          },
+          {
+            "field": "avg_wait_change_rate",
+            "label": "Wait change",
+            "format": "percent",
+            "movement": true
+          },
+          {
+            "field": "estimated_excess_request_to_pickup_minutes",
+            "label": "Excess minutes",
+            "format": "number"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "borough_analysis",
+        "label": "Borough growth and wait decomposition",
+        "path": "data/processed/analysis/borough_yoy.parquet"
+      },
+      {
+        "id": "hourly_analysis",
+        "label": "Citywide hourly year-over-year profile",
+        "path": "data/processed/analysis/hourly_yoy.parquet"
+      },
+      {
+        "id": "priority_window_analysis",
+        "label": "Recurring pickup-window priority analysis",
+        "path": "data/processed/analysis/priority_windows.parquet"
+      },
+      {
+        "id": "zone_priority_analysis",
+        "label": "Taxi-zone marketplace priority analysis",
+        "path": "data/processed/analysis/zone_yoy.parquet"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "navigation",
+        "type": "markdown",
+        "body": "**Executive dashboard · Page 3 of 3**  \n[1. Marketplace Overview](page_1_marketplace_overview.html) · [2. Marketplace Efficiency](page_2_marketplace_efficiency.html) · **3. Growth Quality & Operating Priorities**"
+      },
+      {
+        "id": "priority_summary",
+        "type": "markdown",
+        "body": "## Operating priorities\n\nManhattan and Brooklyn added **318,282 completed trips**, equivalent to **100.7%** of net city growth because declines elsewhere offset part of their increase. The wait decomposition assigns **0.449 minutes** of the citywide change to within-borough movement, while geographic mix contributed **-0.008 minutes** and slightly offset the deterioration.\n\nThe hourly view identifies **03:00** as the largest year-over-year wait increase at **18.5%**. The recurring-window ranking is dominated by JFK and LaGuardia late-evening and overnight periods, while the neighborhood list concentrates on Harlem, Brownsville, Crown Heights, Canarsie, Stuyvesant Heights, Bushwick, Mott Haven, and East New York.\n"
+      },
+      {
+        "id": "priority_metrics",
+        "type": "metric-strip",
+        "cardIds": [
+          "core_growth_card",
+          "within_borough_card",
+          "peak_hour_card",
+          "top_window_card"
+        ]
+      },
+      {
+        "id": "borough_growth_block",
+        "type": "chart",
+        "chartId": "borough_growth_contribution",
+        "layout": "half"
+      },
+      {
+        "id": "borough_wait_block",
+        "type": "chart",
+        "chartId": "borough_wait_change",
+        "layout": "half"
+      },
+      {
+        "id": "hourly_wait_block",
+        "type": "chart",
+        "chartId": "hourly_wait_change",
+        "layout": "full"
+      },
+      {
+        "id": "airport_windows_block",
+        "type": "table",
+        "tableId": "airport_windows_table",
+        "layout": "full"
+      },
+      {
+        "id": "neighborhood_priority_block",
+        "type": "table",
+        "tableId": "neighborhood_priority_table",
+        "layout": "full"
+      },
+      {
+        "id": "recommended_actions",
+        "type": "markdown",
+        "body": "## Recommended actions\n\n1. **Protect airport service quality.** Review late-evening and overnight operating playbooks at JFK and LaGuardia, beginning with the highest-burden weekday-hour windows in the table.\n2. **Target neighborhood diagnostics before broad demand stimulation.** Prioritize localized dispatch, driver-positioning, and pickup-process tests in the ranked Harlem, Brooklyn, and Bronx zones; measure completed trips and Request-to-Pickup together.\n3. **Treat 00:00–07:00 as a focused service-recovery window.** Diagnose the 03:00–06:00 wait increase and evaluate targeted interventions with citywide and zone-level guardrails.\n4. **Add the missing causal evidence before making supply claims.** Join cancellations, driver online time, dispatch acceptance, surge, promotions, and pickup-process data before attributing the observed patterns to supply shortage or estimating financial impact.\n"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-25T03:50:10.099453+00:00",
+    "status": "ready",
+    "datasets": {
+      "priority_headline": [
+        {
+          "manhattan_brooklyn_increment": 318282.0,
+          "manhattan_brooklyn_share": 1.0073904800488689,
+          "within_borough_wait_minutes": 0.44943299999999997,
+          "geographic_mix_wait_minutes": -0.007941999999999998,
+          "peak_hour": "03:00",
+          "peak_hour_wait_change_rate": 0.18485,
+          "top_window_excess_minutes_per_day": 5414.2
+        }
+      ],
+      "borough_yoy": [
+        {
+          "borough": "Manhattan",
+          "trips_2025_05": 5439220.0,
+          "trips_2026_05": 5643405.0,
+          "trip_delta": 204185.0,
+          "trip_growth_rate": 0.03754,
+          "contribution_to_growth_rate": 0.6462600000000001,
+          "avg_wait_2025_05": 4.781,
+          "avg_wait_2026_05": 4.917,
+          "avg_wait_change_rate": 0.02834
+        },
+        {
+          "borough": "Brooklyn",
+          "trips_2025_05": 3991842.0,
+          "trips_2026_05": 4105939.0,
+          "trip_delta": 114097.0,
+          "trip_growth_rate": 0.02858,
+          "contribution_to_growth_rate": 0.36113,
+          "avg_wait_2025_05": 5.055,
+          "avg_wait_2026_05": 5.584,
+          "avg_wait_change_rate": 0.10456
+        },
+        {
+          "borough": "Queens",
+          "trips_2025_05": 3322734.0,
+          "trips_2026_05": 3357279.0,
+          "trip_delta": 34545.0,
+          "trip_growth_rate": 0.0104,
+          "contribution_to_growth_rate": 0.10933999999999999,
+          "avg_wait_2025_05": 5.248,
+          "avg_wait_2026_05": 5.925,
+          "avg_wait_change_rate": 0.12914
+        },
+        {
+          "borough": "Staten Island",
+          "trips_2025_05": 256029.0,
+          "trips_2026_05": 249037.0,
+          "trip_delta": -6992.0,
+          "trip_growth_rate": -0.027309999999999997,
+          "contribution_to_growth_rate": -0.02213,
+          "avg_wait_2025_05": 6.49,
+          "avg_wait_2026_05": 6.716,
+          "avg_wait_change_rate": 0.034820000000000004
+        },
+        {
+          "borough": "Bronx",
+          "trips_2025_05": 2028430.0,
+          "trips_2026_05": 1998341.0,
+          "trip_delta": -30089.0,
+          "trip_growth_rate": -0.014830000000000001,
+          "contribution_to_growth_rate": -0.09523,
+          "avg_wait_2025_05": 5.217,
+          "avg_wait_2026_05": 6.001,
+          "avg_wait_change_rate": 0.1503
+        }
+      ],
+      "wait_decomposition": [
+        {
+          "borough": "Brooklyn",
+          "within_borough_contribution_minutes": 0.140614,
+          "geographic_mix_contribution_minutes": 0.0103,
+          "total_contribution_minutes": 0.150914
+        },
+        {
+          "borough": "Queens",
+          "within_borough_contribution_minutes": 0.149893,
+          "geographic_mix_contribution_minutes": -0.013758,
+          "total_contribution_minutes": 0.136135
+        },
+        {
+          "borough": "Manhattan",
+          "within_borough_contribution_minutes": 0.049045,
+          "geographic_mix_contribution_minutes": 0.030748,
+          "total_contribution_minutes": 0.079793
+        },
+        {
+          "borough": "Bronx",
+          "within_borough_contribution_minutes": 0.105976,
+          "geographic_mix_contribution_minutes": -0.029553,
+          "total_contribution_minutes": 0.076423
+        },
+        {
+          "borough": "Staten Island",
+          "within_borough_contribution_minutes": 0.00383,
+          "geographic_mix_contribution_minutes": -0.005796,
+          "total_contribution_minutes": -0.001967
+        }
+      ],
+      "hourly_yoy": [
+        {
+          "pickup_hour": 0,
+          "pickup_hour_label": "00:00",
+          "trips_2025_05": 530724.0,
+          "trips_2026_05": 554937.0,
+          "trip_delta": 24213.0,
+          "trip_growth_rate": 0.04562,
+          "contribution_to_growth_rate": 0.07664,
+          "avg_wait_2025_05": 5.49,
+          "avg_wait_2026_05": 6.104,
+          "avg_wait_change_rate": 0.11191000000000001
+        },
+        {
+          "pickup_hour": 1,
+          "pickup_hour_label": "01:00",
+          "trips_2025_05": 369493.0,
+          "trips_2026_05": 385751.0,
+          "trip_delta": 16258.0,
+          "trip_growth_rate": 0.044000000000000004,
+          "contribution_to_growth_rate": 0.05146,
+          "avg_wait_2025_05": 5.112,
+          "avg_wait_2026_05": 5.766,
+          "avg_wait_change_rate": 0.128
+        },
+        {
+          "pickup_hour": 2,
+          "pickup_hour_label": "02:00",
+          "trips_2025_05": 261310.0,
+          "trips_2026_05": 277663.0,
+          "trip_delta": 16353.0,
+          "trip_growth_rate": 0.06258,
+          "contribution_to_growth_rate": 0.05176,
+          "avg_wait_2025_05": 5.196,
+          "avg_wait_2026_05": 5.95,
+          "avg_wait_change_rate": 0.14517
+        },
+        {
+          "pickup_hour": 3,
+          "pickup_hour_label": "03:00",
+          "trips_2025_05": 205667.0,
+          "trips_2026_05": 226992.0,
+          "trip_delta": 21325.0,
+          "trip_growth_rate": 0.10369,
+          "contribution_to_growth_rate": 0.0675,
+          "avg_wait_2025_05": 5.406,
+          "avg_wait_2026_05": 6.405,
+          "avg_wait_change_rate": 0.18485
+        },
+        {
+          "pickup_hour": 4,
+          "pickup_hour_label": "04:00",
+          "trips_2025_05": 208990.0,
+          "trips_2026_05": 234743.0,
+          "trip_delta": 25753.0,
+          "trip_growth_rate": 0.12323,
+          "contribution_to_growth_rate": 0.08151,
+          "avg_wait_2025_05": 6.258,
+          "avg_wait_2026_05": 7.281,
+          "avg_wait_change_rate": 0.16346
+        },
+        {
+          "pickup_hour": 5,
+          "pickup_hour_label": "05:00",
+          "trips_2025_05": 261198.0,
+          "trips_2026_05": 289067.0,
+          "trip_delta": 27869.0,
+          "trip_growth_rate": 0.1067,
+          "contribution_to_growth_rate": 0.08821,
+          "avg_wait_2025_05": 5.259,
+          "avg_wait_2026_05": 6.042,
+          "avg_wait_change_rate": 0.14891
+        },
+        {
+          "pickup_hour": 6,
+          "pickup_hour_label": "06:00",
+          "trips_2025_05": 410328.0,
+          "trips_2026_05": 433212.0,
+          "trip_delta": 22884.0,
+          "trip_growth_rate": 0.05577,
+          "contribution_to_growth_rate": 0.07243000000000001,
+          "avg_wait_2025_05": 4.898,
+          "avg_wait_2026_05": 5.653,
+          "avg_wait_change_rate": 0.15408
+        },
+        {
+          "pickup_hour": 7,
+          "pickup_hour_label": "07:00",
+          "trips_2025_05": 612614.0,
+          "trips_2026_05": 650231.0,
+          "trip_delta": 37617.0,
+          "trip_growth_rate": 0.061399999999999996,
+          "contribution_to_growth_rate": 0.11906,
+          "avg_wait_2025_05": 5.565,
+          "avg_wait_2026_05": 6.157,
+          "avg_wait_change_rate": 0.10638
+        },
+        {
+          "pickup_hour": 8,
+          "pickup_hour_label": "08:00",
+          "trips_2025_05": 756506.0,
+          "trips_2026_05": 772378.0,
+          "trip_delta": 15872.0,
+          "trip_growth_rate": 0.02098,
+          "contribution_to_growth_rate": 0.05024,
+          "avg_wait_2025_05": 5.197,
+          "avg_wait_2026_05": 5.578,
+          "avg_wait_change_rate": 0.07339000000000001
+        },
+        {
+          "pickup_hour": 9,
+          "pickup_hour_label": "09:00",
+          "trips_2025_05": 722672.0,
+          "trips_2026_05": 715972.0,
+          "trip_delta": -6700.0,
+          "trip_growth_rate": -0.00927,
+          "contribution_to_growth_rate": -0.02121,
+          "avg_wait_2025_05": 4.469,
+          "avg_wait_2026_05": 4.841,
+          "avg_wait_change_rate": 0.08311
+        },
+        {
+          "pickup_hour": 10,
+          "pickup_hour_label": "10:00",
+          "trips_2025_05": 663910.0,
+          "trips_2026_05": 670702.0,
+          "trip_delta": 6792.0,
+          "trip_growth_rate": 0.01023,
+          "contribution_to_growth_rate": 0.0215,
+          "avg_wait_2025_05": 4.28,
+          "avg_wait_2026_05": 4.701,
+          "avg_wait_change_rate": 0.0984
+        },
+        {
+          "pickup_hour": 11,
+          "pickup_hour_label": "11:00",
+          "trips_2025_05": 643832.0,
+          "trips_2026_05": 666357.0,
+          "trip_delta": 22525.0,
+          "trip_growth_rate": 0.03499,
+          "contribution_to_growth_rate": 0.07128999999999999,
+          "avg_wait_2025_05": 4.355,
+          "avg_wait_2026_05": 4.748,
+          "avg_wait_change_rate": 0.09019
+        },
+        {
+          "pickup_hour": 12,
+          "pickup_hour_label": "12:00",
+          "trips_2025_05": 665442.0,
+          "trips_2026_05": 682250.0,
+          "trip_delta": 16808.0,
+          "trip_growth_rate": 0.025259999999999998,
+          "contribution_to_growth_rate": 0.053200000000000004,
+          "avg_wait_2025_05": 4.669,
+          "avg_wait_2026_05": 5.005,
+          "avg_wait_change_rate": 0.07216
+        },
+        {
+          "pickup_hour": 13,
+          "pickup_hour_label": "13:00",
+          "trips_2025_05": 692665.0,
+          "trips_2026_05": 710563.0,
+          "trip_delta": 17898.0,
+          "trip_growth_rate": 0.025840000000000002,
+          "contribution_to_growth_rate": 0.05665,
+          "avg_wait_2025_05": 4.988,
+          "avg_wait_2026_05": 5.297,
+          "avg_wait_change_rate": 0.06182000000000001
+        },
+        {
+          "pickup_hour": 14,
+          "pickup_hour_label": "14:00",
+          "trips_2025_05": 748389.0,
+          "trips_2026_05": 773086.0,
+          "trip_delta": 24697.0,
+          "trip_growth_rate": 0.033,
+          "contribution_to_growth_rate": 0.07817,
+          "avg_wait_2025_05": 5.153,
+          "avg_wait_2026_05": 5.518,
+          "avg_wait_change_rate": 0.07075999999999999
+        },
+        {
+          "pickup_hour": 15,
+          "pickup_hour_label": "15:00",
+          "trips_2025_05": 762319.0,
+          "trips_2026_05": 783691.0,
+          "trip_delta": 21372.0,
+          "trip_growth_rate": 0.02804,
+          "contribution_to_growth_rate": 0.06764,
+          "avg_wait_2025_05": 5.096,
+          "avg_wait_2026_05": 5.47,
+          "avg_wait_change_rate": 0.07327
+        },
+        {
+          "pickup_hour": 16,
+          "pickup_hour_label": "16:00",
+          "trips_2025_05": 792850.0,
+          "trips_2026_05": 787092.0,
+          "trip_delta": -5758.0,
+          "trip_growth_rate": -0.00726,
+          "contribution_to_growth_rate": -0.01822,
+          "avg_wait_2025_05": 4.935,
+          "avg_wait_2026_05": 5.255,
+          "avg_wait_change_rate": 0.06478
+        },
+        {
+          "pickup_hour": 17,
+          "pickup_hour_label": "17:00",
+          "trips_2025_05": 864959.0,
+          "trips_2026_05": 852130.0,
+          "trip_delta": -12829.0,
+          "trip_growth_rate": -0.014830000000000001,
+          "contribution_to_growth_rate": -0.0406,
+          "avg_wait_2025_05": 5.153,
+          "avg_wait_2026_05": 5.314,
+          "avg_wait_change_rate": 0.031349999999999996
+        },
+        {
+          "pickup_hour": 18,
+          "pickup_hour_label": "18:00",
+          "trips_2025_05": 887006.0,
+          "trips_2026_05": 887161.0,
+          "trip_delta": 155.0,
+          "trip_growth_rate": 0.00017,
+          "contribution_to_growth_rate": 0.00049,
+          "avg_wait_2025_05": 4.93,
+          "avg_wait_2026_05": 5.123,
+          "avg_wait_change_rate": 0.03927
+        },
+        {
+          "pickup_hour": 19,
+          "pickup_hour_label": "19:00",
+          "trips_2025_05": 848165.0,
+          "trips_2026_05": 824073.0,
+          "trip_delta": -24092.0,
+          "trip_growth_rate": -0.028399999999999998,
+          "contribution_to_growth_rate": -0.07625,
+          "avg_wait_2025_05": 4.566,
+          "avg_wait_2026_05": 5.025,
+          "avg_wait_change_rate": 0.1007
+        },
+        {
+          "pickup_hour": 20,
+          "pickup_hour_label": "20:00",
+          "trips_2025_05": 807715.0,
+          "trips_2026_05": 811118.0,
+          "trip_delta": 3403.0,
+          "trip_growth_rate": 0.00421,
+          "contribution_to_growth_rate": 0.01077,
+          "avg_wait_2025_05": 4.786,
+          "avg_wait_2026_05": 5.206,
+          "avg_wait_change_rate": 0.08778000000000001
+        },
+        {
+          "pickup_hour": 21,
+          "pickup_hour_label": "21:00",
+          "trips_2025_05": 799154.0,
+          "trips_2026_05": 828072.0,
+          "trip_delta": 28918.0,
+          "trip_growth_rate": 0.03619,
+          "contribution_to_growth_rate": 0.09153,
+          "avg_wait_2025_05": 5.075,
+          "avg_wait_2026_05": 5.587,
+          "avg_wait_change_rate": 0.10091
+        },
+        {
+          "pickup_hour": 22,
+          "pickup_hour_label": "22:00",
+          "trips_2025_05": 798118.0,
+          "trips_2026_05": 810598.0,
+          "trip_delta": 12480.0,
+          "trip_growth_rate": 0.01564,
+          "contribution_to_growth_rate": 0.0395,
+          "avg_wait_2025_05": 5.738,
+          "avg_wait_2026_05": 6.125,
+          "avg_wait_change_rate": 0.06753
+        },
+        {
+          "pickup_hour": 23,
+          "pickup_hour_label": "23:00",
+          "trips_2025_05": 724843.0,
+          "trips_2026_05": 726977.0,
+          "trip_delta": 2134.0,
+          "trip_growth_rate": 0.00294,
+          "contribution_to_growth_rate": 0.006750000000000001,
+          "avg_wait_2025_05": 5.903,
+          "avg_wait_2026_05": 6.392,
+          "avg_wait_change_rate": 0.08292999999999999
+        }
+      ],
+      "airport_windows": [
+        {
+          "weekday_name": "Monday",
+          "pickup_hour": 21,
+          "pickup_hour_label": "21:00",
+          "borough": "Queens",
+          "zone": "LaGuardia Airport",
+          "zone_label": "Queens — LaGuardia Airport",
+          "avg_trips_per_contributing_day": 746.75,
+          "avg_request_to_pickup_minutes": 12.684,
+          "wait_gap_to_city_minutes": 7.26,
+          "estimated_excess_request_to_pickup_minutes_per_day": 5414.2
+        },
+        {
+          "weekday_name": "Monday",
+          "pickup_hour": 23,
+          "pickup_hour_label": "23:00",
+          "borough": "Queens",
+          "zone": "JFK Airport",
+          "zone_label": "Queens — JFK Airport",
+          "avg_trips_per_contributing_day": 700.75,
+          "avg_request_to_pickup_minutes": 12.866,
+          "wait_gap_to_city_minutes": 7.442,
+          "estimated_excess_request_to_pickup_minutes_per_day": 5198.3
+        },
+        {
+          "weekday_name": "Monday",
+          "pickup_hour": 22,
+          "pickup_hour_label": "22:00",
+          "borough": "Queens",
+          "zone": "LaGuardia Airport",
+          "zone_label": "Queens — LaGuardia Airport",
+          "avg_trips_per_contributing_day": 731.5,
+          "avg_request_to_pickup_minutes": 12.357,
+          "wait_gap_to_city_minutes": 6.933,
+          "estimated_excess_request_to_pickup_minutes_per_day": 5064.6
+        },
+        {
+          "weekday_name": "Thursday",
+          "pickup_hour": 0,
+          "pickup_hour_label": "00:00",
+          "borough": "Queens",
+          "zone": "JFK Airport",
+          "zone_label": "Queens — JFK Airport",
+          "avg_trips_per_contributing_day": 509.5,
+          "avg_request_to_pickup_minutes": 15.422,
+          "wait_gap_to_city_minutes": 9.998,
+          "estimated_excess_request_to_pickup_minutes_per_day": 4999.0
+        },
+        {
+          "weekday_name": "Sunday",
+          "pickup_hour": 23,
+          "pickup_hour_label": "23:00",
+          "borough": "Queens",
+          "zone": "LaGuardia Airport",
+          "zone_label": "Queens — LaGuardia Airport",
+          "avg_trips_per_contributing_day": 669.0,
+          "avg_request_to_pickup_minutes": 12.881,
+          "wait_gap_to_city_minutes": 7.457,
+          "estimated_excess_request_to_pickup_minutes_per_day": 4984.3
+        },
+        {
+          "weekday_name": "Thursday",
+          "pickup_hour": 21,
+          "pickup_hour_label": "21:00",
+          "borough": "Queens",
+          "zone": "LaGuardia Airport",
+          "zone_label": "Queens — LaGuardia Airport",
+          "avg_trips_per_contributing_day": 788.0,
+          "avg_request_to_pickup_minutes": 11.633,
+          "wait_gap_to_city_minutes": 6.209,
+          "estimated_excess_request_to_pickup_minutes_per_day": 4888.1
+        },
+        {
+          "weekday_name": "Sunday",
+          "pickup_hour": 21,
+          "pickup_hour_label": "21:00",
+          "borough": "Queens",
+          "zone": "LaGuardia Airport",
+          "zone_label": "Queens — LaGuardia Airport",
+          "avg_trips_per_contributing_day": 677.6,
+          "avg_request_to_pickup_minutes": 12.464,
+          "wait_gap_to_city_minutes": 7.04,
+          "estimated_excess_request_to_pickup_minutes_per_day": 4763.3
+        },
+        {
+          "weekday_name": "Wednesday",
+          "pickup_hour": 23,
+          "pickup_hour_label": "23:00",
+          "borough": "Queens",
+          "zone": "LaGuardia Airport",
+          "zone_label": "Queens — LaGuardia Airport",
+          "avg_trips_per_contributing_day": 759.25,
+          "avg_request_to_pickup_minutes": 11.657,
+          "wait_gap_to_city_minutes": 6.233,
+          "estimated_excess_request_to_pickup_minutes_per_day": 4726.2
+        },
+        {
+          "weekday_name": "Wednesday",
+          "pickup_hour": 23,
+          "pickup_hour_label": "23:00",
+          "borough": "Queens",
+          "zone": "JFK Airport",
+          "zone_label": "Queens — JFK Airport",
+          "avg_trips_per_contributing_day": 567.25,
+          "avg_request_to_pickup_minutes": 13.567,
+          "wait_gap_to_city_minutes": 8.143,
+          "estimated_excess_request_to_pickup_minutes_per_day": 4606.9
+        },
+        {
+          "weekday_name": "Thursday",
+          "pickup_hour": 23,
+          "pickup_hour_label": "23:00",
+          "borough": "Queens",
+          "zone": "LaGuardia Airport",
+          "zone_label": "Queens — LaGuardia Airport",
+          "avg_trips_per_contributing_day": 758.25,
+          "avg_request_to_pickup_minutes": 11.421,
+          "wait_gap_to_city_minutes": 5.997,
+          "estimated_excess_request_to_pickup_minutes_per_day": 4541.3
+        },
+        {
+          "weekday_name": "Wednesday",
+          "pickup_hour": 22,
+          "pickup_hour_label": "22:00",
+          "borough": "Queens",
+          "zone": "LaGuardia Airport",
+          "zone_label": "Queens — LaGuardia Airport",
+          "avg_trips_per_contributing_day": 691.75,
+          "avg_request_to_pickup_minutes": 11.968,
+          "wait_gap_to_city_minutes": 6.544,
+          "estimated_excess_request_to_pickup_minutes_per_day": 4525.2
+        },
+        {
+          "weekday_name": "Thursday",
+          "pickup_hour": 1,
+          "pickup_hour_label": "01:00",
+          "borough": "Queens",
+          "zone": "JFK Airport",
+          "zone_label": "Queens — JFK Airport",
+          "avg_trips_per_contributing_day": 375.5,
+          "avg_request_to_pickup_minutes": 17.491,
+          "wait_gap_to_city_minutes": 12.067,
+          "estimated_excess_request_to_pickup_minutes_per_day": 4289.8
+        }
+      ],
+      "neighborhood_priority": [
+        {
+          "pickup_location_id": 42,
+          "borough": "Manhattan",
+          "zone": "Central Harlem North",
+          "zone_label": "Manhattan — Central Harlem North",
+          "trips_2026_05": 124925.0,
+          "trip_delta": 4510.0,
+          "trip_growth_rate": 0.037450000000000004,
+          "avg_wait_2026_05": 6.649,
+          "avg_wait_change_rate": 0.19739,
+          "wait_gap_to_city_minutes": 1.162,
+          "estimated_excess_request_to_pickup_minutes": 143134.0,
+          "marketplace_quadrant": "Supply-constrained priority"
+        },
+        {
+          "pickup_location_id": 35,
+          "borough": "Brooklyn",
+          "zone": "Brownsville",
+          "zone_label": "Brooklyn — Brownsville",
+          "trips_2026_05": 96298.0,
+          "trip_delta": 6351.0,
+          "trip_growth_rate": 0.07061,
+          "avg_wait_2026_05": 6.714,
+          "avg_wait_change_rate": 0.1494,
+          "wait_gap_to_city_minutes": 1.227,
+          "estimated_excess_request_to_pickup_minutes": 116319.0,
+          "marketplace_quadrant": "Supply-constrained priority"
+        },
+        {
+          "pickup_location_id": 61,
+          "borough": "Brooklyn",
+          "zone": "Crown Heights North",
+          "zone_label": "Brooklyn — Crown Heights North",
+          "trips_2026_05": 194268.0,
+          "trip_delta": 8719.0,
+          "trip_growth_rate": 0.04699,
+          "avg_wait_2026_05": 6.071,
+          "avg_wait_change_rate": 0.12900999999999999,
+          "wait_gap_to_city_minutes": 0.584,
+          "estimated_excess_request_to_pickup_minutes": 111868.0,
+          "marketplace_quadrant": "Supply-constrained priority"
+        },
+        {
+          "pickup_location_id": 39,
+          "borough": "Brooklyn",
+          "zone": "Canarsie",
+          "zone_label": "Brooklyn — Canarsie",
+          "trips_2026_05": 118920.0,
+          "trip_delta": 3759.0,
+          "trip_growth_rate": 0.032639999999999995,
+          "avg_wait_2026_05": 6.284,
+          "avg_wait_change_rate": 0.13506,
+          "wait_gap_to_city_minutes": 0.797,
+          "estimated_excess_request_to_pickup_minutes": 93639.0,
+          "marketplace_quadrant": "Supply-constrained priority"
+        },
+        {
+          "pickup_location_id": 225,
+          "borough": "Brooklyn",
+          "zone": "Stuyvesant Heights",
+          "zone_label": "Brooklyn — Stuyvesant Heights",
+          "trips_2026_05": 119609.0,
+          "trip_delta": 4249.0,
+          "trip_growth_rate": 0.03683,
+          "avg_wait_2026_05": 6.173,
+          "avg_wait_change_rate": 0.15286,
+          "wait_gap_to_city_minutes": 0.686,
+          "estimated_excess_request_to_pickup_minutes": 80919.0,
+          "marketplace_quadrant": "Supply-constrained priority"
+        },
+        {
+          "pickup_location_id": 74,
+          "borough": "Manhattan",
+          "zone": "East Harlem North",
+          "zone_label": "Manhattan — East Harlem North",
+          "trips_2026_05": 96376.0,
+          "trip_delta": 2642.0,
+          "trip_growth_rate": 0.02819,
+          "avg_wait_2026_05": 6.283,
+          "avg_wait_change_rate": 0.14118,
+          "wait_gap_to_city_minutes": 0.796,
+          "estimated_excess_request_to_pickup_minutes": 75664.0,
+          "marketplace_quadrant": "Supply-constrained priority"
+        },
+        {
+          "pickup_location_id": 37,
+          "borough": "Brooklyn",
+          "zone": "Bushwick South",
+          "zone_label": "Brooklyn — Bushwick South",
+          "trips_2026_05": 172678.0,
+          "trip_delta": 7975.0,
+          "trip_growth_rate": 0.04842,
+          "avg_wait_2026_05": 5.893,
+          "avg_wait_change_rate": 0.159,
+          "wait_gap_to_city_minutes": 0.406,
+          "estimated_excess_request_to_pickup_minutes": 69390.0,
+          "marketplace_quadrant": "Supply-constrained priority"
+        },
+        {
+          "pickup_location_id": 168,
+          "borough": "Bronx",
+          "zone": "Mott Haven/Port Morris",
+          "zone_label": "Bronx — Mott Haven/Port Morris",
+          "trips_2026_05": 100072.0,
+          "trip_delta": 2319.0,
+          "trip_growth_rate": 0.023719999999999998,
+          "avg_wait_2026_05": 6.168,
+          "avg_wait_change_rate": 0.16041,
+          "wait_gap_to_city_minutes": 0.681,
+          "estimated_excess_request_to_pickup_minutes": 67412.0,
+          "marketplace_quadrant": "Supply-constrained priority"
+        },
+        {
+          "pickup_location_id": 41,
+          "borough": "Manhattan",
+          "zone": "Central Harlem",
+          "zone_label": "Manhattan — Central Harlem",
+          "trips_2026_05": 91774.0,
+          "trip_delta": 4895.0,
+          "trip_growth_rate": 0.05634,
+          "avg_wait_2026_05": 6.183,
+          "avg_wait_change_rate": 0.14547000000000002,
+          "wait_gap_to_city_minutes": 0.696,
+          "estimated_excess_request_to_pickup_minutes": 63062.0,
+          "marketplace_quadrant": "Supply-constrained priority"
+        },
+        {
+          "pickup_location_id": 76,
+          "borough": "Brooklyn",
+          "zone": "East New York",
+          "zone_label": "Brooklyn — East New York",
+          "trips_2026_05": 173063.0,
+          "trip_delta": 9469.0,
+          "trip_growth_rate": 0.05788,
+          "avg_wait_2026_05": 5.851,
+          "avg_wait_change_rate": 0.16738,
+          "wait_gap_to_city_minutes": 0.364,
+          "estimated_excess_request_to_pickup_minutes": 62360.0,
+          "marketplace_quadrant": "Supply-constrained priority"
+        }
+      ]
+    },
+    "accessIssues": []
+  },
+  "sources": [
+    {
+      "id": "borough_analysis",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_parquet('data/processed/analysis/borough_yoy.parquet')",
+        "description": "Compares May 2026 with May 2025 by pickup borough and decomposes citywide request-to-pickup movement.",
+        "tables_used": [
+          "analytics.zone_daily_metrics",
+          "data.reference.taxi_zone_lookup"
+        ],
+        "filters": [
+          "May 2025 and May 2026",
+          "five NYC boroughs"
+        ],
+        "metric_definitions": {
+          "growth_contribution": "Borough trip delta divided by the total city trip delta.",
+          "within_borough_effect": "Prior-period borough trip weight multiplied by the borough wait change.",
+          "geographic_mix_effect": "Change in borough trip weight multiplied by current-period borough wait."
+        },
+        "executed_at": "2026-08-25T03:50:10.099453+00:00"
+      }
+    },
+    {
+      "id": "hourly_analysis",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_parquet('data/processed/analysis/hourly_yoy.parquet') ORDER BY pickup_hour",
+        "description": "Compares May 2026 with May 2025 by pickup hour across completed trips.",
+        "tables_used": [
+          "analytics.zone_hour_metrics"
+        ],
+        "filters": [
+          "May 2025 and May 2026",
+          "24 pickup hours"
+        ],
+        "metric_definitions": {
+          "hourly_wait_change": "Year-over-year change in average eligible request-to-pickup for each pickup hour."
+        },
+        "executed_at": "2026-08-25T03:50:10.099453+00:00"
+      }
+    },
+    {
+      "id": "priority_window_analysis",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_parquet('data/processed/analysis/priority_windows.parquet') ORDER BY estimated_excess_request_to_pickup_minutes_per_day DESC",
+        "description": "Ranks May 2026 weekday-hour-zone windows with above-city request-to-pickup and material completed-trip demand.",
+        "tables_used": [
+          "analytics.zone_hour_metrics",
+          "data.reference.taxi_zone_lookup"
+        ],
+        "filters": [
+          "May 2026",
+          "at least 500 trips in the recurring window",
+          "wait above city average"
+        ],
+        "metric_definitions": {
+          "excess_minutes_per_day": "Eligible trips per contributing weekday multiplied by the positive wait gap versus the city average."
+        },
+        "executed_at": "2026-08-25T03:50:10.099453+00:00"
+      }
+    },
+    {
+      "id": "zone_priority_analysis",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_parquet('data/processed/analysis/zone_yoy.parquet') ORDER BY estimated_excess_request_to_pickup_minutes DESC",
+        "description": "Compares pickup zones on completed-trip demand, request-to-pickup, growth, and excess request-to-pickup burden.",
+        "tables_used": [
+          "analytics.zone_daily_metrics",
+          "data.reference.taxi_zone_lookup"
+        ],
+        "filters": [
+          "May 2025 and May 2026",
+          "valid pickup taxi zones"
+        ],
+        "metric_definitions": {
+          "estimated_excess_request_to_pickup_minutes": "Eligible completed trips multiplied by the positive zone wait gap versus the city average.",
+          "supply_constrained_priority": "Top-quartile completed-trip demand with average request-to-pickup above the city benchmark; an operating proxy, not causal proof.",
+          "scatter_population": "Five-borough taxi zones with at least 500 completed trips in each comparison month and a valid May 2026 wait metric."
+        },
+        "executed_at": "2026-08-25T03:50:10.099453+00:00"
+      }
+    }
+  ]
+}

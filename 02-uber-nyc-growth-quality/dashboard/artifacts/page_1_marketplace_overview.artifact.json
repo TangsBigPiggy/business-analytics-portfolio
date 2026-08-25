@@ -1,0 +1,1105 @@
+{
+  "surface": "dashboard",
+  "manifest": {
+    "version": 1,
+    "surface": "dashboard",
+    "title": "Uber NYC Final Dashboard — Marketplace Overview",
+    "description": "Executive view of completed-trip scale, growth, service quality, passenger base fare, and driver pay.",
+    "generatedAt": "2026-08-25T03:50:10.099453+00:00",
+    "cards": [
+      {
+        "id": "trips_card",
+        "description": "Completed Uber HV0003 trips in May 2026; metric-specific eligibility does not alter trip volume.",
+        "dataset": "headline",
+        "sourceId": "monthly_metrics_analysis",
+        "metrics": [
+          {
+            "label": "May 2026 trips",
+            "field": "trips_current",
+            "format": "number"
+          },
+          {
+            "label": "May 2025",
+            "field": "trips_prior",
+            "format": "number"
+          },
+          {
+            "label": "YoY",
+            "field": "trip_growth_rate",
+            "format": "percent",
+            "signed": true
+          }
+        ]
+      },
+      {
+        "id": "avg_wait_card",
+        "description": "Average Request-to-Pickup Time among eligible completed trips.",
+        "dataset": "headline",
+        "sourceId": "monthly_metrics_analysis",
+        "metrics": [
+          {
+            "label": "Avg request-to-pickup",
+            "field": "avg_wait_current",
+            "format": "number",
+            "unit": "min"
+          },
+          {
+            "label": "May 2025",
+            "field": "avg_wait_prior",
+            "format": "number",
+            "unit": "min"
+          },
+          {
+            "label": "YoY",
+            "field": "avg_wait_growth_rate",
+            "format": "percent",
+            "signed": true
+          }
+        ]
+      },
+      {
+        "id": "p90_wait_card",
+        "description": "90th percentile Request-to-Pickup Time among eligible completed trips.",
+        "dataset": "headline",
+        "sourceId": "monthly_metrics_analysis",
+        "metrics": [
+          {
+            "label": "P90 request-to-pickup",
+            "field": "p90_wait_current",
+            "format": "number",
+            "unit": "min"
+          },
+          {
+            "label": "May 2025",
+            "field": "p90_wait_prior",
+            "format": "number",
+            "unit": "min"
+          },
+          {
+            "label": "YoY",
+            "field": "p90_wait_growth_rate",
+            "format": "percent",
+            "signed": true
+          }
+        ]
+      },
+      {
+        "id": "fare_card",
+        "description": "Average eligible passenger base fare per trip; not platform revenue.",
+        "dataset": "headline",
+        "sourceId": "monthly_metrics_analysis",
+        "metrics": [
+          {
+            "label": "Passenger base fare",
+            "field": "fare_current",
+            "format": "currency"
+          },
+          {
+            "label": "May 2025",
+            "field": "fare_prior",
+            "format": "currency"
+          },
+          {
+            "label": "YoY",
+            "field": "fare_growth_rate",
+            "format": "percent",
+            "signed": true
+          }
+        ]
+      },
+      {
+        "id": "pay_card",
+        "description": "Average eligible reported driver compensation per completed trip.",
+        "dataset": "headline",
+        "sourceId": "monthly_metrics_analysis",
+        "metrics": [
+          {
+            "label": "Driver pay per trip",
+            "field": "pay_current",
+            "format": "currency"
+          },
+          {
+            "label": "May 2025",
+            "field": "pay_prior",
+            "format": "currency"
+          },
+          {
+            "label": "YoY",
+            "field": "pay_growth_rate",
+            "format": "percent",
+            "signed": true
+          }
+        ]
+      },
+      {
+        "id": "coverage_card",
+        "description": "Share of completed trips eligible for Request-to-Pickup Time.",
+        "dataset": "headline",
+        "sourceId": "monthly_metrics_analysis",
+        "metrics": [
+          {
+            "label": "Wait eligibility",
+            "field": "wait_coverage_current",
+            "format": "percent"
+          },
+          {
+            "label": "May 2025",
+            "field": "wait_coverage_prior",
+            "format": "percent"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "monthly_trips_chart",
+        "title": "Monthly completed trips",
+        "subtitle": "May 2025–May 2026 · Uber HV0003 completed trips",
+        "type": "line",
+        "intent": "trend",
+        "question": "How did completed-trip volume move across the 13-month window?",
+        "rationale": "A line chart shows the monthly volume shape across 13 observed periods.",
+        "dataset": "monthly_trend",
+        "sourceId": "monthly_metrics_analysis",
+        "layout": "half",
+        "valueFormat": "number",
+        "encodings": {
+          "x": {
+            "field": "month",
+            "type": "temporal",
+            "label": "Month"
+          },
+          "y": {
+            "field": "trips",
+            "type": "quantitative",
+            "label": "Completed trips"
+          },
+          "tooltip": [
+            {
+              "field": "trips_per_active_day",
+              "type": "quantitative",
+              "label": "Trips per active day"
+            },
+            {
+              "field": "avg_request_to_pickup_minutes",
+              "type": "quantitative",
+              "label": "Avg request-to-pickup"
+            }
+          ]
+        }
+      },
+      {
+        "id": "monthly_wait_chart",
+        "title": "Monthly Request-to-Pickup Time",
+        "subtitle": "Average, median, and P90 · eligible completed trips · minutes",
+        "type": "line",
+        "intent": "trend",
+        "question": "How did the center and long-wait tail of Request-to-Pickup move?",
+        "rationale": "Three lines compare the average, median, and P90 across the same monthly grain.",
+        "combinationRationale": "All series use minutes, the same eligibility rule, and the same 13 monthly observations.",
+        "dataset": "monthly_wait_trend",
+        "sourceId": "monthly_metrics_analysis",
+        "layout": "half",
+        "valueFormat": "number",
+        "encodings": {
+          "x": {
+            "field": "month",
+            "type": "temporal",
+            "label": "Month"
+          },
+          "y": {
+            "field": "value_minutes",
+            "type": "quantitative",
+            "label": "Minutes"
+          },
+          "color": {
+            "field": "metric",
+            "type": "nominal",
+            "label": "Statistic"
+          },
+          "tooltip": [
+            {
+              "field": "metric",
+              "type": "nominal",
+              "label": "Statistic"
+            },
+            {
+              "field": "value_minutes",
+              "type": "quantitative",
+              "label": "Minutes"
+            },
+            {
+              "field": "wait_coverage_rate",
+              "type": "quantitative",
+              "label": "Eligibility",
+              "format": "percent"
+            }
+          ]
+        }
+      },
+      {
+        "id": "monthly_economics_chart",
+        "title": "Passenger base fare and driver pay per completed trip",
+        "subtitle": "May 2025–May 2026 · eligible observations · USD per trip",
+        "type": "line",
+        "intent": "trend",
+        "question": "How did passenger base fare and reported driver pay per trip move over time?",
+        "rationale": "Two same-unit lines compare the separate passenger and driver measures without implying a margin relationship.",
+        "combinationRationale": "Both series are monthly averages in USD per eligible completed trip; they remain analytically separate.",
+        "dataset": "economics_trend",
+        "sourceId": "monthly_metrics_analysis",
+        "layout": "full",
+        "valueFormat": "currency",
+        "encodings": {
+          "x": {
+            "field": "month",
+            "type": "temporal",
+            "label": "Month"
+          },
+          "y": {
+            "field": "value_usd_per_trip",
+            "type": "quantitative",
+            "label": "USD per trip"
+          },
+          "color": {
+            "field": "metric",
+            "type": "nominal",
+            "label": "Measure"
+          },
+          "tooltip": [
+            {
+              "field": "metric",
+              "type": "nominal",
+              "label": "Measure"
+            },
+            {
+              "field": "value_usd_per_trip",
+              "type": "quantitative",
+              "label": "USD per trip",
+              "format": "currency"
+            },
+            {
+              "field": "trips",
+              "type": "quantitative",
+              "label": "Completed trips"
+            }
+          ]
+        }
+      }
+    ],
+    "tables": [],
+    "sources": [
+      {
+        "id": "deep_analysis_summary",
+        "label": "Validated deep-analysis summary",
+        "path": "data/processed/analysis/analysis_summary.json"
+      },
+      {
+        "id": "monthly_metrics_analysis",
+        "label": "Monthly Uber marketplace metrics",
+        "path": "data/processed/analysis/monthly_trend.parquet"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "navigation",
+        "type": "markdown",
+        "body": "**Executive dashboard · Page 1 of 3**  \n**1. Marketplace Overview** · [2. Marketplace Efficiency](page_2_marketplace_efficiency.html) · [3. Growth Quality & Operating Priorities](page_3_operating_priorities.html)"
+      },
+      {
+        "id": "growth_quality_summary",
+        "type": "markdown",
+        "body": "## Growth quality at a glance\n\nMay 2026 completed trips rose **+2.1%** year over year to **15.35M**. Average Request-to-Pickup Time increased **+8.8%** to **5.49 minutes**, while P90 increased **+16.9%** to **10.44 minutes**. The long-wait tail therefore deteriorated faster than trip volume grew.\n\nPassenger base fare and driver pay are shown as separate per-trip measures. The dashboard does not use their difference as platform revenue, profit, margin, or take rate. Completed-trip data shows observed service pressure; it does not establish unserved demand or a causal supply shortage.\n",
+        "sourceId": "deep_analysis_summary"
+      },
+      {
+        "id": "headline_metrics",
+        "type": "metric-strip",
+        "cardIds": [
+          "trips_card",
+          "avg_wait_card",
+          "p90_wait_card",
+          "fare_card",
+          "pay_card",
+          "coverage_card"
+        ]
+      },
+      {
+        "id": "monthly_trips_block",
+        "type": "chart",
+        "chartId": "monthly_trips_chart",
+        "layout": "half"
+      },
+      {
+        "id": "monthly_wait_block",
+        "type": "chart",
+        "chartId": "monthly_wait_chart",
+        "layout": "half"
+      },
+      {
+        "id": "monthly_economics_block",
+        "type": "chart",
+        "chartId": "monthly_economics_chart",
+        "layout": "full"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-25T03:50:10.099453+00:00",
+    "status": "ready",
+    "datasets": {
+      "headline": [
+        {
+          "period": "May 2026",
+          "trips_current": 15354816.0,
+          "trips_prior": 15038869.0,
+          "trip_growth_rate": 0.02101,
+          "avg_wait_current": 5.487,
+          "avg_wait_prior": 5.045,
+          "avg_wait_growth_rate": 0.08761,
+          "p90_wait_current": 10.437,
+          "p90_wait_prior": 8.932,
+          "p90_wait_growth_rate": 0.1685,
+          "fare_current": 29.49,
+          "fare_prior": 29.05,
+          "fare_growth_rate": 0.015149999999999999,
+          "pay_current": 22.43,
+          "pay_prior": 22.07,
+          "pay_growth_rate": 0.01631,
+          "wait_coverage_current": 0.9877419999999999,
+          "wait_coverage_prior": 0.991143
+        }
+      ],
+      "monthly_trend": [
+        {
+          "month": "2025-05-01",
+          "month_label": "2025-05",
+          "trips": 15038869,
+          "trips_per_active_day": 485124.81,
+          "avg_request_to_pickup_minutes": 5.045,
+          "p50_request_to_pickup_minutes": 4.235,
+          "p90_request_to_pickup_minutes": 8.932,
+          "wait_coverage_rate": 0.991143,
+          "avg_base_fare_eligible": 29.05,
+          "avg_driver_pay_eligible": 22.07,
+          "trips_yoy_rate": null,
+          "request_to_pickup_yoy_rate": null
+        },
+        {
+          "month": "2025-06-01",
+          "month_label": "2025-06",
+          "trips": 14167361,
+          "trips_per_active_day": 472245.37,
+          "avg_request_to_pickup_minutes": 5.096,
+          "p50_request_to_pickup_minutes": 4.289,
+          "p90_request_to_pickup_minutes": 9.025,
+          "wait_coverage_rate": 0.990719,
+          "avg_base_fare_eligible": 29.08,
+          "avg_driver_pay_eligible": 22.31,
+          "trips_yoy_rate": null,
+          "request_to_pickup_yoy_rate": null
+        },
+        {
+          "month": "2025-07-01",
+          "month_label": "2025-07",
+          "trips": 14141782,
+          "trips_per_active_day": 456186.52,
+          "avg_request_to_pickup_minutes": 4.643,
+          "p50_request_to_pickup_minutes": 3.887,
+          "p90_request_to_pickup_minutes": 8.21,
+          "wait_coverage_rate": 0.991067,
+          "avg_base_fare_eligible": 27.2,
+          "avg_driver_pay_eligible": 21.13,
+          "trips_yoy_rate": null,
+          "request_to_pickup_yoy_rate": null
+        },
+        {
+          "month": "2025-08-01",
+          "month_label": "2025-08",
+          "trips": 13558357,
+          "trips_per_active_day": 437366.35,
+          "avg_request_to_pickup_minutes": 4.459,
+          "p50_request_to_pickup_minutes": 3.719,
+          "p90_request_to_pickup_minutes": 7.741,
+          "wait_coverage_rate": 0.990315,
+          "avg_base_fare_eligible": 27.22,
+          "avg_driver_pay_eligible": 21.14,
+          "trips_yoy_rate": null,
+          "request_to_pickup_yoy_rate": null
+        },
+        {
+          "month": "2025-09-01",
+          "month_label": "2025-09",
+          "trips": 14047040,
+          "trips_per_active_day": 468234.67,
+          "avg_request_to_pickup_minutes": 4.802,
+          "p50_request_to_pickup_minutes": 3.979,
+          "p90_request_to_pickup_minutes": 8.451,
+          "wait_coverage_rate": 0.9894809999999999,
+          "avg_base_fare_eligible": 29.35,
+          "avg_driver_pay_eligible": 22.46,
+          "trips_yoy_rate": null,
+          "request_to_pickup_yoy_rate": null
+        },
+        {
+          "month": "2025-10-01",
+          "month_label": "2025-10",
+          "trips": 15470172,
+          "trips_per_active_day": 499037.81,
+          "avg_request_to_pickup_minutes": 4.837,
+          "p50_request_to_pickup_minutes": 4.001,
+          "p90_request_to_pickup_minutes": 8.752,
+          "wait_coverage_rate": 0.989922,
+          "avg_base_fare_eligible": 27.81,
+          "avg_driver_pay_eligible": 21.88,
+          "trips_yoy_rate": null,
+          "request_to_pickup_yoy_rate": null
+        },
+        {
+          "month": "2025-11-01",
+          "month_label": "2025-11",
+          "trips": 14908456,
+          "trips_per_active_day": 496948.53,
+          "avg_request_to_pickup_minutes": 4.704,
+          "p50_request_to_pickup_minutes": 3.859,
+          "p90_request_to_pickup_minutes": 8.566,
+          "wait_coverage_rate": 0.989609,
+          "avg_base_fare_eligible": 27.56,
+          "avg_driver_pay_eligible": 21.44,
+          "trips_yoy_rate": null,
+          "request_to_pickup_yoy_rate": null
+        },
+        {
+          "month": "2025-12-01",
+          "month_label": "2025-12",
+          "trips": 15973728,
+          "trips_per_active_day": 515281.55,
+          "avg_request_to_pickup_minutes": 5.301,
+          "p50_request_to_pickup_minutes": 4.314,
+          "p90_request_to_pickup_minutes": 9.892,
+          "wait_coverage_rate": 0.987917,
+          "avg_base_fare_eligible": 28.62,
+          "avg_driver_pay_eligible": 21.92,
+          "trips_yoy_rate": null,
+          "request_to_pickup_yoy_rate": null
+        },
+        {
+          "month": "2026-01-01",
+          "month_label": "2026-01",
+          "trips": 15245631,
+          "trips_per_active_day": 491794.55,
+          "avg_request_to_pickup_minutes": 5.287,
+          "p50_request_to_pickup_minutes": 4.195,
+          "p90_request_to_pickup_minutes": 10.103,
+          "wait_coverage_rate": 0.988473,
+          "avg_base_fare_eligible": 26.19,
+          "avg_driver_pay_eligible": 20.11,
+          "trips_yoy_rate": null,
+          "request_to_pickup_yoy_rate": null
+        },
+        {
+          "month": "2026-02-01",
+          "month_label": "2026-02",
+          "trips": 14166961,
+          "trips_per_active_day": 505962.89,
+          "avg_request_to_pickup_minutes": 5.707,
+          "p50_request_to_pickup_minutes": 4.592,
+          "p90_request_to_pickup_minutes": 10.79,
+          "wait_coverage_rate": 0.986434,
+          "avg_base_fare_eligible": 27.52,
+          "avg_driver_pay_eligible": 21.13,
+          "trips_yoy_rate": null,
+          "request_to_pickup_yoy_rate": null
+        },
+        {
+          "month": "2026-03-01",
+          "month_label": "2026-03",
+          "trips": 15956175,
+          "trips_per_active_day": 514715.32,
+          "avg_request_to_pickup_minutes": 5.599,
+          "p50_request_to_pickup_minutes": 4.5,
+          "p90_request_to_pickup_minutes": 10.79,
+          "wait_coverage_rate": 0.9875060000000001,
+          "avg_base_fare_eligible": 28.09,
+          "avg_driver_pay_eligible": 21.38,
+          "trips_yoy_rate": null,
+          "request_to_pickup_yoy_rate": null
+        },
+        {
+          "month": "2026-04-01",
+          "month_label": "2026-04",
+          "trips": 15378858,
+          "trips_per_active_day": 512628.6,
+          "avg_request_to_pickup_minutes": 5.185,
+          "p50_request_to_pickup_minutes": 4.118,
+          "p90_request_to_pickup_minutes": 9.945,
+          "wait_coverage_rate": 0.988806,
+          "avg_base_fare_eligible": 27.66,
+          "avg_driver_pay_eligible": 21.29,
+          "trips_yoy_rate": null,
+          "request_to_pickup_yoy_rate": null
+        },
+        {
+          "month": "2026-05-01",
+          "month_label": "2026-05",
+          "trips": 15354816,
+          "trips_per_active_day": 495316.65,
+          "avg_request_to_pickup_minutes": 5.487,
+          "p50_request_to_pickup_minutes": 4.395,
+          "p90_request_to_pickup_minutes": 10.437,
+          "wait_coverage_rate": 0.9877419999999999,
+          "avg_base_fare_eligible": 29.49,
+          "avg_driver_pay_eligible": 22.43,
+          "trips_yoy_rate": 0.02101,
+          "request_to_pickup_yoy_rate": 0.08761
+        }
+      ],
+      "monthly_wait_trend": [
+        {
+          "month": "2025-05-01",
+          "month_label": "2025-05",
+          "metric": "Average",
+          "value_minutes": 5.045,
+          "trips": 15038869,
+          "wait_coverage_rate": 0.991143
+        },
+        {
+          "month": "2025-05-01",
+          "month_label": "2025-05",
+          "metric": "Median",
+          "value_minutes": 4.235,
+          "trips": 15038869,
+          "wait_coverage_rate": 0.991143
+        },
+        {
+          "month": "2025-05-01",
+          "month_label": "2025-05",
+          "metric": "P90",
+          "value_minutes": 8.932,
+          "trips": 15038869,
+          "wait_coverage_rate": 0.991143
+        },
+        {
+          "month": "2025-06-01",
+          "month_label": "2025-06",
+          "metric": "Average",
+          "value_minutes": 5.096,
+          "trips": 14167361,
+          "wait_coverage_rate": 0.990719
+        },
+        {
+          "month": "2025-06-01",
+          "month_label": "2025-06",
+          "metric": "Median",
+          "value_minutes": 4.289,
+          "trips": 14167361,
+          "wait_coverage_rate": 0.990719
+        },
+        {
+          "month": "2025-06-01",
+          "month_label": "2025-06",
+          "metric": "P90",
+          "value_minutes": 9.025,
+          "trips": 14167361,
+          "wait_coverage_rate": 0.990719
+        },
+        {
+          "month": "2025-07-01",
+          "month_label": "2025-07",
+          "metric": "Average",
+          "value_minutes": 4.643,
+          "trips": 14141782,
+          "wait_coverage_rate": 0.991067
+        },
+        {
+          "month": "2025-07-01",
+          "month_label": "2025-07",
+          "metric": "Median",
+          "value_minutes": 3.887,
+          "trips": 14141782,
+          "wait_coverage_rate": 0.991067
+        },
+        {
+          "month": "2025-07-01",
+          "month_label": "2025-07",
+          "metric": "P90",
+          "value_minutes": 8.21,
+          "trips": 14141782,
+          "wait_coverage_rate": 0.991067
+        },
+        {
+          "month": "2025-08-01",
+          "month_label": "2025-08",
+          "metric": "Average",
+          "value_minutes": 4.459,
+          "trips": 13558357,
+          "wait_coverage_rate": 0.990315
+        },
+        {
+          "month": "2025-08-01",
+          "month_label": "2025-08",
+          "metric": "Median",
+          "value_minutes": 3.719,
+          "trips": 13558357,
+          "wait_coverage_rate": 0.990315
+        },
+        {
+          "month": "2025-08-01",
+          "month_label": "2025-08",
+          "metric": "P90",
+          "value_minutes": 7.741,
+          "trips": 13558357,
+          "wait_coverage_rate": 0.990315
+        },
+        {
+          "month": "2025-09-01",
+          "month_label": "2025-09",
+          "metric": "Average",
+          "value_minutes": 4.802,
+          "trips": 14047040,
+          "wait_coverage_rate": 0.9894809999999999
+        },
+        {
+          "month": "2025-09-01",
+          "month_label": "2025-09",
+          "metric": "Median",
+          "value_minutes": 3.979,
+          "trips": 14047040,
+          "wait_coverage_rate": 0.9894809999999999
+        },
+        {
+          "month": "2025-09-01",
+          "month_label": "2025-09",
+          "metric": "P90",
+          "value_minutes": 8.451,
+          "trips": 14047040,
+          "wait_coverage_rate": 0.9894809999999999
+        },
+        {
+          "month": "2025-10-01",
+          "month_label": "2025-10",
+          "metric": "Average",
+          "value_minutes": 4.837,
+          "trips": 15470172,
+          "wait_coverage_rate": 0.989922
+        },
+        {
+          "month": "2025-10-01",
+          "month_label": "2025-10",
+          "metric": "Median",
+          "value_minutes": 4.001,
+          "trips": 15470172,
+          "wait_coverage_rate": 0.989922
+        },
+        {
+          "month": "2025-10-01",
+          "month_label": "2025-10",
+          "metric": "P90",
+          "value_minutes": 8.752,
+          "trips": 15470172,
+          "wait_coverage_rate": 0.989922
+        },
+        {
+          "month": "2025-11-01",
+          "month_label": "2025-11",
+          "metric": "Average",
+          "value_minutes": 4.704,
+          "trips": 14908456,
+          "wait_coverage_rate": 0.989609
+        },
+        {
+          "month": "2025-11-01",
+          "month_label": "2025-11",
+          "metric": "Median",
+          "value_minutes": 3.859,
+          "trips": 14908456,
+          "wait_coverage_rate": 0.989609
+        },
+        {
+          "month": "2025-11-01",
+          "month_label": "2025-11",
+          "metric": "P90",
+          "value_minutes": 8.566,
+          "trips": 14908456,
+          "wait_coverage_rate": 0.989609
+        },
+        {
+          "month": "2025-12-01",
+          "month_label": "2025-12",
+          "metric": "Average",
+          "value_minutes": 5.301,
+          "trips": 15973728,
+          "wait_coverage_rate": 0.987917
+        },
+        {
+          "month": "2025-12-01",
+          "month_label": "2025-12",
+          "metric": "Median",
+          "value_minutes": 4.314,
+          "trips": 15973728,
+          "wait_coverage_rate": 0.987917
+        },
+        {
+          "month": "2025-12-01",
+          "month_label": "2025-12",
+          "metric": "P90",
+          "value_minutes": 9.892,
+          "trips": 15973728,
+          "wait_coverage_rate": 0.987917
+        },
+        {
+          "month": "2026-01-01",
+          "month_label": "2026-01",
+          "metric": "Average",
+          "value_minutes": 5.287,
+          "trips": 15245631,
+          "wait_coverage_rate": 0.988473
+        },
+        {
+          "month": "2026-01-01",
+          "month_label": "2026-01",
+          "metric": "Median",
+          "value_minutes": 4.195,
+          "trips": 15245631,
+          "wait_coverage_rate": 0.988473
+        },
+        {
+          "month": "2026-01-01",
+          "month_label": "2026-01",
+          "metric": "P90",
+          "value_minutes": 10.103,
+          "trips": 15245631,
+          "wait_coverage_rate": 0.988473
+        },
+        {
+          "month": "2026-02-01",
+          "month_label": "2026-02",
+          "metric": "Average",
+          "value_minutes": 5.707,
+          "trips": 14166961,
+          "wait_coverage_rate": 0.986434
+        },
+        {
+          "month": "2026-02-01",
+          "month_label": "2026-02",
+          "metric": "Median",
+          "value_minutes": 4.592,
+          "trips": 14166961,
+          "wait_coverage_rate": 0.986434
+        },
+        {
+          "month": "2026-02-01",
+          "month_label": "2026-02",
+          "metric": "P90",
+          "value_minutes": 10.79,
+          "trips": 14166961,
+          "wait_coverage_rate": 0.986434
+        },
+        {
+          "month": "2026-03-01",
+          "month_label": "2026-03",
+          "metric": "Average",
+          "value_minutes": 5.599,
+          "trips": 15956175,
+          "wait_coverage_rate": 0.9875060000000001
+        },
+        {
+          "month": "2026-03-01",
+          "month_label": "2026-03",
+          "metric": "Median",
+          "value_minutes": 4.5,
+          "trips": 15956175,
+          "wait_coverage_rate": 0.9875060000000001
+        },
+        {
+          "month": "2026-03-01",
+          "month_label": "2026-03",
+          "metric": "P90",
+          "value_minutes": 10.79,
+          "trips": 15956175,
+          "wait_coverage_rate": 0.9875060000000001
+        },
+        {
+          "month": "2026-04-01",
+          "month_label": "2026-04",
+          "metric": "Average",
+          "value_minutes": 5.185,
+          "trips": 15378858,
+          "wait_coverage_rate": 0.988806
+        },
+        {
+          "month": "2026-04-01",
+          "month_label": "2026-04",
+          "metric": "Median",
+          "value_minutes": 4.118,
+          "trips": 15378858,
+          "wait_coverage_rate": 0.988806
+        },
+        {
+          "month": "2026-04-01",
+          "month_label": "2026-04",
+          "metric": "P90",
+          "value_minutes": 9.945,
+          "trips": 15378858,
+          "wait_coverage_rate": 0.988806
+        },
+        {
+          "month": "2026-05-01",
+          "month_label": "2026-05",
+          "metric": "Average",
+          "value_minutes": 5.487,
+          "trips": 15354816,
+          "wait_coverage_rate": 0.9877419999999999
+        },
+        {
+          "month": "2026-05-01",
+          "month_label": "2026-05",
+          "metric": "Median",
+          "value_minutes": 4.395,
+          "trips": 15354816,
+          "wait_coverage_rate": 0.9877419999999999
+        },
+        {
+          "month": "2026-05-01",
+          "month_label": "2026-05",
+          "metric": "P90",
+          "value_minutes": 10.437,
+          "trips": 15354816,
+          "wait_coverage_rate": 0.9877419999999999
+        }
+      ],
+      "economics_trend": [
+        {
+          "month": "2025-05-01",
+          "month_label": "2025-05",
+          "metric": "Passenger base fare",
+          "value_usd_per_trip": 29.05,
+          "trips": 15038869
+        },
+        {
+          "month": "2025-05-01",
+          "month_label": "2025-05",
+          "metric": "Driver pay",
+          "value_usd_per_trip": 22.07,
+          "trips": 15038869
+        },
+        {
+          "month": "2025-06-01",
+          "month_label": "2025-06",
+          "metric": "Passenger base fare",
+          "value_usd_per_trip": 29.08,
+          "trips": 14167361
+        },
+        {
+          "month": "2025-06-01",
+          "month_label": "2025-06",
+          "metric": "Driver pay",
+          "value_usd_per_trip": 22.31,
+          "trips": 14167361
+        },
+        {
+          "month": "2025-07-01",
+          "month_label": "2025-07",
+          "metric": "Passenger base fare",
+          "value_usd_per_trip": 27.2,
+          "trips": 14141782
+        },
+        {
+          "month": "2025-07-01",
+          "month_label": "2025-07",
+          "metric": "Driver pay",
+          "value_usd_per_trip": 21.13,
+          "trips": 14141782
+        },
+        {
+          "month": "2025-08-01",
+          "month_label": "2025-08",
+          "metric": "Passenger base fare",
+          "value_usd_per_trip": 27.22,
+          "trips": 13558357
+        },
+        {
+          "month": "2025-08-01",
+          "month_label": "2025-08",
+          "metric": "Driver pay",
+          "value_usd_per_trip": 21.14,
+          "trips": 13558357
+        },
+        {
+          "month": "2025-09-01",
+          "month_label": "2025-09",
+          "metric": "Passenger base fare",
+          "value_usd_per_trip": 29.35,
+          "trips": 14047040
+        },
+        {
+          "month": "2025-09-01",
+          "month_label": "2025-09",
+          "metric": "Driver pay",
+          "value_usd_per_trip": 22.46,
+          "trips": 14047040
+        },
+        {
+          "month": "2025-10-01",
+          "month_label": "2025-10",
+          "metric": "Passenger base fare",
+          "value_usd_per_trip": 27.81,
+          "trips": 15470172
+        },
+        {
+          "month": "2025-10-01",
+          "month_label": "2025-10",
+          "metric": "Driver pay",
+          "value_usd_per_trip": 21.88,
+          "trips": 15470172
+        },
+        {
+          "month": "2025-11-01",
+          "month_label": "2025-11",
+          "metric": "Passenger base fare",
+          "value_usd_per_trip": 27.56,
+          "trips": 14908456
+        },
+        {
+          "month": "2025-11-01",
+          "month_label": "2025-11",
+          "metric": "Driver pay",
+          "value_usd_per_trip": 21.44,
+          "trips": 14908456
+        },
+        {
+          "month": "2025-12-01",
+          "month_label": "2025-12",
+          "metric": "Passenger base fare",
+          "value_usd_per_trip": 28.62,
+          "trips": 15973728
+        },
+        {
+          "month": "2025-12-01",
+          "month_label": "2025-12",
+          "metric": "Driver pay",
+          "value_usd_per_trip": 21.92,
+          "trips": 15973728
+        },
+        {
+          "month": "2026-01-01",
+          "month_label": "2026-01",
+          "metric": "Passenger base fare",
+          "value_usd_per_trip": 26.19,
+          "trips": 15245631
+        },
+        {
+          "month": "2026-01-01",
+          "month_label": "2026-01",
+          "metric": "Driver pay",
+          "value_usd_per_trip": 20.11,
+          "trips": 15245631
+        },
+        {
+          "month": "2026-02-01",
+          "month_label": "2026-02",
+          "metric": "Passenger base fare",
+          "value_usd_per_trip": 27.52,
+          "trips": 14166961
+        },
+        {
+          "month": "2026-02-01",
+          "month_label": "2026-02",
+          "metric": "Driver pay",
+          "value_usd_per_trip": 21.13,
+          "trips": 14166961
+        },
+        {
+          "month": "2026-03-01",
+          "month_label": "2026-03",
+          "metric": "Passenger base fare",
+          "value_usd_per_trip": 28.09,
+          "trips": 15956175
+        },
+        {
+          "month": "2026-03-01",
+          "month_label": "2026-03",
+          "metric": "Driver pay",
+          "value_usd_per_trip": 21.38,
+          "trips": 15956175
+        },
+        {
+          "month": "2026-04-01",
+          "month_label": "2026-04",
+          "metric": "Passenger base fare",
+          "value_usd_per_trip": 27.66,
+          "trips": 15378858
+        },
+        {
+          "month": "2026-04-01",
+          "month_label": "2026-04",
+          "metric": "Driver pay",
+          "value_usd_per_trip": 21.29,
+          "trips": 15378858
+        },
+        {
+          "month": "2026-05-01",
+          "month_label": "2026-05",
+          "metric": "Passenger base fare",
+          "value_usd_per_trip": 29.49,
+          "trips": 15354816
+        },
+        {
+          "month": "2026-05-01",
+          "month_label": "2026-05",
+          "metric": "Driver pay",
+          "value_usd_per_trip": 22.43,
+          "trips": 15354816
+        }
+      ]
+    },
+    "accessIssues": []
+  },
+  "sources": [
+    {
+      "id": "deep_analysis_summary",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_json_auto('data/processed/analysis/analysis_summary.json')",
+        "description": "Loads the validated May 2026 versus May 2025 headline metrics and interpretation boundaries.",
+        "tables_used": [
+          "analysis.analysis_summary"
+        ],
+        "filters": [
+          "May 2026 compared with May 2025"
+        ],
+        "metric_definitions": {
+          "growth_quality": "Completed-trip growth assessed alongside request-to-pickup, passenger base fare, driver pay, distance, and duration.",
+          "interpretation_boundary": "Completed-trip data does not measure unserved demand, cancellations, driver online time, surge, promotions, or causal supply shortages."
+        },
+        "executed_at": "2026-08-25T03:50:10.099453+00:00"
+      }
+    },
+    {
+      "id": "monthly_metrics_analysis",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_parquet('data/processed/analysis/monthly_trend.parquet') ORDER BY month",
+        "description": "Loads 13 monthly observations for completed trips, request-to-pickup, passenger base fare, and driver pay.",
+        "tables_used": [
+          "analytics.monthly_metrics"
+        ],
+        "filters": [
+          "HV0003 Uber trips",
+          "2025-05 through 2026-05"
+        ],
+        "metric_definitions": {
+          "trips": "Count of HV0003 completed-trip rows; preserved independently of metric eligibility.",
+          "request_to_pickup": "Pickup timestamp minus request timestamp for eligible observations between 0 and 60 minutes.",
+          "base_fare": "Average eligible passenger base fare per trip; not platform revenue.",
+          "driver_pay": "Average eligible reported driver compensation per trip; not online-hour earnings.",
+          "wait_coverage": "Request-to-pickup-eligible trips divided by all HV0003 completed trips."
+        },
+        "executed_at": "2026-08-25T03:50:10.099453+00:00"
+      }
+    }
+  ]
+}

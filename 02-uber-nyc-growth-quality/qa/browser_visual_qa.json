@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "tested_in": "in-app browser",
+  "dashboard": {
+    "desktop": {
+      "viewport": "1600x1000",
+      "english": {
+        "pages_checked": 3,
+        "document_horizontal_overflow_px": [0, 0, 0]
+      },
+      "chinese": {
+        "pages_checked": 3,
+        "document_horizontal_overflow_px": [0, 0, 0]
+      },
+      "language_switch": "PASS"
+    },
+    "page_2": {
+      "callout_count_per_language": 4,
+      "callout_overlaps": [],
+      "chinese_callout_box_width_px": 298.12,
+      "maximum_chinese_callout_text_width_px": 251.02,
+      "core_labels_readable_without_hover": true
+    },
+    "mobile": {
+      "iframe_viewport": "390x844",
+      "content_client_width_px": 375,
+      "document_horizontal_overflow_px": 0,
+      "english_and_chinese_switch": "PASS",
+      "scatter_uses_internal_horizontal_scroll": true,
+      "table_uses_internal_horizontal_scroll": true
+    }
+  },
+  "reports": {
+    "english": {
+      "document_horizontal_overflow_px": 0,
+      "external_resources": 0,
+      "language": "en",
+      "source_tooltip_interaction": "PASS",
+      "mobile_document_horizontal_overflow_px": 0
+    },
+    "chinese": {
+      "document_horizontal_overflow_px": 0,
+      "external_resources": 0,
+      "language": "zh-CN",
+      "localized_source_heading": true,
+      "localized_priority_zone_labels": true,
+      "mobile_document_horizontal_overflow_px": 0
+    }
+  }
+}

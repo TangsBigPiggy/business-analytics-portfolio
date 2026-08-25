@@ -1,0 +1,12 @@
+display_order,metric,unit,may_2025,may_2026,absolute_change,change_pct
+1,Trips,trips,15038869.0,15354816.0,315947.0,2.101
+2,Average request-to-pickup,minutes,5.045,5.487,0.442,8.761
+3,P90 request-to-pickup,minutes,8.932,10.437,1.505,16.85
+4,Average trip distance,miles,5.161,5.008,-0.153,-2.965
+5,Average trip duration,minutes,20.8,20.6,-0.2,-0.962
+6,Average eligible base fare,USD/trip,29.05,29.49,0.44,1.515
+7,Average eligible driver pay,USD/trip,22.07,22.43,0.36,1.631
+8,Weighted base fare per mile,USD/mile,5.629,5.889,0.26,4.619
+9,Weighted driver pay per mile,USD/mile,4.276,4.479,0.203,4.747
+10,Driver pay per occupied hour,USD/occupied hour,63.657,65.322,1.665,2.616
+11,Wait eligibility coverage,percent,99.1143,98.7742,-0.3401,-0.343

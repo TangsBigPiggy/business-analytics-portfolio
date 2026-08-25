@@ -1,0 +1,65 @@
+{
+  "numeric_signature": "identical",
+  "block_order": "identical",
+  "english_artifact": "executive_report_artifact_en.json",
+  "chinese_artifact": "executive_report_artifact_zh.json",
+  "english": {
+    "ok": true,
+    "html": "uber_nyc_growth_quality_report_en.html",
+    "stages": {
+      "validation": "passed",
+      "package": "passed",
+      "verification": "structural_only"
+    },
+    "browserWarning": {
+      "code": "browser_unavailable",
+      "message": "No installed Chromium headless-shell executable was found. Set CHROMIUM_EXECUTABLE_PATH (or the legacy PLAYWRIGHT_EXECUTABLE_PATH) or preinstall Chromium headless-shell under PLAYWRIGHT_BROWSERS_PATH; portable tooling never downloads browsers."
+    },
+    "counts": {
+      "blocks": 21,
+      "charts": 5,
+      "html": 0,
+      "metrics": 5,
+      "tables": 2
+    },
+    "sourceDialog": "not_verified",
+    "sourceInteraction": "not_verified",
+    "viewports": [],
+    "timings": {
+      "validateAndPackageMs": 107.2,
+      "staticChartExtractionMs": 35.6,
+      "structuralVerificationMs": 4.2,
+      "totalMs": 112.6
+    }
+  },
+  "chinese": {
+    "ok": true,
+    "html": "uber_nyc_growth_quality_report_zh.html",
+    "stages": {
+      "validation": "passed",
+      "package": "passed",
+      "verification": "structural_only"
+    },
+    "browserWarning": {
+      "code": "browser_unavailable",
+      "message": "No installed Chromium headless-shell executable was found. Set CHROMIUM_EXECUTABLE_PATH (or the legacy PLAYWRIGHT_EXECUTABLE_PATH) or preinstall Chromium headless-shell under PLAYWRIGHT_BROWSERS_PATH; portable tooling never downloads browsers."
+    },
+    "counts": {
+      "blocks": 21,
+      "charts": 5,
+      "html": 0,
+      "metrics": 5,
+      "tables": 2
+    },
+    "sourceDialog": "not_verified",
+    "sourceInteraction": "not_verified",
+    "viewports": [],
+    "timings": {
+      "validateAndPackageMs": 104.2,
+      "staticChartExtractionMs": 33.2,
+      "structuralVerificationMs": 4.5,
+      "totalMs": 116.9
+    }
+  },
+  "postprocess": "localized document language/date and bounded global horizontal overflow"
+}

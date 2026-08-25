@@ -1,0 +1,8 @@
+borough,prior_wait_trip_share_pct,current_wait_trip_share_pct,avg_wait_2025_05,avg_wait_2026_05,within_borough_wait_change_minutes,within_borough_contribution_minutes,geographic_mix_contribution_minutes,total_contribution_minutes,within_contribution_share_of_city_change_pct,mix_contribution_share_of_city_change_pct
+Brooklyn,26.581,26.7655,5.055,5.584,0.529,0.140614,0.0103,0.150914,31.85,2.333
+Queens,22.1407,21.9085,5.248,5.925,0.677,0.149893,-0.013758,0.136135,33.952,-3.116
+Manhattan,36.0624,36.6877,4.781,4.917,0.136,0.049045,0.030748,0.079793,11.109,6.965
+Bronx,13.5174,13.0249,5.217,6.001,0.784,0.105976,-0.029553,0.076423,24.004,-6.694
+N/A,0.004,0.0052,8.184,9.974,1.79,7.2e-05,0.000117,0.000189,0.016,0.026
+EWR,0.0,0.0,4.667,46.917,42.25,3e-06,-0.0,3e-06,0.001,-0.0
+Staten Island,1.6945,1.6082,6.49,6.716,0.226,0.00383,-0.005796,-0.001967,0.867,-1.313

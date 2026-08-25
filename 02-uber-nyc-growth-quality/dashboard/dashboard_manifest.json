@@ -1,0 +1,47 @@
+{
+  "title": "Uber NYC Final Dashboard",
+  "generated_at_utc": "2026-08-25T07:28:54.419316+00:00",
+  "snapshot_period": "May 2026 with May 2025 comparison; monthly trend May 2025–May 2026",
+  "primary_dashboard": "uber_nyc_final_dashboard.html",
+  "languages": {
+    "available": [
+      "en",
+      "zh-CN"
+    ],
+    "default": "en",
+    "switch": "in-document button"
+  },
+  "navigation": [
+    {
+      "number": 1,
+      "title": "Marketplace Overview",
+      "hash": "#page-1"
+    },
+    {
+      "number": 2,
+      "title": "Marketplace Efficiency",
+      "hash": "#page-2"
+    },
+    {
+      "number": 3,
+      "title": "Growth Quality & Operating Priorities",
+      "hash": "#page-3"
+    }
+  ],
+  "source_artifacts": [
+    "artifacts/page_1_marketplace_overview.artifact.json",
+    "artifacts/page_2_marketplace_efficiency.artifact.json",
+    "artifacts/page_3_operating_priorities.artifact.json"
+  ],
+  "qa": {
+    "unified_dashboard": "qa/unified_dashboard_qa.csv",
+    "visual_consistency_audit": "qa/visual_consistency_audit.csv",
+    "upstream_numerical": "qa/dashboard_validation.csv"
+  },
+  "interpretation_boundary": "Completed-trip data cannot measure unserved demand, cancellations, driver online time, surge pricing, promotion effects, or causal supply shortages.",
+  "terminology": {
+    "request_to_pickup_zh": "请求至上车时长",
+    "supply_constrained_priority_zh": "供给受限优先级代理（运营排序代理，不是供给不足的因果证明）",
+    "financial_boundary_zh": "乘客基础车费与司机报酬之差不代表利润、利润率或抽成率"
+  }
+}

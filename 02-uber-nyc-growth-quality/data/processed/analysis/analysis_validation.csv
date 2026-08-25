@@ -1,0 +1,18 @@
+﻿check_name,actual,expected,passed
+zone lookup row count,265,265,True
+zone lookup key uniqueness,265,265,True
+monthly source row count,13,13,True
+analysis month range,2025-05-01 to 2026-05-01,2025-05-01 to 2026-05-01,True
+pickup-zone join coverage,0,0,True
+borough prior trips reconcile,15038869,15038869,True
+borough current trips reconcile,15354816,15354816,True
+borough trip delta reconciles,315947,315947,True
+zone prior trips reconcile,15038869,15038869,True
+zone current trips reconcile,15354816,15354816,True
+zone trip delta reconciles,315947,315947,True
+hour prior trips reconcile,15038869,15038869,True
+hour current trips reconcile,15354816,15354816,True
+hour trip delta reconciles,315947,315947,True
+zone output key uniqueness,0,0,True
+monthly output key uniqueness,0,0,True
+wait decomposition reconciles,0.4415,0.442,True

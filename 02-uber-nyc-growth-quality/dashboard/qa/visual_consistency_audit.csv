@@ -1,0 +1,9 @@
+﻿dimension,observed_issue,resolution,status
+Document structure,Three independent HTML files,One HTML with Page 1/2/3 tabs and hash navigation,RESOLVED
+Rendering source,Generic artifact reader differed from static previews,Single custom renderer now controls the actual HTML presentation,RESOLVED
+Palette,Reader category colors did not match previews,Blue / orange / pink / olive mapping is explicit and shared,RESOLVED
+Number format,Reader showed raw exact integers,"Executive compact formatting (M/K, signed percentages) while source values remain in tooltips/tables",RESOLVED
+Scatter axis,Growth appeared as decimals,Growth axis is formatted as signed percentages,RESOLVED
+Page 2 label collisions,Point labels and values could overlap bubbles,Four executive callouts use a fixed side rail with leader lines and non-overlapping numeric summaries,RESOLVED
+Bilingual layout,English-only labels and navigation,One HTML contains synchronized English and Chinese views generated from the same validated datasets,RESOLVED
+Typography and spacing,Reader defaults produced a plain report layout,"Segoe UI, compact cards, near-white canvas, and executive spacing match the approved preview system",RESOLVED

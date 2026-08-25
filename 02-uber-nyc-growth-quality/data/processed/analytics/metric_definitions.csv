@@ -1,0 +1,17 @@
+﻿table_name,metric_name,definition,eligibility_rule,interpretation_note
+all,trips,Count of rows with hvfhs_license_num = 'HV0003'.,All selected Uber rows are eligible.,A row can count as a trip even when it is ineligible for another metric.
+all,request_to_pickup_minutes,"pickup_datetime minus request_datetime, in minutes.",Both timestamps present and elapsed time between 0 and 60 minutes inclusive.,Use the precise label Request-to-Pickup Time; it may include scheduled-trip behavior.
+all,trip_duration_minutes,Official TLC trip_time divided by 60.,trip_time > 0 and dropoff_datetime > pickup_datetime.,"Timestamp duration is used for QC; a mismatch over 60 seconds is flagged, not deleted."
+all,trip_miles,TLC reported trip_miles.,trip_miles > 0 for averages and denominator-based metrics.,Long trips above 50 or 100 miles are retained as genuine long-tail observations and flagged.
+all,weighted_speed_mph,Eligible miles divided by eligible official trip hours.,Eligible trip duration and eligible distance.,"Speeds above 60, 80, and 100 mph remain in the data and are monitored in quality output."
+all,total_base_fare_reported,"Sum of reported base_passenger_fare, including rare negative adjustments.",Non-null reported values.,"Passenger base fare excludes tolls, tips, taxes, and fees; it is not platform revenue."
+all,avg_base_fare_eligible,Average reported base_passenger_fare among eligible trips.,base_passenger_fare >= 0.,Negative values remain in reported totals but are excluded from distribution and rate metrics.
+all,total_driver_pay_reported,"Sum of reported driver_pay, including rare negative adjustments.",Non-null reported values.,Driver compensation is analyzed separately from passenger fare.
+all,avg_driver_pay_eligible,Average reported driver_pay among eligible trips.,driver_pay >= 0.,Do not infer platform margin or take rate by subtracting this from passenger fare.
+all,weighted_base_fare_per_mile,Sum of eligible base fare divided by sum of miles on the same eligible trips.,base_passenger_fare >= 0 and trip_miles > 0.,A ratio of sums is used so very short trips do not dominate the metric.
+all,weighted_driver_pay_per_mile,Sum of eligible driver pay divided by sum of miles on the same eligible trips.,driver_pay >= 0 and trip_miles > 0.,A ratio of sums is used so very short trips do not dominate the metric.
+all,driver_pay_per_occupied_hour,Sum of eligible driver pay divided by official in-trip hours on the same trips.,driver_pay >= 0 and eligible trip duration.,"This is occupied-trip compensation intensity, not driver online-hour earnings or utilization."
+zone_daily_metrics,table_grain,One row per pickup_date and PULocationID.,Pickup zone is between 1 and 265 inclusive.,Invalid-zone coverage is retained in data_quality_by_month.
+zone_hour_metrics,table_grain,"One row per month, ISO weekday, pickup hour, and PULocationID.",Pickup zone is between 1 and 265 inclusive.,"This is a recurring month/weekday/hour profile, not a single calendar-hour fact table."
+data_quality_by_month,eligibility_coverage_pct,"Eligible trip count divided by all Uber trips in the month, multiplied by 100.",Metric-specific rule shown in the corresponding definition.,Coverage rates make exclusions auditable without deleting source rows.
+data_quality_by_month,on_scene fields,Population and chronological-integrity checks for on_scene_datetime.,Monitoring only.,Not used as a core KPI because the public field definition has an accessibility-vehicle caveat.

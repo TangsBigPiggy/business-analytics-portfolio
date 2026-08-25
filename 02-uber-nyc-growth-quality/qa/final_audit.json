@@ -1,0 +1,140 @@
+{
+  "assessment": "READY FOR GITHUB",
+  "checks_passed": 26,
+  "checks_total": 26,
+  "repository_files": 80,
+  "repository_size_mb": 33.84,
+  "largest_file_mb": 25.52,
+  "checks": [
+    {
+      "check": "required release files",
+      "status": "PASS",
+      "detail": "All required files present"
+    },
+    {
+      "check": "README section contract",
+      "status": "PASS",
+      "detail": "9/9 required sections in order"
+    },
+    {
+      "check": "README_zh section contract",
+      "status": "PASS",
+      "detail": "9/9 required sections in order"
+    },
+    {
+      "check": "bilingual documentation links",
+      "status": "PASS",
+      "detail": "32 local links checked; dead=[]"
+    },
+    {
+      "check": "analytics layer validation",
+      "status": "PASS",
+      "detail": "11/11 passed"
+    },
+    {
+      "check": "deep analysis validation",
+      "status": "PASS",
+      "detail": "17/17 passed"
+    },
+    {
+      "check": "dashboard numerical validation",
+      "status": "PASS",
+      "detail": "14/14 passed"
+    },
+    {
+      "check": "unified bilingual HTML validation",
+      "status": "PASS",
+      "detail": "23/23 passed"
+    },
+    {
+      "check": "headline source values",
+      "status": "PASS",
+      "detail": "Trips, average wait, and P90 match the validated summary"
+    },
+    {
+      "check": "bilingual report numeric identity",
+      "status": "PASS",
+      "detail": "Numeric signatures are identical"
+    },
+    {
+      "check": "bilingual report structural identity",
+      "status": "PASS",
+      "detail": "Block IDs and order are identical"
+    },
+    {
+      "check": "bilingual report build receipts",
+      "status": "PASS",
+      "detail": "Both portable reports passed validation and packaging"
+    },
+    {
+      "check": "dashboard headline display",
+      "status": "PASS",
+      "detail": "All six headline display tokens found"
+    },
+    {
+      "check": "README headline consistency",
+      "status": "PASS",
+      "detail": "All six README headline tokens found"
+    },
+    {
+      "check": "README_zh headline consistency",
+      "status": "PASS",
+      "detail": "All six Chinese README headline tokens found"
+    },
+    {
+      "check": "dashboard HTML structure",
+      "status": "PASS",
+      "detail": "{\"chinese_pages\": 3, \"english_pages\": 3, \"external_resources\": false, \"language_controls\": 2, \"page2_callouts\": 8, \"tabs\": 3}"
+    },
+    {
+      "check": "interpretation boundaries",
+      "status": "PASS",
+      "detail": "Proxy, causal, and financial boundaries are explicit across both languages and surfaces"
+    },
+    {
+      "check": "dashboard screenshot assets",
+      "status": "PASS",
+      "detail": "8 final JPEGs; name_delta=[]; issues=[]; png=[]"
+    },
+    {
+      "check": "real-browser visual QA",
+      "status": "PASS",
+      "detail": "Desktop/mobile, language switching, Page 2 overlap, and report interaction checks passed"
+    },
+    {
+      "check": "legacy release cleanup",
+      "status": "PASS",
+      "detail": "Legacy files=[]"
+    },
+    {
+      "check": "raw Parquet exclusion",
+      "status": "PASS",
+      "detail": "No raw monthly Parquet files in the public package"
+    },
+    {
+      "check": "GitHub file-size UX",
+      "status": "PASS",
+      "detail": "Largest file under 50 MB; oversized=[]"
+    },
+    {
+      "check": "local-path privacy",
+      "status": "PASS",
+      "detail": "Local path leaks=[]"
+    },
+    {
+      "check": "AI-trace scan",
+      "status": "PASS",
+      "detail": "Trace hits=[]"
+    },
+    {
+      "check": "Python script syntax",
+      "status": "PASS",
+      "detail": "10 scripts checked; failures=[]"
+    },
+    {
+      "check": "raw-data Git guardrail",
+      "status": "PASS",
+      "detail": "Raw directories, monthly Parquet pattern, and virtual environment are ignored"
+    }
+  ]
+}

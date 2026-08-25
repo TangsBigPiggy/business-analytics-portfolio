@@ -1,0 +1,409 @@
+{
+  "question": "Did May 2026 trip growth represent healthy marketplace growth, or did it come with worsening request-to-pickup performance and geographic/time-window pressure?",
+  "comparison": "May 2026 versus May 2025",
+  "headline_metrics": {
+    "Trips": {
+      "unit": "trips",
+      "may_2025": 15038869.0,
+      "may_2026": 15354816.0,
+      "absolute_change": 315947.0,
+      "change_pct": 2.101
+    },
+    "Average request-to-pickup": {
+      "unit": "minutes",
+      "may_2025": 5.045,
+      "may_2026": 5.487,
+      "absolute_change": 0.442,
+      "change_pct": 8.761
+    },
+    "P90 request-to-pickup": {
+      "unit": "minutes",
+      "may_2025": 8.932,
+      "may_2026": 10.437,
+      "absolute_change": 1.505,
+      "change_pct": 16.85
+    },
+    "Average trip distance": {
+      "unit": "miles",
+      "may_2025": 5.161,
+      "may_2026": 5.008,
+      "absolute_change": -0.153,
+      "change_pct": -2.965
+    },
+    "Average trip duration": {
+      "unit": "minutes",
+      "may_2025": 20.8,
+      "may_2026": 20.6,
+      "absolute_change": -0.2,
+      "change_pct": -0.962
+    },
+    "Average eligible base fare": {
+      "unit": "USD/trip",
+      "may_2025": 29.05,
+      "may_2026": 29.49,
+      "absolute_change": 0.44,
+      "change_pct": 1.515
+    },
+    "Average eligible driver pay": {
+      "unit": "USD/trip",
+      "may_2025": 22.07,
+      "may_2026": 22.43,
+      "absolute_change": 0.36,
+      "change_pct": 1.631
+    },
+    "Weighted base fare per mile": {
+      "unit": "USD/mile",
+      "may_2025": 5.629,
+      "may_2026": 5.889,
+      "absolute_change": 0.26,
+      "change_pct": 4.619
+    },
+    "Weighted driver pay per mile": {
+      "unit": "USD/mile",
+      "may_2025": 4.276,
+      "may_2026": 4.479,
+      "absolute_change": 0.203,
+      "change_pct": 4.747
+    },
+    "Driver pay per occupied hour": {
+      "unit": "USD/occupied hour",
+      "may_2025": 63.657,
+      "may_2026": 65.322,
+      "absolute_change": 1.665,
+      "change_pct": 2.616
+    },
+    "Wait eligibility coverage": {
+      "unit": "percent",
+      "may_2025": 99.1143,
+      "may_2026": 98.7742,
+      "absolute_change": -0.3401,
+      "change_pct": -0.343
+    }
+  },
+  "top_borough_contributors": [
+    {
+      "borough": "Manhattan",
+      "trip_delta": 204185,
+      "trip_growth_pct": 3.754,
+      "contribution_to_city_trip_growth_pct": 64.626,
+      "avg_wait_change_pct": 2.834
+    },
+    {
+      "borough": "Brooklyn",
+      "trip_delta": 114097,
+      "trip_growth_pct": 2.858,
+      "contribution_to_city_trip_growth_pct": 36.113,
+      "avg_wait_change_pct": 10.456
+    },
+    {
+      "borough": "Queens",
+      "trip_delta": 34545,
+      "trip_growth_pct": 1.04,
+      "contribution_to_city_trip_growth_pct": 10.934,
+      "avg_wait_change_pct": 12.914
+    },
+    {
+      "borough": "N/A",
+      "trip_delta": 201,
+      "trip_growth_pct": 32.79,
+      "contribution_to_city_trip_growth_pct": 0.064,
+      "avg_wait_change_pct": 21.881
+    },
+    {
+      "borough": "EWR",
+      "trip_delta": 0,
+      "trip_growth_pct": 0.0,
+      "contribution_to_city_trip_growth_pct": 0.0,
+      "avg_wait_change_pct": 905.292
+    }
+  ],
+  "top_supply_constrained_zones": [
+    {
+      "zone_label": "Queens — LaGuardia Airport",
+      "trips_2026_05": 294905,
+      "trip_delta": -16095,
+      "avg_wait_2026_05": 7.697,
+      "avg_wait_change_pct": 8.517,
+      "estimated_excess_request_to_pickup_minutes": 651225.0,
+      "marketplace_quadrant": "Supply-constrained priority"
+    },
+    {
+      "zone_label": "Queens — JFK Airport",
+      "trips_2026_05": 260433,
+      "trip_delta": -9303,
+      "avg_wait_2026_05": 7.887,
+      "avg_wait_change_pct": 15.106,
+      "estimated_excess_request_to_pickup_minutes": 623327.0,
+      "marketplace_quadrant": "Supply-constrained priority"
+    },
+    {
+      "zone_label": "Manhattan — Central Harlem North",
+      "trips_2026_05": 124925,
+      "trip_delta": 4510,
+      "avg_wait_2026_05": 6.649,
+      "avg_wait_change_pct": 19.739,
+      "estimated_excess_request_to_pickup_minutes": 143134.0,
+      "marketplace_quadrant": "Supply-constrained priority"
+    },
+    {
+      "zone_label": "Brooklyn — Brownsville",
+      "trips_2026_05": 96298,
+      "trip_delta": 6351,
+      "avg_wait_2026_05": 6.714,
+      "avg_wait_change_pct": 14.94,
+      "estimated_excess_request_to_pickup_minutes": 116319.0,
+      "marketplace_quadrant": "Supply-constrained priority"
+    },
+    {
+      "zone_label": "Brooklyn — Crown Heights North",
+      "trips_2026_05": 194268,
+      "trip_delta": 8719,
+      "avg_wait_2026_05": 6.071,
+      "avg_wait_change_pct": 12.901,
+      "estimated_excess_request_to_pickup_minutes": 111868.0,
+      "marketplace_quadrant": "Supply-constrained priority"
+    },
+    {
+      "zone_label": "Brooklyn — Canarsie",
+      "trips_2026_05": 118920,
+      "trip_delta": 3759,
+      "avg_wait_2026_05": 6.284,
+      "avg_wait_change_pct": 13.506,
+      "estimated_excess_request_to_pickup_minutes": 93639.0,
+      "marketplace_quadrant": "Supply-constrained priority"
+    },
+    {
+      "zone_label": "Brooklyn — Stuyvesant Heights",
+      "trips_2026_05": 119609,
+      "trip_delta": 4249,
+      "avg_wait_2026_05": 6.173,
+      "avg_wait_change_pct": 15.286,
+      "estimated_excess_request_to_pickup_minutes": 80919.0,
+      "marketplace_quadrant": "Supply-constrained priority"
+    },
+    {
+      "zone_label": "Manhattan — East Harlem North",
+      "trips_2026_05": 96376,
+      "trip_delta": 2642,
+      "avg_wait_2026_05": 6.283,
+      "avg_wait_change_pct": 14.118,
+      "estimated_excess_request_to_pickup_minutes": 75664.0,
+      "marketplace_quadrant": "Supply-constrained priority"
+    },
+    {
+      "zone_label": "Brooklyn — Bushwick South",
+      "trips_2026_05": 172678,
+      "trip_delta": 7975,
+      "avg_wait_2026_05": 5.893,
+      "avg_wait_change_pct": 15.9,
+      "estimated_excess_request_to_pickup_minutes": 69390.0,
+      "marketplace_quadrant": "Supply-constrained priority"
+    },
+    {
+      "zone_label": "Bronx — Mott Haven/Port Morris",
+      "trips_2026_05": 100072,
+      "trip_delta": 2319,
+      "avg_wait_2026_05": 6.168,
+      "avg_wait_change_pct": 16.041,
+      "estimated_excess_request_to_pickup_minutes": 67412.0,
+      "marketplace_quadrant": "Supply-constrained priority"
+    },
+    {
+      "zone_label": "Manhattan — Central Harlem",
+      "trips_2026_05": 91774,
+      "trip_delta": 4895,
+      "avg_wait_2026_05": 6.183,
+      "avg_wait_change_pct": 14.547,
+      "estimated_excess_request_to_pickup_minutes": 63062.0,
+      "marketplace_quadrant": "Supply-constrained priority"
+    },
+    {
+      "zone_label": "Brooklyn — East New York",
+      "trips_2026_05": 173063,
+      "trip_delta": 9469,
+      "avg_wait_2026_05": 5.851,
+      "avg_wait_change_pct": 16.738,
+      "estimated_excess_request_to_pickup_minutes": 62360.0,
+      "marketplace_quadrant": "Supply-constrained priority"
+    }
+  ],
+  "top_priority_windows": [
+    {
+      "weekday_name": "Monday",
+      "pickup_hour": "21:00",
+      "zone_label": "Queens — LaGuardia Airport",
+      "avg_trips_per_contributing_day": 746.75,
+      "avg_request_to_pickup_minutes": 12.684,
+      "estimated_excess_request_to_pickup_minutes_per_day": 5414.2
+    },
+    {
+      "weekday_name": "Monday",
+      "pickup_hour": "23:00",
+      "zone_label": "Queens — JFK Airport",
+      "avg_trips_per_contributing_day": 700.75,
+      "avg_request_to_pickup_minutes": 12.866,
+      "estimated_excess_request_to_pickup_minutes_per_day": 5198.3
+    },
+    {
+      "weekday_name": "Monday",
+      "pickup_hour": "22:00",
+      "zone_label": "Queens — LaGuardia Airport",
+      "avg_trips_per_contributing_day": 731.5,
+      "avg_request_to_pickup_minutes": 12.357,
+      "estimated_excess_request_to_pickup_minutes_per_day": 5064.6
+    },
+    {
+      "weekday_name": "Thursday",
+      "pickup_hour": "00:00",
+      "zone_label": "Queens — JFK Airport",
+      "avg_trips_per_contributing_day": 509.5,
+      "avg_request_to_pickup_minutes": 15.422,
+      "estimated_excess_request_to_pickup_minutes_per_day": 4999.0
+    },
+    {
+      "weekday_name": "Sunday",
+      "pickup_hour": "23:00",
+      "zone_label": "Queens — LaGuardia Airport",
+      "avg_trips_per_contributing_day": 669.0,
+      "avg_request_to_pickup_minutes": 12.881,
+      "estimated_excess_request_to_pickup_minutes_per_day": 4984.3
+    },
+    {
+      "weekday_name": "Thursday",
+      "pickup_hour": "21:00",
+      "zone_label": "Queens — LaGuardia Airport",
+      "avg_trips_per_contributing_day": 788.0,
+      "avg_request_to_pickup_minutes": 11.633,
+      "estimated_excess_request_to_pickup_minutes_per_day": 4888.1
+    },
+    {
+      "weekday_name": "Sunday",
+      "pickup_hour": "21:00",
+      "zone_label": "Queens — LaGuardia Airport",
+      "avg_trips_per_contributing_day": 677.6,
+      "avg_request_to_pickup_minutes": 12.464,
+      "estimated_excess_request_to_pickup_minutes_per_day": 4763.3
+    },
+    {
+      "weekday_name": "Wednesday",
+      "pickup_hour": "23:00",
+      "zone_label": "Queens — LaGuardia Airport",
+      "avg_trips_per_contributing_day": 759.25,
+      "avg_request_to_pickup_minutes": 11.657,
+      "estimated_excess_request_to_pickup_minutes_per_day": 4726.2
+    },
+    {
+      "weekday_name": "Wednesday",
+      "pickup_hour": "23:00",
+      "zone_label": "Queens — JFK Airport",
+      "avg_trips_per_contributing_day": 567.25,
+      "avg_request_to_pickup_minutes": 13.567,
+      "estimated_excess_request_to_pickup_minutes_per_day": 4606.9
+    },
+    {
+      "weekday_name": "Thursday",
+      "pickup_hour": "23:00",
+      "zone_label": "Queens — LaGuardia Airport",
+      "avg_trips_per_contributing_day": 758.25,
+      "avg_request_to_pickup_minutes": 11.421,
+      "estimated_excess_request_to_pickup_minutes_per_day": 4541.3
+    },
+    {
+      "weekday_name": "Wednesday",
+      "pickup_hour": "22:00",
+      "zone_label": "Queens — LaGuardia Airport",
+      "avg_trips_per_contributing_day": 691.75,
+      "avg_request_to_pickup_minutes": 11.968,
+      "estimated_excess_request_to_pickup_minutes_per_day": 4525.2
+    },
+    {
+      "weekday_name": "Thursday",
+      "pickup_hour": "01:00",
+      "zone_label": "Queens — JFK Airport",
+      "avg_trips_per_contributing_day": 375.5,
+      "avg_request_to_pickup_minutes": 17.491,
+      "estimated_excess_request_to_pickup_minutes_per_day": 4289.8
+    }
+  ],
+  "wait_change_decomposition": {
+    "within_borough_contribution_minutes": 0.44943299999999997,
+    "geographic_mix_contribution_minutes": -0.007941999999999998,
+    "total_change_minutes": 0.44149,
+    "top_borough_drivers": [
+      {
+        "borough": "Brooklyn",
+        "within_borough_contribution_minutes": 0.140614,
+        "geographic_mix_contribution_minutes": 0.0103,
+        "total_contribution_minutes": 0.150914
+      },
+      {
+        "borough": "Queens",
+        "within_borough_contribution_minutes": 0.149893,
+        "geographic_mix_contribution_minutes": -0.013758,
+        "total_contribution_minutes": 0.136135
+      },
+      {
+        "borough": "Manhattan",
+        "within_borough_contribution_minutes": 0.049045,
+        "geographic_mix_contribution_minutes": 0.030748,
+        "total_contribution_minutes": 0.079793
+      },
+      {
+        "borough": "Bronx",
+        "within_borough_contribution_minutes": 0.105976,
+        "geographic_mix_contribution_minutes": -0.029553,
+        "total_contribution_minutes": 0.076423
+      },
+      {
+        "borough": "N/A",
+        "within_borough_contribution_minutes": 7.2e-05,
+        "geographic_mix_contribution_minutes": 0.000117,
+        "total_contribution_minutes": 0.000189
+      }
+    ]
+  },
+  "data_quality_anomalies": [
+    {
+      "month": "2025-11-01",
+      "review_note": "Duration coverage anomaly",
+      "duration_coverage_pct": 99.9425,
+      "base_fare_coverage_pct": 99.9872,
+      "trip_time_mismatch_gt_60sec_trips": 9352
+    },
+    {
+      "month": "2026-01-01",
+      "review_note": "Base-fare coverage anomaly",
+      "duration_coverage_pct": 99.9952,
+      "base_fare_coverage_pct": 99.8037,
+      "trip_time_mismatch_gt_60sec_trips": 1333
+    },
+    {
+      "month": "2026-03-01",
+      "review_note": "Trip-time mismatch anomaly",
+      "duration_coverage_pct": 99.9968,
+      "base_fare_coverage_pct": 99.9647,
+      "trip_time_mismatch_gt_60sec_trips": 7132
+    }
+  ],
+  "interpretation_boundary": "Completed-trip data cannot measure unserved demand, cancellations, driver online time, surge pricing, promotion effects, or causal supply shortages.",
+  "generated_at_utc": "2026-08-25T03:49:58.691300+00:00",
+  "source_files": [
+    "data/processed/analytics/monthly_metrics.parquet",
+    "data/processed/analytics/zone_daily_metrics.parquet",
+    "data/processed/analytics/zone_hour_metrics.parquet",
+    "data/processed/analytics/data_quality_by_month.parquet",
+    "data/reference/taxi_zone_lookup.csv"
+  ],
+  "table_rows": {
+    "monthly_trend": 13,
+    "monthly_wait_trend": 39,
+    "may_yoy_summary": 11,
+    "borough_yoy": 7,
+    "wait_change_decomposition": 7,
+    "zone_yoy": 262,
+    "hourly_yoy": 24,
+    "priority_windows": 100,
+    "data_quality_review": 13
+  },
+  "validation_checks_passed": 17
+}

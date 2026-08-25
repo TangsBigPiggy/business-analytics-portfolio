@@ -1,0 +1,24 @@
+﻿check,status,detail
+single_html_document,PASS,One self-contained dashboard document
+three_page_tabs,PASS,Three tab controls
+two_language_controls,PASS,Chinese and English controls
+three_english_sections,PASS,Three English page views
+three_chinese_sections,PASS,Three Chinese page views
+no_external_stylesheets,PASS,No external stylesheet dependency
+no_external_scripts,PASS,No external script dependency
+no_remote_urls,PASS,Portable offline artifact
+page1_trips,PASS,Expected 15.35M
+page1_avg_wait,PASS,Expected 5.49 min
+page1_p90_wait,PASS,Expected 10.44 min
+page1_fare,PASS,Expected $29.49
+page1_pay,PASS,Expected $22.43
+page2_priority_zones,PASS,Expected 23
+page2_priority_trips,PASS,Expected 2.99M
+page2_airport_excess,PASS,Expected 1.27M
+page3_growth_increment,PASS,Expected 318.3K
+page2_collision_safe_callouts,PASS,Four fixed callout boxes in each language view
+language_switch_runtime,PASS,All language views use one switch runtime
+english_evidence_boundary,PASS,English causal and financial boundaries retained
+chinese_request_to_pickup_term,PASS,Fixed Chinese metric term is present
+chinese_priority_proxy_boundary,PASS,Chinese proxy and causal boundary are explicit
+chinese_financial_boundary,PASS,Chinese financial interpretation boundary is explicit

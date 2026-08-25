@@ -1,0 +1,12 @@
+﻿check_name,actual,expected,passed
+monthly row count,13,13,True
+quality row count,13,13,True
+monthly trips equal daily trips,193408206,193408206,True
+monthly trips equal quality trips,193408206,193408206,True
+valid-zone trips equal zone_daily trips,193408206,193408206,True
+valid-zone trips equal zone_hour trips,193408206,193408206,True
+monthly key uniqueness,0,0,True
+daily key uniqueness,0,0,True
+zone_daily key uniqueness,0,0,True
+zone_hour key uniqueness,0,0,True
+complete pickup-day coverage,0,0,True

@@ -1,0 +1,2232 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "Uber NYC 增长质量复盘",
+    "description": "面向管理层决策的 Uber NYC 增长质量、服务效率与运营优先级复盘。",
+    "generatedAt": "2026-08-25T03:50:09.962325+00:00",
+    "cards": [
+      {
+        "id": "trips_card",
+        "description": "2026 年 5 月 Uber 完成行程及其与 2025 年 5 月的对比。",
+        "dataset": "headline",
+        "sourceId": "monthly_metrics_analysis",
+        "metrics": [
+          {
+            "label": "2026 年 5 月完成行程",
+            "field": "trips_current",
+            "format": "number"
+          },
+          {
+            "label": "2025 年 5 月",
+            "field": "trips_prior",
+            "format": "number"
+          },
+          {
+            "label": "同比",
+            "field": "trip_growth_rate",
+            "format": "percent",
+            "signed": true
+          }
+        ]
+      },
+      {
+        "id": "avg_wait_card",
+        "description": "符合指标条件的完成行程的平均请求至上车时长。",
+        "dataset": "headline",
+        "sourceId": "monthly_metrics_analysis",
+        "metrics": [
+          {
+            "label": "平均请求至上车时长",
+            "field": "avg_wait_current",
+            "format": "number",
+            "unit": "min"
+          },
+          {
+            "label": "2025 年 5 月",
+            "field": "avg_wait_prior",
+            "format": "number",
+            "unit": "min"
+          },
+          {
+            "label": "同比",
+            "field": "avg_wait_growth_rate",
+            "format": "percent",
+            "signed": true
+          }
+        ]
+      },
+      {
+        "id": "p90_wait_card",
+        "description": "符合指标条件的完成行程中，请求至上车时长的第 90 百分位数。",
+        "dataset": "headline",
+        "sourceId": "monthly_metrics_analysis",
+        "metrics": [
+          {
+            "label": "P90 请求至上车时长",
+            "field": "p90_wait_current",
+            "format": "number",
+            "unit": "min"
+          },
+          {
+            "label": "2025 年 5 月",
+            "field": "p90_wait_prior",
+            "format": "number",
+            "unit": "min"
+          },
+          {
+            "label": "同比",
+            "field": "p90_wait_growth_rate",
+            "format": "percent",
+            "signed": true
+          }
+        ]
+      },
+      {
+        "id": "fare_card",
+        "description": "每次完成行程的有效乘客基础车费均值；不代表平台收入。",
+        "dataset": "headline",
+        "sourceId": "monthly_metrics_analysis",
+        "metrics": [
+          {
+            "label": "乘客基础车费",
+            "field": "avg_fare_current",
+            "format": "currency"
+          },
+          {
+            "label": "2025 年 5 月",
+            "field": "avg_fare_prior",
+            "format": "currency"
+          },
+          {
+            "label": "同比",
+            "field": "avg_fare_growth_rate",
+            "format": "percent",
+            "signed": true
+          }
+        ]
+      },
+      {
+        "id": "pay_card",
+        "description": "每次完成行程的有效报送司机报酬均值。",
+        "dataset": "headline",
+        "sourceId": "monthly_metrics_analysis",
+        "metrics": [
+          {
+            "label": "单次行程司机报酬",
+            "field": "avg_pay_current",
+            "format": "currency"
+          },
+          {
+            "label": "2025 年 5 月",
+            "field": "avg_pay_prior",
+            "format": "currency"
+          },
+          {
+            "label": "同比",
+            "field": "avg_pay_growth_rate",
+            "format": "percent",
+            "signed": true
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "monthly_trips_chart",
+        "title": "月度完成行程",
+        "subtitle": "2025 年 5 月至 2026 年 5 月；Uber HV0003 完成行程",
+        "type": "line",
+        "dataset": "monthly_trend",
+        "sourceId": "monthly_metrics_analysis",
+        "valueFormat": "number",
+        "encodings": {
+          "x": {
+            "field": "month",
+            "type": "temporal",
+            "label": "月份"
+          },
+          "y": {
+            "field": "trips",
+            "type": "quantitative",
+            "label": "完成行程"
+          },
+          "tooltip": [
+            {
+              "field": "trips_per_active_day",
+              "type": "quantitative",
+              "label": "每活跃日完成行程"
+            },
+            {
+              "field": "avg_request_to_pickup_minutes",
+              "type": "quantitative",
+              "label": "平均请求至上车时长"
+            }
+          ]
+        }
+      },
+      {
+        "id": "monthly_wait_chart",
+        "title": "月度请求至上车时长分布",
+        "subtitle": "请求至上车时长在 0–60 分钟之间的完成行程：平均值、中位数与 P90",
+        "type": "line",
+        "dataset": "monthly_wait_trend",
+        "sourceId": "monthly_metrics_analysis",
+        "valueFormat": "number",
+        "encodings": {
+          "x": {
+            "field": "month",
+            "type": "temporal",
+            "label": "月份"
+          },
+          "y": {
+            "field": "value_minutes",
+            "type": "quantitative",
+            "label": "分钟"
+          },
+          "color": {
+            "field": "metric",
+            "type": "nominal",
+            "label": "统计量"
+          },
+          "tooltip": [
+            {
+              "field": "metric",
+              "type": "nominal",
+              "label": "统计量"
+            },
+            {
+              "field": "value_minutes",
+              "type": "quantitative",
+              "label": "分钟"
+            },
+            {
+              "field": "wait_coverage_pct",
+              "type": "quantitative",
+              "label": "指标有效率（%）"
+            }
+          ]
+        }
+      },
+      {
+        "id": "borough_growth_chart",
+        "title": "各上车行政区的完成行程增长",
+        "subtitle": "2026 年 5 月对比 2025 年 5 月；NYC 五个行政区",
+        "type": "bar",
+        "dataset": "borough_yoy",
+        "sourceId": "borough_analysis",
+        "valueFormat": "percent",
+        "encodings": {
+          "x": {
+            "field": "borough",
+            "type": "nominal",
+            "label": "上车行政区"
+          },
+          "y": {
+            "field": "trip_growth_rate",
+            "type": "quantitative",
+            "label": "行程增长"
+          },
+          "tooltip": [
+            {
+              "field": "trip_delta",
+              "type": "quantitative",
+              "label": "行程增量"
+            },
+            {
+              "field": "avg_wait_change_rate",
+              "type": "quantitative",
+              "label": "时长变化",
+              "format": "percent"
+            },
+            {
+              "field": "contribution_to_growth_rate",
+              "type": "quantitative",
+              "label": "对全市增长的贡献",
+              "format": "percent"
+            }
+          ]
+        }
+      },
+      {
+        "id": "priority_zone_chart",
+        "title": "各上车区域的估算超额请求至上车时长负担",
+        "subtitle": "2026 年 5 月；需求位于前 25% 且请求至上车时长高于全市均值",
+        "type": "bar",
+        "dataset": "priority_zones",
+        "sourceId": "zone_priority_analysis",
+        "valueFormat": "number",
+        "encodings": {
+          "x": {
+            "field": "zone_label",
+            "type": "nominal",
+            "label": "上车区域"
+          },
+          "y": {
+            "field": "estimated_excess_request_to_pickup_minutes",
+            "type": "quantitative",
+            "label": "估算超额分钟"
+          },
+          "tooltip": [
+            {
+              "field": "trips_2026_05",
+              "type": "quantitative",
+              "label": "2026 年 5 月完成行程"
+            },
+            {
+              "field": "trip_growth_rate",
+              "type": "quantitative",
+              "label": "行程增长",
+              "format": "percent"
+            },
+            {
+              "field": "avg_wait_2026_05",
+              "type": "quantitative",
+              "label": "平均请求至上车时长"
+            },
+            {
+              "field": "avg_wait_change_rate",
+              "type": "quantitative",
+              "label": "时长变化",
+              "format": "percent"
+            }
+          ]
+        }
+      },
+      {
+        "id": "hourly_wait_chart",
+        "title": "各上车小时段的请求至上车时长变化",
+        "subtitle": "2026 年 5 月对比 2025 年 5 月；全市完成行程",
+        "type": "bar",
+        "dataset": "hourly_yoy",
+        "sourceId": "priority_window_analysis",
+        "valueFormat": "percent",
+        "encodings": {
+          "x": {
+            "field": "pickup_hour_label",
+            "type": "ordinal",
+            "label": "上车小时"
+          },
+          "y": {
+            "field": "avg_wait_change_rate",
+            "type": "quantitative",
+            "label": "时长变化"
+          },
+          "tooltip": [
+            {
+              "field": "trip_growth_rate",
+              "type": "quantitative",
+              "label": "行程增长",
+              "format": "percent"
+            },
+            {
+              "field": "avg_wait_2025_05",
+              "type": "quantitative",
+              "label": "2025 年 5 月平均时长"
+            },
+            {
+              "field": "avg_wait_2026_05",
+              "type": "quantitative",
+              "label": "2026 年 5 月平均时长"
+            }
+          ]
+        }
+      }
+    ],
+    "tables": [
+      {
+        "id": "priority_windows_table",
+        "title": "最高优先级重复性上车时窗",
+        "subtitle": "2026 年 5 月按每个贡献日估算超额请求至上车分钟排序的前 15 个星期–小时–区域组合",
+        "dataset": "priority_windows",
+        "sourceId": "priority_window_analysis",
+        "defaultSort": {
+          "field": "estimated_excess_request_to_pickup_minutes_per_day",
+          "direction": "desc"
+        },
+        "columns": [
+          {
+            "field": "weekday_name",
+            "label": "星期",
+            "type": "text"
+          },
+          {
+            "field": "pickup_hour_label",
+            "label": "小时",
+            "type": "text"
+          },
+          {
+            "field": "zone_label",
+            "label": "上车区域",
+            "type": "text"
+          },
+          {
+            "field": "avg_trips_per_contributing_day",
+            "label": "行程/日",
+            "format": "number"
+          },
+          {
+            "field": "avg_request_to_pickup_minutes",
+            "label": "平均请求至上车时长",
+            "format": "number"
+          },
+          {
+            "field": "wait_gap_to_city_minutes",
+            "label": "与全市差值",
+            "format": "number"
+          },
+          {
+            "field": "estimated_excess_request_to_pickup_minutes_per_day",
+            "label": "超额分钟/日",
+            "format": "number"
+          }
+        ]
+      },
+      {
+        "id": "quality_table",
+        "title": "焦点对比月份之外的月度质量异常",
+        "subtitle": "出现行程时长、车费覆盖或行程时间不匹配信号、需谨慎解读的月份",
+        "dataset": "quality_exceptions",
+        "sourceId": "quality_review",
+        "defaultSort": {
+          "field": "month",
+          "direction": "asc"
+        },
+        "columns": [
+          {
+            "field": "month",
+            "label": "月份",
+            "type": "text"
+          },
+          {
+            "field": "review_note",
+            "label": "质量复核说明",
+            "type": "text"
+          },
+          {
+            "field": "wait_coverage_rate",
+            "label": "请求至上车指标覆盖率",
+            "format": "percent"
+          },
+          {
+            "field": "duration_coverage_rate",
+            "label": "行程时长覆盖率",
+            "format": "percent"
+          },
+          {
+            "field": "base_fare_coverage_rate",
+            "label": "车费覆盖率",
+            "format": "percent"
+          },
+          {
+            "field": "trip_time_mismatch_gt_60sec_trips",
+            "label": "行程时间不匹配",
+            "format": "number"
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "id": "deep_analysis_summary",
+        "label": "深度分析摘要",
+        "path": "data/processed/analysis/analysis_summary.json"
+      },
+      {
+        "id": "monthly_metrics_analysis",
+        "label": "Uber 月度市场指标",
+        "path": "data/processed/analysis/monthly_trend.parquet"
+      },
+      {
+        "id": "borough_analysis",
+        "label": "行政区增长与时长分解",
+        "path": "data/processed/analysis/borough_yoy.parquet"
+      },
+      {
+        "id": "zone_priority_analysis",
+        "label": "出租车分区市场优先级分析",
+        "path": "data/processed/analysis/zone_yoy.parquet"
+      },
+      {
+        "id": "priority_window_analysis",
+        "label": "上车区域与重复性小时段优先级",
+        "path": "data/processed/analysis/priority_windows.parquet"
+      },
+      {
+        "id": "quality_review",
+        "label": "月度数据质量复核",
+        "path": "data/processed/analysis/data_quality_review.parquet"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# Uber NYC 增长质量复盘"
+      },
+      {
+        "id": "executive_summary",
+        "type": "markdown",
+        "body": "## 执行摘要\n\n- **2026 年 5 月行程实现温和增长，但增长质量并不理想。** 完成行程同比增长 **+2.1%** 至 **15.35M**，平均请求至上车时长上升 **+8.8%** 至 **5.49 分钟**，P90 上升 **+16.9%** 至 **10.44 分钟**。\n- **服务时长恶化主要来自广泛的区内变动，而非地理结构造成的假象。** 行政区分解将约 **0.449 分钟**归于各区内部的时长上升；地理结构变化则抵消约 **0.008 分钟**。\n- **增长集中在曼哈顿与布鲁克林，但服务压力更集中于其他区域。** 两区合计贡献 **318,282 次新增行程**，相当于全市净增长的 **100.7%**。布鲁克林的请求至上车时长上升 **10.5%**、皇后区上升 **12.9%**、布朗克斯上升 **15.0%**。\n- **应采用定向的供给与机场运营方案，而非广泛刺激需求。** 尽管机场行程量较低，其估算超额请求至上车时长负担最高；部分仍在增长的布鲁克林与哈莱姆区域也同时出现较大需求和两位数的时长恶化。\n",
+        "sourceId": "deep_analysis_summary"
+      },
+      {
+        "id": "headline_metrics",
+        "type": "metric-strip",
+        "cardIds": [
+          "trips_card",
+          "avg_wait_card",
+          "p90_wait_card",
+          "fare_card",
+          "pay_card"
+        ]
+      },
+      {
+        "id": "growth_section",
+        "type": "markdown",
+        "body": "## 行程增长伴随更明显的服务质量压力\n\n完成行程同比增长 **+2.1%**，但服务时长分布恶化得更快：平均请求至上车时长上升 **+8.8%**，P90 上升 **+16.9%**。平均值与 P90 的差异表明，长等待尾部的恶化幅度高于典型行程。\n\n单次行程乘客基础车费与司机报酬走势几乎一致，分别上升 **+1.5%** 与 **+1.6%**；同期平均里程下降 **-3.0%**。更短的行程结构使每英里基础车费机械性上升 **+4.6%**，每英里司机报酬上升 **+4.7%**。二者分别反映乘客与司机侧的经济指标，不能据此计算平台利润、利润率或抽成率。\n",
+        "sourceId": "deep_analysis_summary"
+      },
+      {
+        "id": "monthly_trips_block",
+        "type": "chart",
+        "chartId": "monthly_trips_chart"
+      },
+      {
+        "id": "monthly_wait_block",
+        "type": "chart",
+        "chartId": "monthly_wait_chart"
+      },
+      {
+        "id": "wait_section",
+        "type": "markdown",
+        "body": "## 服务时长恶化覆盖面广，地理结构反而略有缓冲\n\n全市平均请求至上车时长增加 **0.442 分钟**。分解结果将约 **0.449 分钟**归于各行政区内部的时长上升；行政区行程结构变化贡献 **-0.008 分钟**，对恶化形成轻微抵消，而非造成恶化。\n\n曼哈顿行程增长 **3.8%**，请求至上车时长仅上升 **2.8%**；布鲁克林增长 **2.9%**，时长上升 **10.5%**；皇后区在行程增长 **1.0%** 的情况下时长上升 **12.9%**；布朗克斯行程下降 **1.5%**，时长仍上升 **15.0%**。这一模式不支持用单一的全市市场机制解释全部变化。\n",
+        "sourceId": "deep_analysis_summary"
+      },
+      {
+        "id": "borough_growth_block",
+        "type": "chart",
+        "chartId": "borough_growth_chart"
+      },
+      {
+        "id": "zone_section",
+        "type": "markdown",
+        "body": "## 机场与增长型社区需要不同的运营方案\n\n拉瓜迪亚机场与肯尼迪机场在估算超额请求至上车分钟数上排名前两位，但两者完成行程均低于上年 5 月。这一组合更像是机场上车、候车区与调度流程的结构性问题，而不是需求增长带来的压力；但公共数据不足以证明具体因果机制。\n\n社区区域呈现出不同的模式。哈莱姆中北部、皇冠高地北部、卡纳西、斯图维森特高地、布什维克南部、东纽约与布朗斯维尔同时具备较大完成行程量和上升的请求至上车时长。相比全市性干预，这些区域更适合定向的供给再配置或受控激励试验。\n",
+        "sourceId": "deep_analysis_summary"
+      },
+      {
+        "id": "priority_zone_block",
+        "type": "chart",
+        "chartId": "priority_zone_chart"
+      },
+      {
+        "id": "window_section",
+        "type": "markdown",
+        "body": "## 深夜机场时窗与全市凌晨时段应列为首批运营优先级\n\n最集中的重复性高优先级时窗主要位于拉瓜迪亚机场与肯尼迪机场的深夜及凌晨。与此同时，全市小时段对比显示，03:00–06:00 左右的请求至上车时长恶化最明显，完成行程增速也有所加快。运营团队应同时监控平均值与 P90，因为整体上长时长尾部恶化最快。\n",
+        "sourceId": "deep_analysis_summary"
+      },
+      {
+        "id": "hourly_wait_block",
+        "type": "chart",
+        "chartId": "hourly_wait_chart"
+      },
+      {
+        "id": "priority_windows_block",
+        "type": "table",
+        "tableId": "priority_windows_table"
+      },
+      {
+        "id": "recommendations",
+        "type": "markdown",
+        "body": "## 建议行动\n\n1. **将机场运营与社区市场管理分开。** 独立复盘机场候车区、队列释放、航班到达匹配及深夜司机可用性，不与城市社区的供给配置混为一谈。\n2. **在负担最高的社区区域试点定向干预。** 从优先级表中的重复性区域–小时段时窗入手，在条件允许时采用分阶段或随机化设计。\n3. **增加需求前先设置服务护栏。** 不把完成行程增长单独视为成功；平均与 P90 请求至上车时长、估算超额分钟及司机报酬强度均应保持在约定范围内。\n4. **在作出因果判断前补充内部市场数据。** 接单、取消、未服务请求、司机在线时长、动态加价、预约与激励暴露等数据，是区分供给、调度、产品与报送因素所必需的。\n",
+        "sourceId": "deep_analysis_summary"
+      },
+      {
+        "id": "further_questions",
+        "type": "markdown",
+        "body": "## 后续问题\n\n- 请求至上车时长上升中，有多少来自预约或计划行程，而非即时派单？\n- 受影响行政区和小时段的司机在线时长、接单、取消或调位行为是否发生变化？\n- 机场模式能否由航班时刻、队列规则、候车区利用率或上车区域报送方式解释？\n- 在控制天气、节假日和本地活动后，哪些高优先级社区时窗仍然承压？\n"
+      },
+      {
+        "id": "caveats",
+        "type": "markdown",
+        "body": "## 局限与假设\n\n- TLC 记录仅代表完成行程，不包含未服务需求、取消、司机在线时长、促销、动态加价倍数或乘客/司机标识。\n- “供给受限优先级代理”和“估算超额请求至上车分钟数”只用于运营排序，不构成司机供给不足的因果证明。\n- 时间戳按纽约当地时间理解；请求至上车时长限定在 0–60 分钟，`on_scene_datetime` 不作为核心 KPI。\n- 乘客基础车费与司机报酬分别分析；二者之差不定义为平台收入、利润、利润率或抽成率。\n- 月度质量检查发现焦点同比月份之外存在个别行程时长与车费异常。两个 5 月的指标有效率足以支持本次对比，但 TLC 公共数据由平台方提交，官方不保证其完整无误。\n",
+        "sourceId": "quality_review"
+      },
+      {
+        "id": "quality_block",
+        "type": "table",
+        "tableId": "quality_table"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-25T03:50:09.962325+00:00",
+    "status": "ready",
+    "datasets": {
+      "headline": [
+        {
+          "period": "2026 年 5 月",
+          "trips_current": 15354816.0,
+          "trips_prior": 15038869.0,
+          "trip_growth_rate": 0.02101,
+          "avg_wait_current": 5.487,
+          "avg_wait_prior": 5.045,
+          "avg_wait_growth_rate": 0.08761,
+          "p90_wait_current": 10.437,
+          "p90_wait_prior": 8.932,
+          "p90_wait_growth_rate": 0.1685,
+          "avg_fare_current": 29.49,
+          "avg_fare_prior": 29.05,
+          "avg_fare_growth_rate": 0.015149999999999999,
+          "avg_pay_current": 22.43,
+          "avg_pay_prior": 22.07,
+          "avg_pay_growth_rate": 0.01631,
+          "avg_miles_current": 5.008,
+          "avg_miles_prior": 5.161,
+          "avg_miles_growth_rate": -0.02965
+        }
+      ],
+      "monthly_trend": [
+        {
+          "month": "2025-05-01",
+          "month_label": "2025-05",
+          "trips": 15038869,
+          "trips_per_active_day": 485124.81,
+          "avg_request_to_pickup_minutes": 5.045,
+          "p50_request_to_pickup_minutes": 4.235,
+          "p90_request_to_pickup_minutes": 8.932,
+          "wait_coverage_pct": 99.1143,
+          "avg_trip_miles": 5.161,
+          "avg_trip_duration_minutes": 20.8,
+          "avg_base_fare_eligible": 29.05,
+          "avg_driver_pay_eligible": 22.07,
+          "weighted_base_fare_per_mile": 5.629,
+          "weighted_driver_pay_per_mile": 4.276,
+          "driver_pay_per_occupied_hour": 63.657,
+          "trips_mom_pct": null,
+          "request_to_pickup_mom_pct": null,
+          "trips_yoy_pct": null,
+          "request_to_pickup_yoy_pct": null
+        },
+        {
+          "month": "2025-06-01",
+          "month_label": "2025-06",
+          "trips": 14167361,
+          "trips_per_active_day": 472245.37,
+          "avg_request_to_pickup_minutes": 5.096,
+          "p50_request_to_pickup_minutes": 4.289,
+          "p90_request_to_pickup_minutes": 9.025,
+          "wait_coverage_pct": 99.0719,
+          "avg_trip_miles": 5.268,
+          "avg_trip_duration_minutes": 20.571,
+          "avg_base_fare_eligible": 29.08,
+          "avg_driver_pay_eligible": 22.31,
+          "weighted_base_fare_per_mile": 5.52,
+          "weighted_driver_pay_per_mile": 4.235,
+          "driver_pay_per_occupied_hour": 65.073,
+          "trips_mom_pct": -5.795,
+          "request_to_pickup_mom_pct": 1.011,
+          "trips_yoy_pct": null,
+          "request_to_pickup_yoy_pct": null
+        },
+        {
+          "month": "2025-07-01",
+          "month_label": "2025-07",
+          "trips": 14141782,
+          "trips_per_active_day": 456186.52,
+          "avg_request_to_pickup_minutes": 4.643,
+          "p50_request_to_pickup_minutes": 3.887,
+          "p90_request_to_pickup_minutes": 8.21,
+          "wait_coverage_pct": 99.1067,
+          "avg_trip_miles": 5.208,
+          "avg_trip_duration_minutes": 19.938,
+          "avg_base_fare_eligible": 27.2,
+          "avg_driver_pay_eligible": 21.13,
+          "weighted_base_fare_per_mile": 5.223,
+          "weighted_driver_pay_per_mile": 4.058,
+          "driver_pay_per_occupied_hour": 63.6,
+          "trips_mom_pct": -0.181,
+          "request_to_pickup_mom_pct": -8.889,
+          "trips_yoy_pct": null,
+          "request_to_pickup_yoy_pct": null
+        },
+        {
+          "month": "2025-08-01",
+          "month_label": "2025-08",
+          "trips": 13558357,
+          "trips_per_active_day": 437366.35,
+          "avg_request_to_pickup_minutes": 4.459,
+          "p50_request_to_pickup_minutes": 3.719,
+          "p90_request_to_pickup_minutes": 7.741,
+          "wait_coverage_pct": 99.0315,
+          "avg_trip_miles": 5.279,
+          "avg_trip_duration_minutes": 19.871,
+          "avg_base_fare_eligible": 27.22,
+          "avg_driver_pay_eligible": 21.14,
+          "weighted_base_fare_per_mile": 5.157,
+          "weighted_driver_pay_per_mile": 4.005,
+          "driver_pay_per_occupied_hour": 63.84,
+          "trips_mom_pct": -4.126,
+          "request_to_pickup_mom_pct": -3.963,
+          "trips_yoy_pct": null,
+          "request_to_pickup_yoy_pct": null
+        },
+        {
+          "month": "2025-09-01",
+          "month_label": "2025-09",
+          "trips": 14047040,
+          "trips_per_active_day": 468234.67,
+          "avg_request_to_pickup_minutes": 4.802,
+          "p50_request_to_pickup_minutes": 3.979,
+          "p90_request_to_pickup_minutes": 8.451,
+          "wait_coverage_pct": 98.9481,
+          "avg_trip_miles": 5.229,
+          "avg_trip_duration_minutes": 21.126,
+          "avg_base_fare_eligible": 29.35,
+          "avg_driver_pay_eligible": 22.46,
+          "weighted_base_fare_per_mile": 5.613,
+          "weighted_driver_pay_per_mile": 4.296,
+          "driver_pay_per_occupied_hour": 63.786,
+          "trips_mom_pct": 3.604,
+          "request_to_pickup_mom_pct": 7.692,
+          "trips_yoy_pct": null,
+          "request_to_pickup_yoy_pct": null
+        },
+        {
+          "month": "2025-10-01",
+          "month_label": "2025-10",
+          "trips": 15470172,
+          "trips_per_active_day": 499037.81,
+          "avg_request_to_pickup_minutes": 4.837,
+          "p50_request_to_pickup_minutes": 4.001,
+          "p90_request_to_pickup_minutes": 8.752,
+          "wait_coverage_pct": 98.9922,
+          "avg_trip_miles": 5.118,
+          "avg_trip_duration_minutes": 20.833,
+          "avg_base_fare_eligible": 27.81,
+          "avg_driver_pay_eligible": 21.88,
+          "weighted_base_fare_per_mile": 5.435,
+          "weighted_driver_pay_per_mile": 4.275,
+          "driver_pay_per_occupied_hour": 63.011,
+          "trips_mom_pct": 10.131,
+          "request_to_pickup_mom_pct": 0.729,
+          "trips_yoy_pct": null,
+          "request_to_pickup_yoy_pct": null
+        },
+        {
+          "month": "2025-11-01",
+          "month_label": "2025-11",
+          "trips": 14908456,
+          "trips_per_active_day": 496948.53,
+          "avg_request_to_pickup_minutes": 4.704,
+          "p50_request_to_pickup_minutes": 3.859,
+          "p90_request_to_pickup_minutes": 8.566,
+          "wait_coverage_pct": 98.9609,
+          "avg_trip_miles": 5.031,
+          "avg_trip_duration_minutes": 20.141,
+          "avg_base_fare_eligible": 27.56,
+          "avg_driver_pay_eligible": 21.44,
+          "weighted_base_fare_per_mile": 5.479,
+          "weighted_driver_pay_per_mile": 4.262,
+          "driver_pay_per_occupied_hour": 63.869,
+          "trips_mom_pct": -3.631,
+          "request_to_pickup_mom_pct": -2.75,
+          "trips_yoy_pct": null,
+          "request_to_pickup_yoy_pct": null
+        },
+        {
+          "month": "2025-12-01",
+          "month_label": "2025-12",
+          "trips": 15973728,
+          "trips_per_active_day": 515281.55,
+          "avg_request_to_pickup_minutes": 5.301,
+          "p50_request_to_pickup_minutes": 4.314,
+          "p90_request_to_pickup_minutes": 9.892,
+          "wait_coverage_pct": 98.7917,
+          "avg_trip_miles": 4.94,
+          "avg_trip_duration_minutes": 20.155,
+          "avg_base_fare_eligible": 28.62,
+          "avg_driver_pay_eligible": 21.92,
+          "weighted_base_fare_per_mile": 5.793,
+          "weighted_driver_pay_per_mile": 4.437,
+          "driver_pay_per_occupied_hour": 65.257,
+          "trips_mom_pct": 7.145,
+          "request_to_pickup_mom_pct": 12.691,
+          "trips_yoy_pct": null,
+          "request_to_pickup_yoy_pct": null
+        },
+        {
+          "month": "2026-01-01",
+          "month_label": "2026-01",
+          "trips": 15245631,
+          "trips_per_active_day": 491794.55,
+          "avg_request_to_pickup_minutes": 5.287,
+          "p50_request_to_pickup_minutes": 4.195,
+          "p90_request_to_pickup_minutes": 10.103,
+          "wait_coverage_pct": 98.8473,
+          "avg_trip_miles": 4.699,
+          "avg_trip_duration_minutes": 18.853,
+          "avg_base_fare_eligible": 26.19,
+          "avg_driver_pay_eligible": 20.11,
+          "weighted_base_fare_per_mile": 5.571,
+          "weighted_driver_pay_per_mile": 4.281,
+          "driver_pay_per_occupied_hour": 64.007,
+          "trips_mom_pct": -4.558,
+          "request_to_pickup_mom_pct": -0.264,
+          "trips_yoy_pct": null,
+          "request_to_pickup_yoy_pct": null
+        },
+        {
+          "month": "2026-02-01",
+          "month_label": "2026-02",
+          "trips": 14166961,
+          "trips_per_active_day": 505962.89,
+          "avg_request_to_pickup_minutes": 5.707,
+          "p50_request_to_pickup_minutes": 4.592,
+          "p90_request_to_pickup_minutes": 10.79,
+          "wait_coverage_pct": 98.6434,
+          "avg_trip_miles": 4.826,
+          "avg_trip_duration_minutes": 19.724,
+          "avg_base_fare_eligible": 27.52,
+          "avg_driver_pay_eligible": 21.13,
+          "weighted_base_fare_per_mile": 5.701,
+          "weighted_driver_pay_per_mile": 4.377,
+          "driver_pay_per_occupied_hour": 64.265,
+          "trips_mom_pct": -7.075,
+          "request_to_pickup_mom_pct": 7.944,
+          "trips_yoy_pct": null,
+          "request_to_pickup_yoy_pct": null
+        },
+        {
+          "month": "2026-03-01",
+          "month_label": "2026-03",
+          "trips": 15956175,
+          "trips_per_active_day": 514715.32,
+          "avg_request_to_pickup_minutes": 5.599,
+          "p50_request_to_pickup_minutes": 4.5,
+          "p90_request_to_pickup_minutes": 10.79,
+          "wait_coverage_pct": 98.7506,
+          "avg_trip_miles": 4.912,
+          "avg_trip_duration_minutes": 19.413,
+          "avg_base_fare_eligible": 28.09,
+          "avg_driver_pay_eligible": 21.38,
+          "weighted_base_fare_per_mile": 5.719,
+          "weighted_driver_pay_per_mile": 4.354,
+          "driver_pay_per_occupied_hour": 66.093,
+          "trips_mom_pct": 12.629,
+          "request_to_pickup_mom_pct": -1.892,
+          "trips_yoy_pct": null,
+          "request_to_pickup_yoy_pct": null
+        },
+        {
+          "month": "2026-04-01",
+          "month_label": "2026-04",
+          "trips": 15378858,
+          "trips_per_active_day": 512628.6,
+          "avg_request_to_pickup_minutes": 5.185,
+          "p50_request_to_pickup_minutes": 4.118,
+          "p90_request_to_pickup_minutes": 9.945,
+          "wait_coverage_pct": 98.8806,
+          "avg_trip_miles": 4.95,
+          "avg_trip_duration_minutes": 19.755,
+          "avg_base_fare_eligible": 27.66,
+          "avg_driver_pay_eligible": 21.29,
+          "weighted_base_fare_per_mile": 5.588,
+          "weighted_driver_pay_per_mile": 4.302,
+          "driver_pay_per_occupied_hour": 64.663,
+          "trips_mom_pct": -3.618,
+          "request_to_pickup_mom_pct": -7.394,
+          "trips_yoy_pct": null,
+          "request_to_pickup_yoy_pct": null
+        },
+        {
+          "month": "2026-05-01",
+          "month_label": "2026-05",
+          "trips": 15354816,
+          "trips_per_active_day": 495316.65,
+          "avg_request_to_pickup_minutes": 5.487,
+          "p50_request_to_pickup_minutes": 4.395,
+          "p90_request_to_pickup_minutes": 10.437,
+          "wait_coverage_pct": 98.7742,
+          "avg_trip_miles": 5.008,
+          "avg_trip_duration_minutes": 20.6,
+          "avg_base_fare_eligible": 29.49,
+          "avg_driver_pay_eligible": 22.43,
+          "weighted_base_fare_per_mile": 5.889,
+          "weighted_driver_pay_per_mile": 4.479,
+          "driver_pay_per_occupied_hour": 65.322,
+          "trips_mom_pct": -0.156,
+          "request_to_pickup_mom_pct": 5.824,
+          "trips_yoy_pct": 2.101,
+          "request_to_pickup_yoy_pct": 8.761
+        }
+      ],
+      "monthly_wait_trend": [
+        {
+          "month": "2025-05-01",
+          "month_label": "2025-05",
+          "metric": "平均值",
+          "value_minutes": 5.045,
+          "trips": 15038869,
+          "wait_coverage_pct": 99.1143
+        },
+        {
+          "month": "2025-05-01",
+          "month_label": "2025-05",
+          "metric": "中位数",
+          "value_minutes": 4.235,
+          "trips": 15038869,
+          "wait_coverage_pct": 99.1143
+        },
+        {
+          "month": "2025-05-01",
+          "month_label": "2025-05",
+          "metric": "P90",
+          "value_minutes": 8.932,
+          "trips": 15038869,
+          "wait_coverage_pct": 99.1143
+        },
+        {
+          "month": "2025-06-01",
+          "month_label": "2025-06",
+          "metric": "平均值",
+          "value_minutes": 5.096,
+          "trips": 14167361,
+          "wait_coverage_pct": 99.0719
+        },
+        {
+          "month": "2025-06-01",
+          "month_label": "2025-06",
+          "metric": "中位数",
+          "value_minutes": 4.289,
+          "trips": 14167361,
+          "wait_coverage_pct": 99.0719
+        },
+        {
+          "month": "2025-06-01",
+          "month_label": "2025-06",
+          "metric": "P90",
+          "value_minutes": 9.025,
+          "trips": 14167361,
+          "wait_coverage_pct": 99.0719
+        },
+        {
+          "month": "2025-07-01",
+          "month_label": "2025-07",
+          "metric": "平均值",
+          "value_minutes": 4.643,
+          "trips": 14141782,
+          "wait_coverage_pct": 99.1067
+        },
+        {
+          "month": "2025-07-01",
+          "month_label": "2025-07",
+          "metric": "中位数",
+          "value_minutes": 3.887,
+          "trips": 14141782,
+          "wait_coverage_pct": 99.1067
+        },
+        {
+          "month": "2025-07-01",
+          "month_label": "2025-07",
+          "metric": "P90",
+          "value_minutes": 8.21,
+          "trips": 14141782,
+          "wait_coverage_pct": 99.1067
+        },
+        {
+          "month": "2025-08-01",
+          "month_label": "2025-08",
+          "metric": "平均值",
+          "value_minutes": 4.459,
+          "trips": 13558357,
+          "wait_coverage_pct": 99.0315
+        },
+        {
+          "month": "2025-08-01",
+          "month_label": "2025-08",
+          "metric": "中位数",
+          "value_minutes": 3.719,
+          "trips": 13558357,
+          "wait_coverage_pct": 99.0315
+        },
+        {
+          "month": "2025-08-01",
+          "month_label": "2025-08",
+          "metric": "P90",
+          "value_minutes": 7.741,
+          "trips": 13558357,
+          "wait_coverage_pct": 99.0315
+        },
+        {
+          "month": "2025-09-01",
+          "month_label": "2025-09",
+          "metric": "平均值",
+          "value_minutes": 4.802,
+          "trips": 14047040,
+          "wait_coverage_pct": 98.9481
+        },
+        {
+          "month": "2025-09-01",
+          "month_label": "2025-09",
+          "metric": "中位数",
+          "value_minutes": 3.979,
+          "trips": 14047040,
+          "wait_coverage_pct": 98.9481
+        },
+        {
+          "month": "2025-09-01",
+          "month_label": "2025-09",
+          "metric": "P90",
+          "value_minutes": 8.451,
+          "trips": 14047040,
+          "wait_coverage_pct": 98.9481
+        },
+        {
+          "month": "2025-10-01",
+          "month_label": "2025-10",
+          "metric": "平均值",
+          "value_minutes": 4.837,
+          "trips": 15470172,
+          "wait_coverage_pct": 98.9922
+        },
+        {
+          "month": "2025-10-01",
+          "month_label": "2025-10",
+          "metric": "中位数",
+          "value_minutes": 4.001,
+          "trips": 15470172,
+          "wait_coverage_pct": 98.9922
+        },
+        {
+          "month": "2025-10-01",
+          "month_label": "2025-10",
+          "metric": "P90",
+          "value_minutes": 8.752,
+          "trips": 15470172,
+          "wait_coverage_pct": 98.9922
+        },
+        {
+          "month": "2025-11-01",
+          "month_label": "2025-11",
+          "metric": "平均值",
+          "value_minutes": 4.704,
+          "trips": 14908456,
+          "wait_coverage_pct": 98.9609
+        },
+        {
+          "month": "2025-11-01",
+          "month_label": "2025-11",
+          "metric": "中位数",
+          "value_minutes": 3.859,
+          "trips": 14908456,
+          "wait_coverage_pct": 98.9609
+        },
+        {
+          "month": "2025-11-01",
+          "month_label": "2025-11",
+          "metric": "P90",
+          "value_minutes": 8.566,
+          "trips": 14908456,
+          "wait_coverage_pct": 98.9609
+        },
+        {
+          "month": "2025-12-01",
+          "month_label": "2025-12",
+          "metric": "平均值",
+          "value_minutes": 5.301,
+          "trips": 15973728,
+          "wait_coverage_pct": 98.7917
+        },
+        {
+          "month": "2025-12-01",
+          "month_label": "2025-12",
+          "metric": "中位数",
+          "value_minutes": 4.314,
+          "trips": 15973728,
+          "wait_coverage_pct": 98.7917
+        },
+        {
+          "month": "2025-12-01",
+          "month_label": "2025-12",
+          "metric": "P90",
+          "value_minutes": 9.892,
+          "trips": 15973728,
+          "wait_coverage_pct": 98.7917
+        },
+        {
+          "month": "2026-01-01",
+          "month_label": "2026-01",
+          "metric": "平均值",
+          "value_minutes": 5.287,
+          "trips": 15245631,
+          "wait_coverage_pct": 98.8473
+        },
+        {
+          "month": "2026-01-01",
+          "month_label": "2026-01",
+          "metric": "中位数",
+          "value_minutes": 4.195,
+          "trips": 15245631,
+          "wait_coverage_pct": 98.8473
+        },
+        {
+          "month": "2026-01-01",
+          "month_label": "2026-01",
+          "metric": "P90",
+          "value_minutes": 10.103,
+          "trips": 15245631,
+          "wait_coverage_pct": 98.8473
+        },
+        {
+          "month": "2026-02-01",
+          "month_label": "2026-02",
+          "metric": "平均值",
+          "value_minutes": 5.707,
+          "trips": 14166961,
+          "wait_coverage_pct": 98.6434
+        },
+        {
+          "month": "2026-02-01",
+          "month_label": "2026-02",
+          "metric": "中位数",
+          "value_minutes": 4.592,
+          "trips": 14166961,
+          "wait_coverage_pct": 98.6434
+        },
+        {
+          "month": "2026-02-01",
+          "month_label": "2026-02",
+          "metric": "P90",
+          "value_minutes": 10.79,
+          "trips": 14166961,
+          "wait_coverage_pct": 98.6434
+        },
+        {
+          "month": "2026-03-01",
+          "month_label": "2026-03",
+          "metric": "平均值",
+          "value_minutes": 5.599,
+          "trips": 15956175,
+          "wait_coverage_pct": 98.7506
+        },
+        {
+          "month": "2026-03-01",
+          "month_label": "2026-03",
+          "metric": "中位数",
+          "value_minutes": 4.5,
+          "trips": 15956175,
+          "wait_coverage_pct": 98.7506
+        },
+        {
+          "month": "2026-03-01",
+          "month_label": "2026-03",
+          "metric": "P90",
+          "value_minutes": 10.79,
+          "trips": 15956175,
+          "wait_coverage_pct": 98.7506
+        },
+        {
+          "month": "2026-04-01",
+          "month_label": "2026-04",
+          "metric": "平均值",
+          "value_minutes": 5.185,
+          "trips": 15378858,
+          "wait_coverage_pct": 98.8806
+        },
+        {
+          "month": "2026-04-01",
+          "month_label": "2026-04",
+          "metric": "中位数",
+          "value_minutes": 4.118,
+          "trips": 15378858,
+          "wait_coverage_pct": 98.8806
+        },
+        {
+          "month": "2026-04-01",
+          "month_label": "2026-04",
+          "metric": "P90",
+          "value_minutes": 9.945,
+          "trips": 15378858,
+          "wait_coverage_pct": 98.8806
+        },
+        {
+          "month": "2026-05-01",
+          "month_label": "2026-05",
+          "metric": "平均值",
+          "value_minutes": 5.487,
+          "trips": 15354816,
+          "wait_coverage_pct": 98.7742
+        },
+        {
+          "month": "2026-05-01",
+          "month_label": "2026-05",
+          "metric": "中位数",
+          "value_minutes": 4.395,
+          "trips": 15354816,
+          "wait_coverage_pct": 98.7742
+        },
+        {
+          "month": "2026-05-01",
+          "month_label": "2026-05",
+          "metric": "P90",
+          "value_minutes": 10.437,
+          "trips": 15354816,
+          "wait_coverage_pct": 98.7742
+        }
+      ],
+      "borough_yoy": [
+        {
+          "borough": "曼哈顿",
+          "trips_2025_05": 5439220.0,
+          "trips_2026_05": 5643405.0,
+          "trip_delta": 204185.0,
+          "trip_growth_rate": 0.03754,
+          "trip_share_2026_rate": 0.36753,
+          "contribution_to_growth_rate": 0.6462600000000001,
+          "avg_wait_2025_05": 4.781,
+          "avg_wait_2026_05": 4.917,
+          "avg_wait_change_rate": 0.02834,
+          "avg_fare_2025_05": 36.01,
+          "avg_fare_2026_05": 36.14,
+          "avg_driver_pay_2025_05": 24.65,
+          "avg_driver_pay_2026_05": 25.49
+        },
+        {
+          "borough": "布鲁克林",
+          "trips_2025_05": 3991842.0,
+          "trips_2026_05": 4105939.0,
+          "trip_delta": 114097.0,
+          "trip_growth_rate": 0.02858,
+          "trip_share_2026_rate": 0.26739999999999997,
+          "contribution_to_growth_rate": 0.36113,
+          "avg_wait_2025_05": 5.055,
+          "avg_wait_2026_05": 5.584,
+          "avg_wait_change_rate": 0.10456,
+          "avg_fare_2025_05": 23.29,
+          "avg_fare_2026_05": 23.71,
+          "avg_driver_pay_2025_05": 19.02,
+          "avg_driver_pay_2026_05": 19.18
+        },
+        {
+          "borough": "皇后区",
+          "trips_2025_05": 3322734.0,
+          "trips_2026_05": 3357279.0,
+          "trip_delta": 34545.0,
+          "trip_growth_rate": 0.0104,
+          "trip_share_2026_rate": 0.21864999999999998,
+          "contribution_to_growth_rate": 0.10933999999999999,
+          "avg_wait_2025_05": 5.248,
+          "avg_wait_2026_05": 5.925,
+          "avg_wait_change_rate": 0.12914,
+          "avg_fare_2025_05": 30.44,
+          "avg_fare_2026_05": 31.22,
+          "avg_driver_pay_2025_05": 24.39,
+          "avg_driver_pay_2026_05": 24.48
+        },
+        {
+          "borough": "史泰登岛",
+          "trips_2025_05": 256029.0,
+          "trips_2026_05": 249037.0,
+          "trip_delta": -6992.0,
+          "trip_growth_rate": -0.027309999999999997,
+          "trip_share_2026_rate": 0.016220000000000002,
+          "contribution_to_growth_rate": -0.02213,
+          "avg_wait_2025_05": 6.49,
+          "avg_wait_2026_05": 6.716,
+          "avg_wait_change_rate": 0.034820000000000004,
+          "avg_fare_2025_05": 22.56,
+          "avg_fare_2026_05": 23.56,
+          "avg_driver_pay_2025_05": 19.15,
+          "avg_driver_pay_2026_05": 18.85
+        },
+        {
+          "borough": "布朗克斯",
+          "trips_2025_05": 2028430.0,
+          "trips_2026_05": 1998341.0,
+          "trip_delta": -30089.0,
+          "trip_growth_rate": -0.014830000000000001,
+          "trip_share_2026_rate": 0.13014,
+          "contribution_to_growth_rate": -0.09523,
+          "avg_wait_2025_05": 5.217,
+          "avg_wait_2026_05": 6.001,
+          "avg_wait_change_rate": 0.1503,
+          "avg_fare_2025_05": 20.25,
+          "avg_fare_2026_05": 20.42,
+          "avg_driver_pay_2025_05": 17.72,
+          "avg_driver_pay_2026_05": 17.44
+        }
+      ],
+      "wait_decomposition": [
+        {
+          "borough": "布鲁克林",
+          "prior_wait_trip_share_rate": 0.26581,
+          "current_wait_trip_share_rate": 0.267655,
+          "avg_wait_2025_05": 5.055,
+          "avg_wait_2026_05": 5.584,
+          "within_borough_wait_change_minutes": 0.529,
+          "within_borough_contribution_minutes": 0.140614,
+          "geographic_mix_contribution_minutes": 0.0103,
+          "total_contribution_minutes": 0.150914
+        },
+        {
+          "borough": "皇后区",
+          "prior_wait_trip_share_rate": 0.221407,
+          "current_wait_trip_share_rate": 0.219085,
+          "avg_wait_2025_05": 5.248,
+          "avg_wait_2026_05": 5.925,
+          "within_borough_wait_change_minutes": 0.677,
+          "within_borough_contribution_minutes": 0.149893,
+          "geographic_mix_contribution_minutes": -0.013758,
+          "total_contribution_minutes": 0.136135
+        },
+        {
+          "borough": "曼哈顿",
+          "prior_wait_trip_share_rate": 0.36062399999999994,
+          "current_wait_trip_share_rate": 0.366877,
+          "avg_wait_2025_05": 4.781,
+          "avg_wait_2026_05": 4.917,
+          "within_borough_wait_change_minutes": 0.136,
+          "within_borough_contribution_minutes": 0.049045,
+          "geographic_mix_contribution_minutes": 0.030748,
+          "total_contribution_minutes": 0.079793
+        },
+        {
+          "borough": "布朗克斯",
+          "prior_wait_trip_share_rate": 0.13517400000000002,
+          "current_wait_trip_share_rate": 0.130249,
+          "avg_wait_2025_05": 5.217,
+          "avg_wait_2026_05": 6.001,
+          "within_borough_wait_change_minutes": 0.784,
+          "within_borough_contribution_minutes": 0.105976,
+          "geographic_mix_contribution_minutes": -0.029553,
+          "total_contribution_minutes": 0.076423
+        },
+        {
+          "borough": "史泰登岛",
+          "prior_wait_trip_share_rate": 0.016944999999999998,
+          "current_wait_trip_share_rate": 0.016082,
+          "avg_wait_2025_05": 6.49,
+          "avg_wait_2026_05": 6.716,
+          "within_borough_wait_change_minutes": 0.226,
+          "within_borough_contribution_minutes": 0.00383,
+          "geographic_mix_contribution_minutes": -0.005796,
+          "total_contribution_minutes": -0.001967
+        }
+      ],
+      "priority_zones": [
+        {
+          "pickup_location_id": 138,
+          "borough": "皇后区",
+          "zone": "LaGuardia Airport",
+          "zone_label": "皇后区 · 拉瓜迪亚机场",
+          "trips_2025_05": 311000.0,
+          "trips_2026_05": 294905.0,
+          "trip_delta": -16095.0,
+          "trip_growth_rate": -0.05175,
+          "trip_share_2026_rate": 0.019206,
+          "avg_wait_2025_05": 7.093,
+          "avg_wait_2026_05": 7.697,
+          "avg_wait_change_minutes": 0.604,
+          "avg_wait_change_rate": 0.08517,
+          "wait_gap_to_city_minutes": 2.21,
+          "estimated_excess_request_to_pickup_minutes": 651225.0,
+          "marketplace_quadrant": "Supply-constrained priority"
+        },
+        {
+          "pickup_location_id": 132,
+          "borough": "皇后区",
+          "zone": "JFK Airport",
+          "zone_label": "皇后区 · 肯尼迪机场",
+          "trips_2025_05": 269736.0,
+          "trips_2026_05": 260433.0,
+          "trip_delta": -9303.0,
+          "trip_growth_rate": -0.03449,
+          "trip_share_2026_rate": 0.016961,
+          "avg_wait_2025_05": 6.852,
+          "avg_wait_2026_05": 7.887,
+          "avg_wait_change_minutes": 1.035,
+          "avg_wait_change_rate": 0.15106,
+          "wait_gap_to_city_minutes": 2.4,
+          "estimated_excess_request_to_pickup_minutes": 623327.0,
+          "marketplace_quadrant": "Supply-constrained priority"
+        },
+        {
+          "pickup_location_id": 42,
+          "borough": "曼哈顿",
+          "zone": "Central Harlem North",
+          "zone_label": "曼哈顿 · 哈莱姆中北部",
+          "trips_2025_05": 120415.0,
+          "trips_2026_05": 124925.0,
+          "trip_delta": 4510.0,
+          "trip_growth_rate": 0.037450000000000004,
+          "trip_share_2026_rate": 0.008136,
+          "avg_wait_2025_05": 5.553,
+          "avg_wait_2026_05": 6.649,
+          "avg_wait_change_minutes": 1.096,
+          "avg_wait_change_rate": 0.19739,
+          "wait_gap_to_city_minutes": 1.162,
+          "estimated_excess_request_to_pickup_minutes": 143134.0,
+          "marketplace_quadrant": "Supply-constrained priority"
+        },
+        {
+          "pickup_location_id": 35,
+          "borough": "布鲁克林",
+          "zone": "Brownsville",
+          "zone_label": "布鲁克林 · 布朗斯维尔",
+          "trips_2025_05": 89947.0,
+          "trips_2026_05": 96298.0,
+          "trip_delta": 6351.0,
+          "trip_growth_rate": 0.07061,
+          "trip_share_2026_rate": 0.006272,
+          "avg_wait_2025_05": 5.841,
+          "avg_wait_2026_05": 6.714,
+          "avg_wait_change_minutes": 0.873,
+          "avg_wait_change_rate": 0.1494,
+          "wait_gap_to_city_minutes": 1.227,
+          "estimated_excess_request_to_pickup_minutes": 116319.0,
+          "marketplace_quadrant": "Supply-constrained priority"
+        },
+        {
+          "pickup_location_id": 61,
+          "borough": "布鲁克林",
+          "zone": "Crown Heights North",
+          "zone_label": "布鲁克林 · 皇冠高地北部",
+          "trips_2025_05": 185549.0,
+          "trips_2026_05": 194268.0,
+          "trip_delta": 8719.0,
+          "trip_growth_rate": 0.04699,
+          "trip_share_2026_rate": 0.012652000000000002,
+          "avg_wait_2025_05": 5.377,
+          "avg_wait_2026_05": 6.071,
+          "avg_wait_change_minutes": 0.694,
+          "avg_wait_change_rate": 0.12900999999999999,
+          "wait_gap_to_city_minutes": 0.584,
+          "estimated_excess_request_to_pickup_minutes": 111868.0,
+          "marketplace_quadrant": "Supply-constrained priority"
+        },
+        {
+          "pickup_location_id": 39,
+          "borough": "布鲁克林",
+          "zone": "Canarsie",
+          "zone_label": "布鲁克林 · 卡纳西",
+          "trips_2025_05": 115161.0,
+          "trips_2026_05": 118920.0,
+          "trip_delta": 3759.0,
+          "trip_growth_rate": 0.032639999999999995,
+          "trip_share_2026_rate": 0.007744999999999999,
+          "avg_wait_2025_05": 5.536,
+          "avg_wait_2026_05": 6.284,
+          "avg_wait_change_minutes": 0.748,
+          "avg_wait_change_rate": 0.13506,
+          "wait_gap_to_city_minutes": 0.797,
+          "estimated_excess_request_to_pickup_minutes": 93639.0,
+          "marketplace_quadrant": "Supply-constrained priority"
+        },
+        {
+          "pickup_location_id": 225,
+          "borough": "布鲁克林",
+          "zone": "Stuyvesant Heights",
+          "zone_label": "布鲁克林 · 斯图维森特高地",
+          "trips_2025_05": 115360.0,
+          "trips_2026_05": 119609.0,
+          "trip_delta": 4249.0,
+          "trip_growth_rate": 0.03683,
+          "trip_share_2026_rate": 0.00779,
+          "avg_wait_2025_05": 5.354,
+          "avg_wait_2026_05": 6.173,
+          "avg_wait_change_minutes": 0.818,
+          "avg_wait_change_rate": 0.15286,
+          "wait_gap_to_city_minutes": 0.686,
+          "estimated_excess_request_to_pickup_minutes": 80919.0,
+          "marketplace_quadrant": "Supply-constrained priority"
+        },
+        {
+          "pickup_location_id": 74,
+          "borough": "曼哈顿",
+          "zone": "East Harlem North",
+          "zone_label": "曼哈顿 · 东哈莱姆北部",
+          "trips_2025_05": 93734.0,
+          "trips_2026_05": 96376.0,
+          "trip_delta": 2642.0,
+          "trip_growth_rate": 0.02819,
+          "trip_share_2026_rate": 0.0062770000000000005,
+          "avg_wait_2025_05": 5.505,
+          "avg_wait_2026_05": 6.283,
+          "avg_wait_change_minutes": 0.777,
+          "avg_wait_change_rate": 0.14118,
+          "wait_gap_to_city_minutes": 0.796,
+          "estimated_excess_request_to_pickup_minutes": 75664.0,
+          "marketplace_quadrant": "Supply-constrained priority"
+        },
+        {
+          "pickup_location_id": 37,
+          "borough": "布鲁克林",
+          "zone": "Bushwick South",
+          "zone_label": "布鲁克林 · 布什维克南部",
+          "trips_2025_05": 164703.0,
+          "trips_2026_05": 172678.0,
+          "trip_delta": 7975.0,
+          "trip_growth_rate": 0.04842,
+          "trip_share_2026_rate": 0.011246,
+          "avg_wait_2025_05": 5.085,
+          "avg_wait_2026_05": 5.893,
+          "avg_wait_change_minutes": 0.808,
+          "avg_wait_change_rate": 0.159,
+          "wait_gap_to_city_minutes": 0.406,
+          "estimated_excess_request_to_pickup_minutes": 69390.0,
+          "marketplace_quadrant": "Supply-constrained priority"
+        },
+        {
+          "pickup_location_id": 168,
+          "borough": "布朗克斯",
+          "zone": "Mott Haven/Port Morris",
+          "zone_label": "布朗克斯 · 莫特黑文/莫里斯港",
+          "trips_2025_05": 97753.0,
+          "trips_2026_05": 100072.0,
+          "trip_delta": 2319.0,
+          "trip_growth_rate": 0.023719999999999998,
+          "trip_share_2026_rate": 0.006516999999999999,
+          "avg_wait_2025_05": 5.315,
+          "avg_wait_2026_05": 6.168,
+          "avg_wait_change_minutes": 0.853,
+          "avg_wait_change_rate": 0.16041,
+          "wait_gap_to_city_minutes": 0.681,
+          "estimated_excess_request_to_pickup_minutes": 67412.0,
+          "marketplace_quadrant": "Supply-constrained priority"
+        },
+        {
+          "pickup_location_id": 41,
+          "borough": "曼哈顿",
+          "zone": "Central Harlem",
+          "zone_label": "曼哈顿 · 哈莱姆中部",
+          "trips_2025_05": 86879.0,
+          "trips_2026_05": 91774.0,
+          "trip_delta": 4895.0,
+          "trip_growth_rate": 0.05634,
+          "trip_share_2026_rate": 0.005977,
+          "avg_wait_2025_05": 5.398,
+          "avg_wait_2026_05": 6.183,
+          "avg_wait_change_minutes": 0.785,
+          "avg_wait_change_rate": 0.14547000000000002,
+          "wait_gap_to_city_minutes": 0.696,
+          "estimated_excess_request_to_pickup_minutes": 63062.0,
+          "marketplace_quadrant": "Supply-constrained priority"
+        },
+        {
+          "pickup_location_id": 76,
+          "borough": "布鲁克林",
+          "zone": "East New York",
+          "zone_label": "布鲁克林 · 东纽约",
+          "trips_2025_05": 163594.0,
+          "trips_2026_05": 173063.0,
+          "trip_delta": 9469.0,
+          "trip_growth_rate": 0.05788,
+          "trip_share_2026_rate": 0.011271,
+          "avg_wait_2025_05": 5.012,
+          "avg_wait_2026_05": 5.851,
+          "avg_wait_change_minutes": 0.839,
+          "avg_wait_change_rate": 0.16738,
+          "wait_gap_to_city_minutes": 0.364,
+          "estimated_excess_request_to_pickup_minutes": 62360.0,
+          "marketplace_quadrant": "Supply-constrained priority"
+        }
+      ],
+      "priority_windows": [
+        {
+          "weekday_name": "周一",
+          "pickup_hour_label": "21:00",
+          "borough": "皇后区",
+          "zone": "LaGuardia Airport",
+          "zone_label": "皇后区 · 拉瓜迪亚机场",
+          "avg_trips_per_contributing_day": 746.75,
+          "avg_request_to_pickup_minutes": 12.684,
+          "wait_gap_to_city_minutes": 7.26,
+          "estimated_excess_request_to_pickup_minutes_per_day": 5414.2,
+          "avg_base_fare_eligible": 60.08,
+          "avg_driver_pay_eligible": 42.46
+        },
+        {
+          "weekday_name": "周一",
+          "pickup_hour_label": "23:00",
+          "borough": "皇后区",
+          "zone": "JFK Airport",
+          "zone_label": "皇后区 · 肯尼迪机场",
+          "avg_trips_per_contributing_day": 700.75,
+          "avg_request_to_pickup_minutes": 12.866,
+          "wait_gap_to_city_minutes": 7.442,
+          "estimated_excess_request_to_pickup_minutes_per_day": 5198.3,
+          "avg_base_fare_eligible": 73.91,
+          "avg_driver_pay_eligible": 55.91
+        },
+        {
+          "weekday_name": "周一",
+          "pickup_hour_label": "22:00",
+          "borough": "皇后区",
+          "zone": "LaGuardia Airport",
+          "zone_label": "皇后区 · 拉瓜迪亚机场",
+          "avg_trips_per_contributing_day": 731.5,
+          "avg_request_to_pickup_minutes": 12.357,
+          "wait_gap_to_city_minutes": 6.933,
+          "estimated_excess_request_to_pickup_minutes_per_day": 5064.6,
+          "avg_base_fare_eligible": 59.32,
+          "avg_driver_pay_eligible": 41.16
+        },
+        {
+          "weekday_name": "周四",
+          "pickup_hour_label": "00:00",
+          "borough": "皇后区",
+          "zone": "JFK Airport",
+          "zone_label": "皇后区 · 肯尼迪机场",
+          "avg_trips_per_contributing_day": 509.5,
+          "avg_request_to_pickup_minutes": 15.422,
+          "wait_gap_to_city_minutes": 9.998,
+          "estimated_excess_request_to_pickup_minutes_per_day": 4999.0,
+          "avg_base_fare_eligible": 92.61,
+          "avg_driver_pay_eligible": 63.58
+        },
+        {
+          "weekday_name": "周日",
+          "pickup_hour_label": "23:00",
+          "borough": "皇后区",
+          "zone": "LaGuardia Airport",
+          "zone_label": "皇后区 · 拉瓜迪亚机场",
+          "avg_trips_per_contributing_day": 669.0,
+          "avg_request_to_pickup_minutes": 12.881,
+          "wait_gap_to_city_minutes": 7.457,
+          "estimated_excess_request_to_pickup_minutes_per_day": 4984.3,
+          "avg_base_fare_eligible": 63.93,
+          "avg_driver_pay_eligible": 43.95
+        },
+        {
+          "weekday_name": "周四",
+          "pickup_hour_label": "21:00",
+          "borough": "皇后区",
+          "zone": "LaGuardia Airport",
+          "zone_label": "皇后区 · 拉瓜迪亚机场",
+          "avg_trips_per_contributing_day": 788.0,
+          "avg_request_to_pickup_minutes": 11.633,
+          "wait_gap_to_city_minutes": 6.209,
+          "estimated_excess_request_to_pickup_minutes_per_day": 4888.1,
+          "avg_base_fare_eligible": 68.53,
+          "avg_driver_pay_eligible": 47.38
+        },
+        {
+          "weekday_name": "周日",
+          "pickup_hour_label": "21:00",
+          "borough": "皇后区",
+          "zone": "LaGuardia Airport",
+          "zone_label": "皇后区 · 拉瓜迪亚机场",
+          "avg_trips_per_contributing_day": 677.6,
+          "avg_request_to_pickup_minutes": 12.464,
+          "wait_gap_to_city_minutes": 7.04,
+          "estimated_excess_request_to_pickup_minutes_per_day": 4763.3,
+          "avg_base_fare_eligible": 72.19,
+          "avg_driver_pay_eligible": 48.8
+        },
+        {
+          "weekday_name": "周三",
+          "pickup_hour_label": "23:00",
+          "borough": "皇后区",
+          "zone": "LaGuardia Airport",
+          "zone_label": "皇后区 · 拉瓜迪亚机场",
+          "avg_trips_per_contributing_day": 759.25,
+          "avg_request_to_pickup_minutes": 11.657,
+          "wait_gap_to_city_minutes": 6.233,
+          "estimated_excess_request_to_pickup_minutes_per_day": 4726.2,
+          "avg_base_fare_eligible": 69.46,
+          "avg_driver_pay_eligible": 47.99
+        },
+        {
+          "weekday_name": "周三",
+          "pickup_hour_label": "23:00",
+          "borough": "皇后区",
+          "zone": "JFK Airport",
+          "zone_label": "皇后区 · 肯尼迪机场",
+          "avg_trips_per_contributing_day": 567.25,
+          "avg_request_to_pickup_minutes": 13.567,
+          "wait_gap_to_city_minutes": 8.143,
+          "estimated_excess_request_to_pickup_minutes_per_day": 4606.9,
+          "avg_base_fare_eligible": 77.02,
+          "avg_driver_pay_eligible": 58.38
+        },
+        {
+          "weekday_name": "周四",
+          "pickup_hour_label": "23:00",
+          "borough": "皇后区",
+          "zone": "LaGuardia Airport",
+          "zone_label": "皇后区 · 拉瓜迪亚机场",
+          "avg_trips_per_contributing_day": 758.25,
+          "avg_request_to_pickup_minutes": 11.421,
+          "wait_gap_to_city_minutes": 5.997,
+          "estimated_excess_request_to_pickup_minutes_per_day": 4541.3,
+          "avg_base_fare_eligible": 71.25,
+          "avg_driver_pay_eligible": 49.25
+        },
+        {
+          "weekday_name": "周三",
+          "pickup_hour_label": "22:00",
+          "borough": "皇后区",
+          "zone": "LaGuardia Airport",
+          "zone_label": "皇后区 · 拉瓜迪亚机场",
+          "avg_trips_per_contributing_day": 691.75,
+          "avg_request_to_pickup_minutes": 11.968,
+          "wait_gap_to_city_minutes": 6.544,
+          "estimated_excess_request_to_pickup_minutes_per_day": 4525.2,
+          "avg_base_fare_eligible": 81.84,
+          "avg_driver_pay_eligible": 53.87
+        },
+        {
+          "weekday_name": "周四",
+          "pickup_hour_label": "01:00",
+          "borough": "皇后区",
+          "zone": "JFK Airport",
+          "zone_label": "皇后区 · 肯尼迪机场",
+          "avg_trips_per_contributing_day": 375.5,
+          "avg_request_to_pickup_minutes": 17.491,
+          "wait_gap_to_city_minutes": 12.067,
+          "estimated_excess_request_to_pickup_minutes_per_day": 4289.8,
+          "avg_base_fare_eligible": 98.73,
+          "avg_driver_pay_eligible": 65.11
+        },
+        {
+          "weekday_name": "周四",
+          "pickup_hour_label": "22:00",
+          "borough": "皇后区",
+          "zone": "LaGuardia Airport",
+          "zone_label": "皇后区 · 拉瓜迪亚机场",
+          "avg_trips_per_contributing_day": 747.25,
+          "avg_request_to_pickup_minutes": 11.129,
+          "wait_gap_to_city_minutes": 5.705,
+          "estimated_excess_request_to_pickup_minutes_per_day": 4258.8,
+          "avg_base_fare_eligible": 69.17,
+          "avg_driver_pay_eligible": 48.05
+        },
+        {
+          "weekday_name": "周一",
+          "pickup_hour_label": "23:00",
+          "borough": "皇后区",
+          "zone": "LaGuardia Airport",
+          "zone_label": "皇后区 · 拉瓜迪亚机场",
+          "avg_trips_per_contributing_day": 669.5,
+          "avg_request_to_pickup_minutes": 11.611,
+          "wait_gap_to_city_minutes": 6.187,
+          "estimated_excess_request_to_pickup_minutes_per_day": 4134.5,
+          "avg_base_fare_eligible": 61.68,
+          "avg_driver_pay_eligible": 42.33
+        },
+        {
+          "weekday_name": "周日",
+          "pickup_hour_label": "22:00",
+          "borough": "皇后区",
+          "zone": "LaGuardia Airport",
+          "zone_label": "皇后区 · 拉瓜迪亚机场",
+          "avg_trips_per_contributing_day": 569.2,
+          "avg_request_to_pickup_minutes": 12.665,
+          "wait_gap_to_city_minutes": 7.241,
+          "estimated_excess_request_to_pickup_minutes_per_day": 4114.4,
+          "avg_base_fare_eligible": 74.05,
+          "avg_driver_pay_eligible": 48.24
+        }
+      ],
+      "hourly_yoy": [
+        {
+          "pickup_hour": 0,
+          "pickup_hour_label": "00:00",
+          "trips_2025_05": 530724.0,
+          "trips_2026_05": 554937.0,
+          "avg_daily_trips_2025_05": 17120.1,
+          "avg_daily_trips_2026_05": 17901.2,
+          "trip_delta": 24213.0,
+          "trip_growth_rate": 0.04562,
+          "contribution_to_growth_rate": 0.07664,
+          "avg_wait_2025_05": 5.49,
+          "avg_wait_2026_05": 6.104,
+          "avg_wait_change_rate": 0.11191000000000001
+        },
+        {
+          "pickup_hour": 1,
+          "pickup_hour_label": "01:00",
+          "trips_2025_05": 369493.0,
+          "trips_2026_05": 385751.0,
+          "avg_daily_trips_2025_05": 11919.1,
+          "avg_daily_trips_2026_05": 12443.6,
+          "trip_delta": 16258.0,
+          "trip_growth_rate": 0.044000000000000004,
+          "contribution_to_growth_rate": 0.05146,
+          "avg_wait_2025_05": 5.112,
+          "avg_wait_2026_05": 5.766,
+          "avg_wait_change_rate": 0.128
+        },
+        {
+          "pickup_hour": 2,
+          "pickup_hour_label": "02:00",
+          "trips_2025_05": 261310.0,
+          "trips_2026_05": 277663.0,
+          "avg_daily_trips_2025_05": 8429.4,
+          "avg_daily_trips_2026_05": 8956.9,
+          "trip_delta": 16353.0,
+          "trip_growth_rate": 0.06258,
+          "contribution_to_growth_rate": 0.05176,
+          "avg_wait_2025_05": 5.196,
+          "avg_wait_2026_05": 5.95,
+          "avg_wait_change_rate": 0.14517
+        },
+        {
+          "pickup_hour": 3,
+          "pickup_hour_label": "03:00",
+          "trips_2025_05": 205667.0,
+          "trips_2026_05": 226992.0,
+          "avg_daily_trips_2025_05": 6634.4,
+          "avg_daily_trips_2026_05": 7322.3,
+          "trip_delta": 21325.0,
+          "trip_growth_rate": 0.10369,
+          "contribution_to_growth_rate": 0.0675,
+          "avg_wait_2025_05": 5.406,
+          "avg_wait_2026_05": 6.405,
+          "avg_wait_change_rate": 0.18485
+        },
+        {
+          "pickup_hour": 4,
+          "pickup_hour_label": "04:00",
+          "trips_2025_05": 208990.0,
+          "trips_2026_05": 234743.0,
+          "avg_daily_trips_2025_05": 6741.6,
+          "avg_daily_trips_2026_05": 7572.4,
+          "trip_delta": 25753.0,
+          "trip_growth_rate": 0.12323,
+          "contribution_to_growth_rate": 0.08151,
+          "avg_wait_2025_05": 6.258,
+          "avg_wait_2026_05": 7.281,
+          "avg_wait_change_rate": 0.16346
+        },
+        {
+          "pickup_hour": 5,
+          "pickup_hour_label": "05:00",
+          "trips_2025_05": 261198.0,
+          "trips_2026_05": 289067.0,
+          "avg_daily_trips_2025_05": 8425.7,
+          "avg_daily_trips_2026_05": 9324.7,
+          "trip_delta": 27869.0,
+          "trip_growth_rate": 0.1067,
+          "contribution_to_growth_rate": 0.08821,
+          "avg_wait_2025_05": 5.259,
+          "avg_wait_2026_05": 6.042,
+          "avg_wait_change_rate": 0.14891
+        },
+        {
+          "pickup_hour": 6,
+          "pickup_hour_label": "06:00",
+          "trips_2025_05": 410328.0,
+          "trips_2026_05": 433212.0,
+          "avg_daily_trips_2025_05": 13236.4,
+          "avg_daily_trips_2026_05": 13974.6,
+          "trip_delta": 22884.0,
+          "trip_growth_rate": 0.05577,
+          "contribution_to_growth_rate": 0.07243000000000001,
+          "avg_wait_2025_05": 4.898,
+          "avg_wait_2026_05": 5.653,
+          "avg_wait_change_rate": 0.15408
+        },
+        {
+          "pickup_hour": 7,
+          "pickup_hour_label": "07:00",
+          "trips_2025_05": 612614.0,
+          "trips_2026_05": 650231.0,
+          "avg_daily_trips_2025_05": 19761.7,
+          "avg_daily_trips_2026_05": 20975.2,
+          "trip_delta": 37617.0,
+          "trip_growth_rate": 0.061399999999999996,
+          "contribution_to_growth_rate": 0.11906,
+          "avg_wait_2025_05": 5.565,
+          "avg_wait_2026_05": 6.157,
+          "avg_wait_change_rate": 0.10638
+        },
+        {
+          "pickup_hour": 8,
+          "pickup_hour_label": "08:00",
+          "trips_2025_05": 756506.0,
+          "trips_2026_05": 772378.0,
+          "avg_daily_trips_2025_05": 24403.4,
+          "avg_daily_trips_2026_05": 24915.4,
+          "trip_delta": 15872.0,
+          "trip_growth_rate": 0.02098,
+          "contribution_to_growth_rate": 0.05024,
+          "avg_wait_2025_05": 5.197,
+          "avg_wait_2026_05": 5.578,
+          "avg_wait_change_rate": 0.07339000000000001
+        },
+        {
+          "pickup_hour": 9,
+          "pickup_hour_label": "09:00",
+          "trips_2025_05": 722672.0,
+          "trips_2026_05": 715972.0,
+          "avg_daily_trips_2025_05": 23312.0,
+          "avg_daily_trips_2026_05": 23095.9,
+          "trip_delta": -6700.0,
+          "trip_growth_rate": -0.00927,
+          "contribution_to_growth_rate": -0.02121,
+          "avg_wait_2025_05": 4.469,
+          "avg_wait_2026_05": 4.841,
+          "avg_wait_change_rate": 0.08311
+        },
+        {
+          "pickup_hour": 10,
+          "pickup_hour_label": "10:00",
+          "trips_2025_05": 663910.0,
+          "trips_2026_05": 670702.0,
+          "avg_daily_trips_2025_05": 21416.5,
+          "avg_daily_trips_2026_05": 21635.5,
+          "trip_delta": 6792.0,
+          "trip_growth_rate": 0.01023,
+          "contribution_to_growth_rate": 0.0215,
+          "avg_wait_2025_05": 4.28,
+          "avg_wait_2026_05": 4.701,
+          "avg_wait_change_rate": 0.0984
+        },
+        {
+          "pickup_hour": 11,
+          "pickup_hour_label": "11:00",
+          "trips_2025_05": 643832.0,
+          "trips_2026_05": 666357.0,
+          "avg_daily_trips_2025_05": 20768.8,
+          "avg_daily_trips_2026_05": 21495.4,
+          "trip_delta": 22525.0,
+          "trip_growth_rate": 0.03499,
+          "contribution_to_growth_rate": 0.07128999999999999,
+          "avg_wait_2025_05": 4.355,
+          "avg_wait_2026_05": 4.748,
+          "avg_wait_change_rate": 0.09019
+        },
+        {
+          "pickup_hour": 12,
+          "pickup_hour_label": "12:00",
+          "trips_2025_05": 665442.0,
+          "trips_2026_05": 682250.0,
+          "avg_daily_trips_2025_05": 21465.9,
+          "avg_daily_trips_2026_05": 22008.1,
+          "trip_delta": 16808.0,
+          "trip_growth_rate": 0.025259999999999998,
+          "contribution_to_growth_rate": 0.053200000000000004,
+          "avg_wait_2025_05": 4.669,
+          "avg_wait_2026_05": 5.005,
+          "avg_wait_change_rate": 0.07216
+        },
+        {
+          "pickup_hour": 13,
+          "pickup_hour_label": "13:00",
+          "trips_2025_05": 692665.0,
+          "trips_2026_05": 710563.0,
+          "avg_daily_trips_2025_05": 22344.0,
+          "avg_daily_trips_2026_05": 22921.4,
+          "trip_delta": 17898.0,
+          "trip_growth_rate": 0.025840000000000002,
+          "contribution_to_growth_rate": 0.05665,
+          "avg_wait_2025_05": 4.988,
+          "avg_wait_2026_05": 5.297,
+          "avg_wait_change_rate": 0.06182000000000001
+        },
+        {
+          "pickup_hour": 14,
+          "pickup_hour_label": "14:00",
+          "trips_2025_05": 748389.0,
+          "trips_2026_05": 773086.0,
+          "avg_daily_trips_2025_05": 24141.6,
+          "avg_daily_trips_2026_05": 24938.3,
+          "trip_delta": 24697.0,
+          "trip_growth_rate": 0.033,
+          "contribution_to_growth_rate": 0.07817,
+          "avg_wait_2025_05": 5.153,
+          "avg_wait_2026_05": 5.518,
+          "avg_wait_change_rate": 0.07075999999999999
+        },
+        {
+          "pickup_hour": 15,
+          "pickup_hour_label": "15:00",
+          "trips_2025_05": 762319.0,
+          "trips_2026_05": 783691.0,
+          "avg_daily_trips_2025_05": 24590.9,
+          "avg_daily_trips_2026_05": 25280.4,
+          "trip_delta": 21372.0,
+          "trip_growth_rate": 0.02804,
+          "contribution_to_growth_rate": 0.06764,
+          "avg_wait_2025_05": 5.096,
+          "avg_wait_2026_05": 5.47,
+          "avg_wait_change_rate": 0.07327
+        },
+        {
+          "pickup_hour": 16,
+          "pickup_hour_label": "16:00",
+          "trips_2025_05": 792850.0,
+          "trips_2026_05": 787092.0,
+          "avg_daily_trips_2025_05": 25575.8,
+          "avg_daily_trips_2026_05": 25390.1,
+          "trip_delta": -5758.0,
+          "trip_growth_rate": -0.00726,
+          "contribution_to_growth_rate": -0.01822,
+          "avg_wait_2025_05": 4.935,
+          "avg_wait_2026_05": 5.255,
+          "avg_wait_change_rate": 0.06478
+        },
+        {
+          "pickup_hour": 17,
+          "pickup_hour_label": "17:00",
+          "trips_2025_05": 864959.0,
+          "trips_2026_05": 852130.0,
+          "avg_daily_trips_2025_05": 27901.9,
+          "avg_daily_trips_2026_05": 27488.1,
+          "trip_delta": -12829.0,
+          "trip_growth_rate": -0.014830000000000001,
+          "contribution_to_growth_rate": -0.0406,
+          "avg_wait_2025_05": 5.153,
+          "avg_wait_2026_05": 5.314,
+          "avg_wait_change_rate": 0.031349999999999996
+        },
+        {
+          "pickup_hour": 18,
+          "pickup_hour_label": "18:00",
+          "trips_2025_05": 887006.0,
+          "trips_2026_05": 887161.0,
+          "avg_daily_trips_2025_05": 28613.1,
+          "avg_daily_trips_2026_05": 28618.1,
+          "trip_delta": 155.0,
+          "trip_growth_rate": 0.00017,
+          "contribution_to_growth_rate": 0.00049,
+          "avg_wait_2025_05": 4.93,
+          "avg_wait_2026_05": 5.123,
+          "avg_wait_change_rate": 0.03927
+        },
+        {
+          "pickup_hour": 19,
+          "pickup_hour_label": "19:00",
+          "trips_2025_05": 848165.0,
+          "trips_2026_05": 824073.0,
+          "avg_daily_trips_2025_05": 27360.2,
+          "avg_daily_trips_2026_05": 26583.0,
+          "trip_delta": -24092.0,
+          "trip_growth_rate": -0.028399999999999998,
+          "contribution_to_growth_rate": -0.07625,
+          "avg_wait_2025_05": 4.566,
+          "avg_wait_2026_05": 5.025,
+          "avg_wait_change_rate": 0.1007
+        },
+        {
+          "pickup_hour": 20,
+          "pickup_hour_label": "20:00",
+          "trips_2025_05": 807715.0,
+          "trips_2026_05": 811118.0,
+          "avg_daily_trips_2025_05": 26055.3,
+          "avg_daily_trips_2026_05": 26165.1,
+          "trip_delta": 3403.0,
+          "trip_growth_rate": 0.00421,
+          "contribution_to_growth_rate": 0.01077,
+          "avg_wait_2025_05": 4.786,
+          "avg_wait_2026_05": 5.206,
+          "avg_wait_change_rate": 0.08778000000000001
+        },
+        {
+          "pickup_hour": 21,
+          "pickup_hour_label": "21:00",
+          "trips_2025_05": 799154.0,
+          "trips_2026_05": 828072.0,
+          "avg_daily_trips_2025_05": 25779.2,
+          "avg_daily_trips_2026_05": 26712.0,
+          "trip_delta": 28918.0,
+          "trip_growth_rate": 0.03619,
+          "contribution_to_growth_rate": 0.09153,
+          "avg_wait_2025_05": 5.075,
+          "avg_wait_2026_05": 5.587,
+          "avg_wait_change_rate": 0.10091
+        },
+        {
+          "pickup_hour": 22,
+          "pickup_hour_label": "22:00",
+          "trips_2025_05": 798118.0,
+          "trips_2026_05": 810598.0,
+          "avg_daily_trips_2025_05": 25745.7,
+          "avg_daily_trips_2026_05": 26148.3,
+          "trip_delta": 12480.0,
+          "trip_growth_rate": 0.01564,
+          "contribution_to_growth_rate": 0.0395,
+          "avg_wait_2025_05": 5.738,
+          "avg_wait_2026_05": 6.125,
+          "avg_wait_change_rate": 0.06753
+        },
+        {
+          "pickup_hour": 23,
+          "pickup_hour_label": "23:00",
+          "trips_2025_05": 724843.0,
+          "trips_2026_05": 726977.0,
+          "avg_daily_trips_2025_05": 23382.0,
+          "avg_daily_trips_2026_05": 23450.9,
+          "trip_delta": 2134.0,
+          "trip_growth_rate": 0.00294,
+          "contribution_to_growth_rate": 0.006750000000000001,
+          "avg_wait_2025_05": 5.903,
+          "avg_wait_2026_05": 6.392,
+          "avg_wait_change_rate": 0.08292999999999999
+        }
+      ],
+      "quality_exceptions": [
+        {
+          "month": "2025-11-01",
+          "review_note": "行程时长覆盖异常",
+          "trips": 14908456,
+          "wait_coverage_rate": 0.989609,
+          "duration_coverage_rate": 0.999425,
+          "base_fare_coverage_rate": 0.999872,
+          "trip_time_mismatch_gt_60sec_trips": 9352
+        },
+        {
+          "month": "2026-01-01",
+          "review_note": "基础车费覆盖异常",
+          "trips": 15245631,
+          "wait_coverage_rate": 0.988473,
+          "duration_coverage_rate": 0.999952,
+          "base_fare_coverage_rate": 0.9980370000000001,
+          "trip_time_mismatch_gt_60sec_trips": 1333
+        },
+        {
+          "month": "2026-03-01",
+          "review_note": "行程时间不匹配异常",
+          "trips": 15956175,
+          "wait_coverage_rate": 0.9875060000000001,
+          "duration_coverage_rate": 0.999968,
+          "base_fare_coverage_rate": 0.999647,
+          "trip_time_mismatch_gt_60sec_trips": 7132
+        }
+      ]
+    },
+    "accessIssues": []
+  },
+  "sources": [
+    {
+      "id": "deep_analysis_summary",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_json_auto('data/processed/analysis/analysis_summary.json')",
+        "description": "载入深度分析脚本生成并已验证的核心对比与排序结果。",
+        "tables_used": [
+          "analysis.analysis_summary"
+        ],
+        "filters": [
+          "2026 年 5 月对比 2025 年 5 月"
+        ],
+        "metric_definitions": {
+          "growth_quality": "结合请求至上车时长、乘客车费、司机报酬、里程与行程时长评估行程增长质量。",
+          "supply_constrained_priority": "区域需求位于前 25% 且平均请求至上车时长高于全市基准；仅为优先级代理，不构成因果证明。"
+        },
+        "executed_at": "2026-08-25T03:50:09.962325+00:00"
+      }
+    },
+    {
+      "id": "monthly_metrics_analysis",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_parquet('data/processed/analytics/monthly_metrics.parquet') ORDER BY month",
+        "description": "载入 Uber 月度行程、服务、乘客车费与司机报酬指标。",
+        "tables_used": [
+          "analytics.monthly_metrics"
+        ],
+        "filters": [
+          "HV0003 Uber 行程",
+          "2025 年 5 月至 2026 年 5 月"
+        ],
+        "metric_definitions": {
+          "request_to_pickup": "对 0–60 分钟的有效行程，以 pickup_datetime 减去 request_datetime。",
+          "base_fare": "乘客基础车费，不代表平台收入。",
+          "driver_pay": "报送的司机报酬，与乘客车费分开分析。"
+        },
+        "executed_at": "2026-08-25T03:50:09.962325+00:00"
+      }
+    },
+    {
+      "id": "borough_analysis",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_parquet('data/processed/analysis/borough_yoy.parquet')",
+        "description": "按上车行政区比较 2026 年 5 月与 2025 年 5 月，并将全市请求至上车时长变化分解为区内变动与地理结构两部分。",
+        "tables_used": [
+          "analytics.zone_daily_metrics",
+          "data.reference.taxi_zone_lookup"
+        ],
+        "filters": [
+          "2025 年 5 月与 2026 年 5 月",
+          "有效上车出租车分区"
+        ],
+        "metric_definitions": {
+          "growth_contribution": "行政区行程增量除以全市行程净增量。",
+          "within_borough_wait_effect": "上期行政区权重乘以该区请求至上车时长变化。",
+          "geographic_mix_effect": "行政区行程权重变化乘以本期该区请求至上车时长。"
+        },
+        "executed_at": "2026-08-25T03:50:09.962325+00:00"
+      }
+    },
+    {
+      "id": "zone_priority_analysis",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_parquet('data/processed/analysis/zone_yoy.parquet') ORDER BY estimated_excess_request_to_pickup_minutes DESC",
+        "description": "按需求、请求至上车时长表现、增长与估算超额分钟对上车区域排序。",
+        "tables_used": [
+          "analytics.zone_daily_metrics",
+          "data.reference.taxi_zone_lookup"
+        ],
+        "filters": [
+          "2025 年 5 月与 2026 年 5 月",
+          "有效上车出租车分区"
+        ],
+        "metric_definitions": {
+          "estimated_excess_request_to_pickup_minutes": "有效行程数乘以区域相对全市均值的正向请求至上车时长差。",
+          "priority_quadrant": "需求位于前 25% 且平均请求至上车时长高于全市均值。"
+        },
+        "executed_at": "2026-08-25T03:50:09.962325+00:00"
+      }
+    },
+    {
+      "id": "priority_window_analysis",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_parquet('data/processed/analysis/priority_windows.parquet') ORDER BY estimated_excess_request_to_pickup_minutes_per_day DESC",
+        "description": "对 2026 年 5 月请求至上车时长高于全市均值且完成行程量较大的星期–小时–出租车分区时窗进行排序。",
+        "tables_used": [
+          "analytics.zone_hour_metrics",
+          "data.reference.taxi_zone_lookup"
+        ],
+        "filters": [
+          "2026 年 5 月",
+          "重复性时窗至少 500 次行程",
+          "请求至上车时长高于全市均值"
+        ],
+        "metric_definitions": {
+          "excess_minutes_per_day": "每个贡献星期的有效行程数乘以相对全市均值的正向时长差。"
+        },
+        "executed_at": "2026-08-25T03:50:09.962325+00:00"
+      }
+    },
+    {
+      "id": "quality_review",
+      "query": {
+        "engine": "duckdb",
+        "language": "sql",
+        "sql": "SELECT * FROM read_parquet('data/processed/analytics/data_quality_by_month.parquet') ORDER BY month",
+        "description": "在将结果用于建议前，复核月度指标覆盖率及时间/车费异常。",
+        "tables_used": [
+          "analytics.data_quality_by_month"
+        ],
+        "filters": [
+          "HV0003 Uber 行程",
+          "2025 年 5 月至 2026 年 5 月"
+        ],
+        "executed_at": "2026-08-25T03:50:09.962325+00:00"
+      }
+    }
+  ]
+}
